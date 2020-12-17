@@ -1,11 +1,23 @@
 
 import './App.scss';
-
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import Footer from './cmps/Footer/Footer'
+import Header from './cmps/Header/Header'
+import Main from './pages/Main/Main'
+import Home from './pages/Home/Home';
 function App() {
   return (
     <div className="App">
-      <h2>start</h2>
-    </div>
+      <Router>
+        <Header />
+        <Switch>
+
+          <Route component={Main} path="/main" />
+          <Route component={Home} path="/" />
+        </Switch>
+        <Footer />
+      </Router>
+    </div >
   );
 }
 
