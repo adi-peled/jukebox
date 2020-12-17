@@ -15,8 +15,8 @@ function App() {
         <Header />
         <Switch>
 
-          <Route component={Home} path="/" />
           <Route component={Main} path="/main" />
+          <Route component={Home} path="/" />
         </Switch>
         <Footer />
       </Router>
