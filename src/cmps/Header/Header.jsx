@@ -9,10 +9,10 @@ function Header() {
                 <li className="header__item">Boxes</li>
                 <li className="header__item">Create Box</li>
                 <li className="header__item">
-                    <li className="header__item">
-                        <img className="header__profile" src="" alt="profile" />
-                    </li>
-                    <ul className="profile__list"> 
+                    <img className="header__profile" src="" alt="profile" />
+                </li>
+                <li className="header__item">
+                    <ul className="profile__list">
                         <li className="profile__item">Signup</li>
                         <li className="profile__item">Login</li>
                         <li className="profile__item">Logout</li>
