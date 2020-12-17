@@ -5,6 +5,9 @@ import Footer from './cmps/Footer/Footer'
 import Header from './cmps/Header/Header'
 import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
+
+
+
 function App() {
   return (
     <div className="App">
@@ -12,8 +15,8 @@ function App() {
         <Header />
         <Switch>
 
-          <Route component={Main} path="/main" />
           <Route component={Home} path="/" />
+          <Route component={Main} path="/main" />
         </Switch>
         <Footer />
       </Router>
