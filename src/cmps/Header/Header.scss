@@ -1,0 +1,22 @@
+// @import
+
+.header {
+    font-size: 1.5rem;
+
+    &__logo {
+        flex: 0.3;
+    }
+
+    &__nav {
+        flex: 0.7;
+        justify-content: flex-end;
+    }
+
+    &__item {
+        margin-right: 1.5rem;
+    }
+
+    .profile__list {
+        display: none;
+    }
+}
