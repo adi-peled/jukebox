@@ -1,0 +1,57 @@
+.grid {
+    display: grid;
+}
+
+.flex {
+    display: flex;
+}
+
+.title {
+    text-align: center;
+    font-size: 35px;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.center {
+    text-align: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.capi {
+    text-transform: capitalize;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.right {
+    text-align: right !important;
+}
+
+.align-self {
+    align-self: center;
+}
+
