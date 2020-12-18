@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import './Filter.scss'
+function Filter({ onFilter }) {
+    const [filter, setFilter] = useState(null)
+    const genres = ['All', 'Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop', 'Classical', 'alternativ', 'Blues', 'Disco', 'Israeli', 'Arabic']
 
-function Filter() {
+
+    useEffect(() => {
+        onFilter(filter)
+    }, [filter])
+
     return (
         <div className="filter">
-            i am filter
+            <ul className="filter__list flex wrap">
+                {genres.map(genre => {
+                    return <li key={genre} className="filter__item" onClick={() => setFilter(genre)}>{genre}</li>
+                })}
+
+            </ul>
         </div>
     )
 }

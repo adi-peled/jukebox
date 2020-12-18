@@ -3,7 +3,7 @@ import './BoxPreview.scss'
 function BoxPreview() {
     return (
         <div className="boxPreview">
-          this is preview  
+         preview  
         </div>
     )
 }

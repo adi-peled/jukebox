@@ -1,0 +1,15 @@
+.filter {
+    &__list {
+        background-color: lightgray;
+
+    }
+
+    &__item {
+        padding: 1rem;
+        cursor: pointer;
+
+        &:hover {
+            border: #5b3a7b solid 1px;
+        }
+    }
+}

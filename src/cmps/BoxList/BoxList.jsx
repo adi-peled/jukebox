@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './BoxList.scss'
 import BoxPreview from '../BoxPreview/BoxPreview'
-function BoxList() {
+function BoxList({ genre }) {
+
+    useEffect(() => {
+        console.log(genre);
+    }, [genre])
+
     return (
-        <section className="boxList">
-            this is list
+        <section className="boxList flex">
+
+            <BoxPreview />
+            <BoxPreview />
             <BoxPreview />
         </section>
     )

@@ -21,9 +21,24 @@
 
     &__item {
         margin-right: 1.5rem;
+        position: relative;
+
+        .profile {
+            &__list {
+                position: absolute;
+                background-color: lightgray;
+            }
+
+            &__item {
+                padding: 1rem;
+                cursor: pointer;
+            }
+
+        }
+
     }
 
-    .profile__list {
-        display: none;
+    &__profile {
+        cursor: pointer;
     }
 }
