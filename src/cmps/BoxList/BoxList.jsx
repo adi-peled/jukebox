@@ -7,6 +7,7 @@ function BoxList({ genre }) {
             <BoxPreview />
             <BoxPreview />
             <BoxPreview />
+            
         </section>
     )
 }
