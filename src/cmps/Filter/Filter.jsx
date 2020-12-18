@@ -4,7 +4,6 @@ function Filter({ onFilter }) {
     const [filter, setFilter] = useState(null)
     const genres = ['All', 'Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop', 'Classical', 'alternativ', 'Blues', 'Disco', 'Israeli', 'Arabic']
 
-
     useEffect(() => {
         onFilter(filter)
     }, [filter])
