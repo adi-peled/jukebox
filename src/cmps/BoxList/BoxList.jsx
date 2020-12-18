@@ -3,10 +3,7 @@ import './BoxList.scss'
 import BoxPreview from '../BoxPreview/BoxPreview'
 function BoxList({ genre }) {
 
-    useEffect(() => {
-        console.log(genre);
-    }, [genre])
-
+    
     return (
         <section className="boxList flex">
 
