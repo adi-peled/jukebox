@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export const playListService = {
     getPlayLists
 }
@@ -14,4 +15,20 @@ let playList=[ {name:'אייל גולן - טעיתי',vid:'tGubzVL31r4'},
 
 function getPlayLists(){
     return playList
+=======
+export const playlistService = {
+    getPlaylists
+}
+
+
+const playlists = [
+    {
+
+    }
+]
+
+
+function getPlaylists() {
+    return playlists
+>>>>>>> 0288248f4631fd18d5ad1ebf8b43e0f5347875a5
 }
