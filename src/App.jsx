@@ -5,7 +5,7 @@ import Footer from './cmps/Footer/Footer'
 import Header from './cmps/Header/Header'
 import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
-import Login from './pages/Login/Login'
+import Login from './cmps/Login/Login'
 import BoxDetails from './cmps/BoxDetails/BoxDetails'
 
 function App() {
@@ -17,7 +17,6 @@ function App() {
         <Switch>
 
           <Route component={Main} path="/main" />
-          <Route component={Login} path="/login" />
           <Route component={Home} path="/" />
         </Switch>
         <Footer />

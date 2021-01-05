@@ -2,27 +2,31 @@ import React, { useState } from 'react'
 import './Login.scss'
 import { authService } from '../../services/authService'
 import { Button, Input } from '@material-ui/core'
-function Login() {
+function Login({ type }) {
 
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
 
-    const signUp = async (ev, email, password, username) => {
+
+    const onSubmit = async (ev, email, password, username) => {
         ev.preventDefault()
-        console.log(email, password, username);
-        // await authService.signUp(email, password, username)
+        if (type === 'signup') {
+            await authService.signUp(email, password, username)
+        } else {
+            await authService.login(email, password)
+        }
     }
     return (
         <section>
             <form className="form">
-                <Input
+                {type === 'signup' && <Input
                     placeholder="usersname"
                     type="text"
                     value={username}
                     onChange={(ev) => setUsername(ev.target.value)}
-                />
+                />}
                 <Input
                     placeholder="email"
                     type="text"
@@ -35,7 +39,7 @@ function Login() {
                     value={password}
                     onChange={(ev) => setPassword(ev.target.value)}
                 />
-                <Button onClick={(ev) => signUp(ev, email, password, username)}>signup</Button>
+                <Button onClick={(ev) => onSubmit(ev, email, password, username)}>signup</Button>
 
             </form>
         </section>

@@ -1,4 +1,7 @@
-.modal {
+.form {
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
     width: 400px;
     border: 2px solid #000;
     padding: 16px 32px 24px;
@@ -9,23 +12,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    .app-signup {
-
-        flex-direction: column;
-    }
-
-    .svg {
-        width: 100px;
-        height: 100px;
-        align-self: center;
-    }
 }
 
+
 @media (max-width:500px) {
-    .modal {
+    .form {
         width: 80%;
         padding: 6px;
-        display: flex;
-        justify-content: center;
     }
 }

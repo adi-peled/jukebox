@@ -1,9 +1,9 @@
-// @import
 
 .header {
     font-size: 1.5rem;
     padding: 3rem;
     background-color: lightgray;
+
 
     &__logo {
         flex: 0.3;
@@ -41,4 +41,5 @@
     &__profile {
         cursor: pointer;
     }
+
 }
