@@ -22,6 +22,7 @@ function BoxDetails() {
         event.preventDefault()
         youtubeService.get(input)
         .then(res=>{
+            console.log(res);
             setVideoId(res.items[0].id.videoId)
         })
       
