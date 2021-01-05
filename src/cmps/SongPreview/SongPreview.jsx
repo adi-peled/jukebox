@@ -1,9 +1,9 @@
 import React from 'react'
 
-function SongPreview() {
+function SongPreview({song}) {
     return (
         <div>
-            hi
+            {song.name}
         </div>
     )
 }
