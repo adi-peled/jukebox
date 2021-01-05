@@ -19,14 +19,10 @@ function BoxDetails(props) {
         console.log(box);
     }, [])
     return (
-        <div>
+        <div className="box-details">
             { box &&<div className="flex"> 
-               {/* flexRow */}
-
                 <Chat box={box}/>
             <div>
-                {/* flexColumn */}
-
                 <BoxInfo box={box}/>
                 <BoxPlayList box={box}/>
             </div>

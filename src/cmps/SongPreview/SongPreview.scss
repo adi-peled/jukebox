@@ -1,0 +1,33 @@
+
+.song-preview{
+    min-height: 100px;
+}
+
+.song-preview:hover{
+    background-color: rgba(255, 255, 255, 0.041);
+    cursor: pointer;
+}
+
+.song-preview-svg{
+    transform: scale(1.8);
+}
+
+.song-preview-section1{
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    width: 30%;
+    justify-content: space-between;
+}
+
+.song-preview-section2{
+    padding:0 1rem;
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-between;
+}
+
+.equalizer-gif{
+    width: 150px;
+}
