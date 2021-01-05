@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import Filter from '../../cmps/Filter/Filter'
 import BoxList from '../../cmps/BoxList/BoxList'
 //
-import {playListService}from '../../services/playlistService.js'
+import {boxService}from '../../services/boxService.js'
 
 function Main() {
 
-    const [playList,setPlayList] = useState(playListService.getPlayLists())
-    console.log(playList);
+    const [boxs,setBoxs] = useState(boxService.getBoxs())
     const [genre, setGenre] = useState(null)
 
     function onFilter(filter) {
@@ -19,7 +18,7 @@ function Main() {
         <section className="main">
             main page
             <Filter onFilter={onFilter} />
-            <BoxList genre={genre} />
+            <BoxList boxs={boxs} genre={genre} />
         </section>
     )
 }

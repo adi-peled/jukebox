@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { youtubeService } from '../../services/youtubeService.js'
-import YouTube from 'react-youtube'
-function BoxDetails() {
-    
-    const [videoId, setVideoId] = useState('')
-    const [input, setInput] = useState('')
-    
-     const opts = {
-            height: '300',
-            width: '300',
-            playerVars: {
-                // https://developers.google.com/youtube/player_parameters
-                autoplay: 1,
-            }
-        }
 
-   
+import './BoxDetails.scss'
 
-    function showSongObj(event){
-        event.preventDefault()
-        youtubeService.get(input)
-        .then(res=>{
-            console.log(res);
-            setVideoId(res.items[0].id.videoId)
-        })
-      
+import { boxService } from '../../services/boxService'
+import BoxPlayList from '../BoxPlayList/BoxPlayList'
+import Chat from '../Chat/Chat'
+import BoxInfo from '../BoxInfo/BoxInfo'
+function BoxDetails(props) {
+    const { id } = props.match.params
+    const [box,setBox] = useState(null)
+
+    function getBox(){
+        const box = boxService.getBoxById(id)
+        setBox(...box)
     }
+    useEffect(() => {
+        getBox(id)
+        console.log(box);
+    }, [])
     return (
         <div>
-            <form action="">
-                <input placeholder="Look for a song" value={input} onChange={(event) => setInput(event.target.value)} type="search"/>
-                <button onClick={ (event) => showSongObj(event)}>Search</button>
-            </form>
-            { videoId&&<YouTube videoId={ videoId } opts={opts}  />}
+            { box &&<div className="flex"> 
+               {/* flexRow */}
+
+                <Chat box={box}/>
+            <div>
+                {/* flexColumn */}
+
+                <BoxInfo/>
+                <BoxPlayList box={box}/>
+            </div>
+                </div>
+            }
         </div>
     )
 }

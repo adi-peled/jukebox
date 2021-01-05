@@ -13,9 +13,8 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <BoxDetails />
         <Switch>
-
+          <Route component={BoxDetails} path="/boxDetails/:id" />
           <Route component={Main} path="/main" />
           <Route component={Login} path="/login" />
           <Route component={Home} path="/" />
