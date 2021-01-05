@@ -27,7 +27,7 @@ function BoxDetails(props) {
             <div>
                 {/* flexColumn */}
 
-                <BoxInfo/>
+                <BoxInfo box={box}/>
                 <BoxPlayList box={box}/>
             </div>
                 </div>

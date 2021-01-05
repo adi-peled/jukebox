@@ -1,8 +1,9 @@
 import React from 'react'
+import './BoxInfo.scss'
 
 function BoxInfo() {
     return (
-        <div>
+        <div className="box-info">
             info
         </div>
     )
