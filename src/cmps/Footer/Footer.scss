@@ -1,7 +1,24 @@
-.footer{
+.footer {
+    justify-content: center;
     font-size: 1.5rem;
     width: 100%;
-    min-height: 12rem;
-    background-color:#5b3a7b ;
+    padding: 1.5rem;
+    background-color: #5b3a7b;
     color: white;
+
+    &__developer {
+        margin-right: 10rem;
+    }
+
+    &__svg {
+        fill: white;
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &__img {
+        border-radius: 50%;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
 }

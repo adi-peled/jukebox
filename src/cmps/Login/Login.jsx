@@ -25,7 +25,7 @@ function Login({ type }) {
         }
     }
     return (
-        <form className="form modal">
+        <form className="form  modal">
             {type === 'signup' && <Input
                 placeholder="usersname"
                 type="text"
