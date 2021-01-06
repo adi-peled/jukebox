@@ -3,13 +3,11 @@ import './BoxList.scss'
 import BoxPreview from '../BoxPreview/BoxPreview'
 function BoxList({ genre,boxs }) {
     return (
-        <section className="boxList flex">
+        <section className="boxList grid">
            {boxs && boxs.map(box=>{
                 return <BoxPreview key={box._id} box={box} />
             })
         }
-            
-            
         </section>
     )
 }

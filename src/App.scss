@@ -2,6 +2,15 @@
 
 
 
+
+
+body {
+    font-family: 'nunito-regular';
+    font-weight: 700;
+    line-height: 1.7;
+    color: $color-grey-dark;
+}
+
 .app-container {
     min-height: 84vh;
 }

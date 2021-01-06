@@ -1,7 +1,13 @@
-body {
-    font-family: 'Lato';
-    font-weight: 700;
-    line-height: 1.7;
-    color: #777;
+@font-face {
+    font-family: nunito-regular;
+    // src: url(~@/assets/fonts/nunito/Nunito-Regular);
+    src: url('../../assets/fonts/nunito/Nunito-Regular.ttf');
 }
+
+@font-face {
+    font-family: nunito-bold;
+    // src: url(~@/assets/fonts/nunito/Nunito-Regular);
+    src: url('../../assets/fonts/nunito/Nunito-ExtraBold.ttf');
+}
+
 

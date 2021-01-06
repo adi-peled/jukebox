@@ -5,7 +5,6 @@ import Footer from './cmps/Footer/Footer'
 import Header from './cmps/Header/Header'
 import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
-import Login from './cmps/Login/Login'
 import BoxDetails from './cmps/BoxDetails/BoxDetails'
 
 function App() {

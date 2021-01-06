@@ -1,9 +1,11 @@
+@import '../../scss/abstracts/variables';
+
 .footer {
     justify-content: center;
     font-size: 1.5rem;
     width: 100%;
     padding: 1.5rem;
-    background-color: #5b3a7b;
+    background-color: $color-primary;
     color: white;
 
     &__developer {

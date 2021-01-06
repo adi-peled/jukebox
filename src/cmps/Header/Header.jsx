@@ -39,13 +39,17 @@ function Header() {
                 </li>
                 <li className="header__item">
                     <img className="header__profile" src="" alt="profile" onClick={() => setShowMenu(!showMenu)} />
-                    {showMenu && <ul className="profile__list">
-                        {!user && <>
-                            <li onClick={() => setOpenLoginModal({ show: true, type: 'signup' })} className="profile__item">Signup</li>
-                            <li onClick={() => setOpenLoginModal({ show: true, type: 'login' })} className="profile__item">Login</li>
-                        </>}
-                        {user && <li onClick={() => logout()} className="profile__item">Logout</li>}
-                    </ul>}
+                    {showMenu && <>
+                        <ul className="profile__list">
+                            {!user && <>
+                                <li onClick={() => setOpenLoginModal({ show: true, type: 'signup' })} className="profile__item">Signup</li>
+                                <li onClick={() => setOpenLoginModal({ show: true, type: 'login' })} className="profile__item">Login</li>
+                            </>}
+                            {user && <li onClick={() => logout()} className="profile__item">Logout</li>}
+                        </ul>
+                        <div onClick={() => setShowMenu(false)} className="screen" />
+                    </>
+                    }
                 </li>
             </ul>
 
@@ -59,7 +63,7 @@ function Header() {
 
             {
                 openCreateModal &&
-                 <>
+                <>
                     <CreateBox />
                     <div onClick={() => setOpenCreateModal(false)} className="screen" />
                 </>

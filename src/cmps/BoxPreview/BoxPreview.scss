@@ -1,3 +1,35 @@
+@import '../../scss/abstracts/variables';
+
+
 .boxPreview {
     margin-right: .5rem;
+    flex-direction: column;
+
+    &__info {
+        height: 20%;
+        background-color: $color-primary;
+        padding: 5px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__title {
+        margin-left: 0.5rem;
+        font-size: 2rem;
+        text-transform: capitalize;
+        font-family: 'nunito-bold';
+        color: white;
+    }
+
+    &__img {
+        height: 80%;
+        width: 100%;
+    }
+
+    .MuiSvgIcon-root {
+        width: 3.2rem;
+        height: 3.2rem;
+        fill: white;
+        margin-right: 0.5rem;
+    }
 }

@@ -1,8 +1,10 @@
+@import '../../scss/abstracts/variables';
+
 .header {
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding: 3rem;
     background-color: lightgray;
-
+    margin-bottom: 1rem;
 
     .screen {
         height: 100vh;
@@ -10,6 +12,7 @@
         top: 0;
         right: 0;
         position: absolute;
+        // z-index: -5;
     }
 
     &__logo {
@@ -35,15 +38,19 @@
             &__list {
                 position: absolute;
                 background-color: lightgray;
+                z-index: 100;
             }
 
             &__item {
                 padding: 1rem;
                 cursor: pointer;
             }
-
         }
 
+    }
+
+    &__link {
+        color: $color-grey-dark;
     }
 
     &__profile {
