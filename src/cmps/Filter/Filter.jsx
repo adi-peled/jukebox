@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import GenreCarousel from '../GenreCarousel/GenreCarousel'
 import './Filter.scss'
 function Filter({ onFilter }) {
     const [filter, setFilter] = useState(null)
@@ -10,12 +11,13 @@ function Filter({ onFilter }) {
 
     return (
         <div className="filter">
-            <ul className="filter__list flex wrap">
+            {/* <ul className="filter__list flex wrap">
                 {genres.map(genre => {
                     return <li key={genre} className="filter__item" onClick={() => setFilter(genre)}>{genre}</li>
                 })}
+            </ul> */}
+            <GenreCarousel genres={genres} />
 
-            </ul>
         </div>
     )
 }
