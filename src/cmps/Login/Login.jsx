@@ -25,9 +25,12 @@ function Login({ type }) {
         }
     }
     return (
-        <form className="form  modal">
+        <form className="form  modal flex">
+            <div className="title">
+                {type === 'signup' ? 'Signup' : 'Login'}
+            </div>
             {type === 'signup' && <Input
-                placeholder="usersname"
+                placeholder="username"
                 type="text"
                 value={username}
                 onChange={(ev) => setUsername(ev.target.value)}

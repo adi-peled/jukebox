@@ -1,7 +1,24 @@
 .createBox {
-    display: flex;
     flex-direction: column;
-    height: 30rem;
+    height: 75rem;
+    justify-content: space-between;
+
+    &__file-container {
+        justify-content: center;
+
+        input {
+            opacity: 0;
+            width: 30rem;
+            height: 30rem;
+            position: absolute;
+            z-index: 100;
+        }
+    }
+
+    &__svg {
+        width: 30rem;
+        height: 30rem;
+    }
 
     &__label {
         font-size: 2rem !important;
@@ -9,7 +26,6 @@
 
     &__input {
         font-size: 2rem !important;
-        margin-bottom: 3rem;
     }
 
 }

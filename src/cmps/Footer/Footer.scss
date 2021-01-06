@@ -10,6 +10,10 @@
 
     &__developer {
         margin-right: 10rem;
+
+        >* {
+            margin-right: 1rem;
+        }
     }
 
     &__svg {

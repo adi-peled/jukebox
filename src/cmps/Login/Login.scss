@@ -1,7 +1,23 @@
 .form {
     flex-direction: column;
-  
+    min-height: 55rem;
+    align-items: center;
 
+    .title {
+        margin-bottom: 5rem;
+    }
+
+    .MuiInputBase-root {
+        margin-bottom: 10rem;
+        font-size: 3rem;
+    }
+
+    .MuiButtonBase-root {
+        font-size: 3rem;
+        position: absolute;
+
+        bottom: 3rem;
+    }
 }
 
 
