@@ -1,3 +1,5 @@
+@import '../../scss/abstracts/variables';
+
 .form {
     flex-direction: column;
     min-height: 55rem;
@@ -15,8 +17,13 @@
     .MuiButtonBase-root {
         font-size: 3rem;
         position: absolute;
-
         bottom: 3rem;
+        background-color: $color-primary;
+
+        &:hover {
+            background-color: $color-primary-light;
+
+        }
     }
 }
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './Login.scss'
-import { setUser } from '../../store/actions/userActions'
-import { authService } from '../../services/authService'
+import { signup, login } from '../../store/actions/userActions'
 import { Button, Input } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 function Login({ type }) {
@@ -15,13 +14,9 @@ function Login({ type }) {
     const onSubmit = async (ev, email, password, username) => {
         ev.preventDefault()
         if (type === 'signup') {
-            const user = await authService.signup(email, password, username)
-            if (user) {
-                dispatch({ type: 'SET_USER', user })
-            }
+            dispatch(signup(email, password, username))
         } else {
-            const user = await authService.login(email, password)
-            dispatch({ type: 'SET_USER', user })
+            dispatch(login(email, password))
         }
     }
     return (

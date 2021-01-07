@@ -3,7 +3,7 @@ import GenreCarousel from '../GenreCarousel/GenreCarousel'
 import './Filter.scss'
 function Filter({ onFilter }) {
     const [filter, setFilter] = useState(null)
-    const genres = ['All', 'Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop', 'Classical', 'alternativ', 'Blues', 'Disco', 'Israeli', 'Arabic']
+    const genres = ['All', 'Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop', 'Classical', 'Alternativ', 'Blues', 'Disco', 'Israeli', 'Arabic']
 
     useEffect(() => {
         onFilter(filter)
@@ -11,13 +11,7 @@ function Filter({ onFilter }) {
 
     return (
         <div className="filter">
-            {/* <ul className="filter__list flex wrap">
-                {genres.map(genre => {
-                    return <li key={genre} className="filter__item" onClick={() => setFilter(genre)}>{genre}</li>
-                })}
-            </ul> */}
             <GenreCarousel genres={genres} />
-
         </div>
     )
 }

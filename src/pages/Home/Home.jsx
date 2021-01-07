@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Home.scss'
 import BoxList from '../../cmps/BoxList/BoxList'
-import heroImg from '../../assets/img/hero1.jpg'
+import heroImg from '../../assets/img/hero2.jpg'
 import { TweenLite } from 'gsap'
 function Home() {
 

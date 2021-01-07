@@ -3,4 +3,13 @@
     .react-multi-carousel-dot-list {
         z-index: -100;
     }
+
+    .react-multi-carousel-item {
+        transition: all .3s;
+
+        &:hover {
+            transform: skewX(10deg) scale(1.1);
+        }
+
+    }
 }

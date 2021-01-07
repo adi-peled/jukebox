@@ -1,3 +1,6 @@
+@import '../../scss/abstracts/variables';
+
+
 .createBox {
     flex-direction: column;
     height: 75rem;
@@ -28,4 +31,17 @@
         font-size: 2rem !important;
     }
 
+    .MuiInputBase-root {
+        width: 75%;
+    }
+
+
+    .MuiButtonBase-root {
+        font-size: 2rem;
+        background-color: $color-primary;
+        transition: .5s;
+        &:hover {
+            background-color: $color-primary-light;
+        }
+    }
 }

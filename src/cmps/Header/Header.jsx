@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import './Header.scss'
-import { NavLink, useHistory, Link } from 'react-router-dom'
+import { NavLink, useHistory} from 'react-router-dom'
 import Login from '../Login/Login'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import { authService } from '../../services/authService'
+import { useSelector, useDispatch } from 'react-redux'
+import { loadLoggedUser, signout } from '../../store/actions/userActions'
+
 import CreateBox from '../CreateBox/CreateBox'
 
 function Header() {
     const history = useHistory()
+    const dispatch = useDispatch()
+    const { user } = useSelector(state => state.userReducer)
     const [showMenu, setShowMenu] = useState(false)
     const [openLoginModal, setOpenLoginModal] = useState({ show: false, type: '' })
     const [openCreateModal, setOpenCreateModal] = useState(false)
-    const { user } = useSelector(state => state.userReducer)
-    const dispatch = useDispatch()
-
-    const logout = async () => {
-        await authService.logout()
-        dispatch({ type: 'SET_USER', user: null })
-    }
 
     useEffect(async () => {
-        const user = await authService.getUser()
-        dispatch({ type: 'SET_USER', user })
-
+        dispatch(loadLoggedUser())
     }, [])
 
     return (
@@ -45,7 +38,7 @@ function Header() {
                                 <li onClick={() => setOpenLoginModal({ show: true, type: 'signup' })} className="profile__item">Signup</li>
                                 <li onClick={() => setOpenLoginModal({ show: true, type: 'login' })} className="profile__item">Login</li>
                             </>}
-                            {user && <li onClick={() => logout()} className="profile__item">Logout</li>}
+                            {user && <li onClick={() => dispatch(signout())} className="profile__item">Logout</li>}
                         </ul>
                         <div onClick={() => setShowMenu(false)} className="screen" />
                     </>

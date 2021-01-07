@@ -4,7 +4,7 @@ import './GenreCarousel.scss'
 import { NavLink, useHistory, Link } from 'react-router-dom'
 import 'react-multi-carousel/lib/styles.css';
 
-export default function ImgCarousel({ genres }) {
+export default function GenreCarousel({ genres }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -44,7 +44,7 @@ export default function ImgCarousel({ genres }) {
       >
 
         {genres.map(genre => {
-          return <Link className="genreCarousel__link" onClick={() => console.log('clicked')} to={'/main/' + genre}> {genre}</Link>
+          return <Link className="genreCarousel__link" to={'/main/' + genre}> {genre}</Link>
         })}
       </Carousel>
 
