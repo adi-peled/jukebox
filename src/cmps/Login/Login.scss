@@ -19,6 +19,7 @@
         position: absolute;
         bottom: 3rem;
         background-color: $color-primary;
+        width: 70%;
 
         &:hover {
             background-color: $color-primary-light;
@@ -31,6 +32,5 @@
 @media (max-width:500px) {
     .form {
         width: 80%;
-        padding: 6px;
     }
 }

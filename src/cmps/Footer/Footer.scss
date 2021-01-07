@@ -1,14 +1,19 @@
 @import '../../scss/abstracts/variables';
+@import '../../scss/abstracts/mixins';
 
 .footer {
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 2.6rem;
     width: 100%;
-    padding: 1.5rem;
+    padding: 3rem;
     background-color: $color-primary;
     color: white;
 
+
     &__developer {
+        padding: .5rem;
+        align-items: center;
+        box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.3);
         margin-right: 10rem;
 
         >* {
@@ -18,13 +23,13 @@
 
     &__svg {
         fill: white;
-        width: 3rem;
-        height: 3rem;
+        width: 4.5rem;
+        height: 4.5rem;
     }
 
     &__img {
         border-radius: 50%;
-        width: 3.5rem;
-        height: 3.5rem;
+        width: 4.5rem;
+        height: 4.5rem;
     }
 }

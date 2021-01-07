@@ -1,10 +1,12 @@
 @import '../../scss/abstracts/variables';
+@import '../../scss/abstracts/mixins';
 
 
 .createBox {
     flex-direction: column;
     height: 75rem;
     justify-content: space-between;
+
 
     &__file-container {
         justify-content: center;
@@ -15,12 +17,33 @@
             height: 30rem;
             position: absolute;
             z-index: 100;
+            cursor: pointer;
+
+            @include respon(tab-land) {
+                width: 25rem;
+                height: 25rem;
+            }
+
+            @include respon(phone) {
+                width: 20rem;
+                height: 20rem;
+            }
         }
     }
 
     &__svg {
         width: 30rem;
         height: 30rem;
+
+        @include respon(tab-land) {
+            width: 25rem;
+            height: 25rem;
+        }
+
+        @include respon(phone) {
+            width: 20rem;
+            height: 20rem;
+        }
     }
 
     &__label {
@@ -29,10 +52,11 @@
 
     &__input {
         font-size: 2rem !important;
+
     }
 
     .MuiInputBase-root {
-        width: 75%;
+        width: 100%;
     }
 
 
@@ -40,6 +64,7 @@
         font-size: 2rem;
         background-color: $color-primary;
         transition: .5s;
+
         &:hover {
             background-color: $color-primary-light;
         }

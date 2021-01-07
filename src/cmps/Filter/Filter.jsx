@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import GenreCarousel from '../GenreCarousel/GenreCarousel'
+import Carousel from '../Carousel/Carousel'
 import './Filter.scss'
 function Filter({ onFilter }) {
     const [filter, setFilter] = useState(null)
@@ -11,7 +11,7 @@ function Filter({ onFilter }) {
 
     return (
         <div className="filter">
-            <GenreCarousel genres={genres} />
+            <Carousel genres={genres} />
         </div>
     )
 }

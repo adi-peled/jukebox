@@ -1,5 +1,7 @@
 .boxList {
     grid-template-columns: repeat(auto-fill, 22rem);
     gap: 1rem;
-    margin-top: 5rem;
+    margin: 5rem 0;
+    place-content: center;
+
 }
