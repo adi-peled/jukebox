@@ -9,6 +9,17 @@
     background-color: $color-primary;
     color: white;
 
+    @include respon(tab-land) {
+        font-size: 2rem;
+    }
+
+
+    @include respon(phone) {
+        align-items: center;
+        flex-direction: column;
+    }
+
+
 
     &__developer {
         padding: .5rem;
@@ -16,8 +27,28 @@
         box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.3);
         margin-right: 10rem;
 
+        @include respon(tab-land) {
+            margin-right: 5rem;
+        }
+
+
+        @include respon(phone) {
+            justify-content: center;
+            width:80%;
+            margin-right: 0;
+            margin-bottom: 3rem;
+        }
+
         >* {
             margin-right: 1rem;
+
+            @include respon(tab-land) {
+                margin-right: .8rem;
+            }
+
+            @include respon(phone) {
+                margin-right: 2rem;
+            }
         }
     }
 
@@ -25,11 +56,21 @@
         fill: white;
         width: 4.5rem;
         height: 4.5rem;
+
+        @include respon(phone) {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
     }
 
     &__img {
         border-radius: 50%;
         width: 4.5rem;
         height: 4.5rem;
+
+        @include respon(phone) {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
     }
 }

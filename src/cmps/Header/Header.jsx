@@ -1,38 +1,65 @@
 import React, { useEffect, useState } from 'react'
 import './Header.scss'
-import { NavLink, useHistory} from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import Login from '../Login/Login'
+import { Input } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadLoggedUser, signout } from '../../store/actions/userActions'
-
 import CreateBox from '../CreateBox/CreateBox'
+//icons
+import SearchIcon from '@material-ui/icons/Search';
+import MenuIcon from '@material-ui/icons/Menu';
+import PersonIcon from '@material-ui/icons/Person';
 
 function Header() {
     const history = useHistory()
     const dispatch = useDispatch()
     const { user } = useSelector(state => state.userReducer)
+    const [showProfileMenu, setShowProfileMenu] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const [openLoginModal, setOpenLoginModal] = useState({ show: false, type: '' })
     const [openCreateModal, setOpenCreateModal] = useState(false)
-
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     useEffect(async () => {
         dispatch(loadLoggedUser())
     }, [])
 
+    useEffect(() => {
+        window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
+    }, [])
+    useEffect(() => {
+        console.log({ screenWidth });
+    }, [screenWidth])
+
+
+
     return (
         <header className="header flex">
             <img className="header__logo" src="" alt="logo" onClick={() => history.push('/')} />
-            <input className="header__search" placeholder="Search" />
+            <div className="header__input-container flex">
+                <input className="header__input-container--search" placeholder="Search" />
+                <SearchIcon className="header__input-container--icon" />
+            </div>
             <ul className="header__nav flex">
+                <div class="relative">
+                    {screenWidth < 600 &&
+                        <MenuIcon className="header__menu-icon" onClick={() => setShowMenu(!showMenu)} />
+                    }
+                    {(screenWidth >= 600 || showMenu) && <div className={screenWidth < 600 ? 'menu' : 'flex'}>
+
+                        <li className="header__item--menu">
+                            <NavLink to="/main" className="header__link" exact >Boxes</NavLink>
+                        </li>
+                        <li className="header__item--menu" onClick={() => setOpenCreateModal(true)}>
+                            Create Box
+                       </li>
+                    </div>}
+
+                </div>
+
                 <li className="header__item">
-                    <NavLink to="/main" className="header__link" exact >Boxes</NavLink>
-                </li>
-                <li className="header__item" onClick={() => setOpenCreateModal(true)}>
-                    Create Box
-                </li>
-                <li className="header__item">
-                    <img className="header__profile" src="" alt="profile" onClick={() => setShowMenu(!showMenu)} />
-                    {showMenu && <>
+                    <PersonIcon className="header__profile" onClick={() => setShowProfileMenu(!showProfileMenu)} />
+                    {showProfileMenu && <>
                         <ul className="profile__list">
                             {!user && <>
                                 <li onClick={() => setOpenLoginModal({ show: true, type: 'signup' })} className="profile__item">Signup</li>
@@ -40,7 +67,7 @@ function Header() {
                             </>}
                             {user && <li onClick={() => dispatch(signout())} className="profile__item">Logout</li>}
                         </ul>
-                        <div onClick={() => setShowMenu(false)} className="screen" />
+                        <div onClick={() => setShowProfileMenu(false)} className="screen" />
                     </>
                     }
                 </li>
