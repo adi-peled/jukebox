@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import './BoxPreview.scss'
 function BoxPreview({ box }) {
-    console.log({ box });
     return (
 
         <Link className="boxPreview flex" to={`/boxDetails/${box._id}`}>

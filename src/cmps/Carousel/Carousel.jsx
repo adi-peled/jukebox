@@ -1,14 +1,14 @@
 import React from 'react'
 import Carousel from 'react-multi-carousel';
-import './GenreCarousel.scss'
-import { NavLink, useHistory, Link } from 'react-router-dom'
+import './Carousel.scss'
+import { Link } from 'react-router-dom'
 import 'react-multi-carousel/lib/styles.css';
 
-export default function ImgCarousel({ genres }) {
+export default function AppCarousel({ genres }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items:7,
+      items: 7,
       slidesToSlide: 1// optional, default to 1.
     },
     tablet: {
@@ -23,13 +23,12 @@ export default function ImgCarousel({ genres }) {
     }
   };
   return (
-    <div className="genreCarousel">
+    <div className="carousel">
       <Carousel
         swipeable={false}
         draggable={false}
         showDots={true}
         responsive={responsive}
-        ssr={false} // means to render carousel on server-side.
         infinite={true}
         // autoPlay={this.props.deviceType !== "mobile" ? true : false}
         autoPlaySpeed={1000}
@@ -37,14 +36,14 @@ export default function ImgCarousel({ genres }) {
         customTransition="all .5"
         transitionDuration={500}
         containerClass="carousel-container"
-        // deviceType={this.props.deviceType}
-        dotListClass="custom-dot-list-style"
+        // dotListClass="custom-dot-list-style"
         itemClass=""
-      renderDotsOutside={true}
+        showDots={false}
+        renderDotsOutside={false}
       >
 
         {genres.map(genre => {
-          return <Link className="genreCarousel__link" onClick={() => console.log('clicked')} to={'/main/' + genre}> {genre}</Link>
+          return <Link key={genre} to={'/main/' + genre}> {genre}</Link>
         })}
       </Carousel>
 

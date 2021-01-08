@@ -8,7 +8,7 @@ import maorImg from '../../assets/adi.jpeg'
 function Footer() {
     return (
         <footer className="footer flex">
-            <div className="footer__developer">
+            <div className="footer__developer flex">
                 <img className="footer__img" src={adiImg} />
                 <label >Adi Peled</label>
                 <a target="_blank" href="https://github.com/adi-peled?tab=repositories">
@@ -18,7 +18,7 @@ function Footer() {
                     <Linkedin className="footer__svg" />
                 </a>
             </div>
-            <div className="footer__developer">
+            <div className="footer__developer flex">
                 <img className="footer__img" src={maorImg} />
                 <label >Maor Bason</label>
                 <a target="_blank" href="https://github.com/maorba6?tab=repositories">

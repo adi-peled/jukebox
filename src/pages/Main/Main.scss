@@ -1,3 +1,13 @@
+@import '../../scss/abstracts/mixins';
+
 .main {
     padding: 0 8rem;
+
+    @include respon(tab-port) {
+        padding: 0 6rem;
+    }
+
+    @include respon(phone) {
+        padding: 0;
+    }
 }

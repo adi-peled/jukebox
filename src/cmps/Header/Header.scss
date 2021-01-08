@@ -1,4 +1,5 @@
 @import '../../scss/abstracts/variables';
+@import '../../scss/abstracts/mixins';
 
 .header {
     font-size: 2rem;
@@ -6,18 +7,66 @@
     background-color: lightgray;
     margin-bottom: 1rem;
 
+    @include respon(tab-port) {
+        padding: 2.5rem;
+    }
+
+    @include respon(phone) {
+        padding: 1.5rem;
+    }
+
+    &__input-container {
+        flex: 0.2;
+        position: relative;
+        align-items: center;
+        border-bottom: 1px solid rgb(141, 140, 140);
+
+        &--search {
+            font: inherit;
+            border: 0;
+            height: 1.1876em;
+            padding: 6px 0 7px;
+            background: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &--search+&--icon {
+            transition: all .2s;
+        }
+
+        &--search:focus+&--icon {
+            transform: scale(1.2);
+            fill: rgb(141, 140, 140);
+        }
+
+        &--icon {
+            position: absolute;
+            right: 0;
+            width: 3rem !important;
+            height: 3rem !important;
+        }
+    }
+
+
+
     .screen {
         height: 100vh;
         width: 100vw;
         top: 0;
         right: 0;
         position: absolute;
-        // z-index: -5;
     }
 
     &__logo {
-        flex: 0.3;
+        flex: 0.2;
         cursor: pointer;
+
+        @include respon(phone) {
+            margin-right: 3rem;
+        }
     }
 
     &__search {
@@ -25,8 +74,13 @@
     }
 
     &__nav {
-        flex: 0.5;
+        flex: 0.6;
         justify-content: flex-end;
+        align-items: center;
+        position: relative;
+
+
+
     }
 
     &__item {
@@ -47,6 +101,13 @@
             }
         }
 
+        &--menu {
+            width: 10rem;
+            cursor: pointer;
+            margin-right: 2rem;
+
+        }
+
     }
 
     &__link {
@@ -55,6 +116,20 @@
 
     &__profile {
         cursor: pointer;
+        width: 3.5rem !important;
+        height: 3.5rem !important;
     }
 
+    &__menu-icon {
+        width: 3.5rem !important;
+        height: 3.5rem !important;
+        margin-right: 3rem;
+    }
+
+    .menu {
+        flex-direction: column;
+        position: absolute;
+        z-index: 999;
+
+    }
 }
