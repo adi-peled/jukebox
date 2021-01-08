@@ -57,24 +57,11 @@ function CreateBox() {
             <div>
                 <InputLabel id="label" className="createBox__label">genre</InputLabel>
 
-                <Select
-                    open={open}
-                    onClose={() => setOpen(false)}
-                    onOpen={() => setOpen(true)}
-                    value={genre}
-                    onChange={(ev)=>setGenre(ev.target.value)}
-                >
+                <select className="createBox__select" value={genre} onChange={(ev) => setGenre(ev.target.value)}>
                     {genres.map(g => {
-                        return <MenuItem className="option" key={g} value={g}>{g}</MenuItem>
+                        return <option className="createBox__option" key={g} value={g}>{g}</option>
                     })}
-
-                </Select>
-
-                {/* <select value={genre} onChange={(ev) => setGenre(ev.target.value)}>
-                    {genres.map(g => {
-                        return <option className="option" key={g} value={g}>{g}</option>
-                    })}
-                </select> */}
+                </select>
             </div>
             <Button  onClick={createBox}>
             create box

@@ -27,11 +27,6 @@ function Header() {
     useEffect(() => {
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
     }, [])
-    useEffect(() => {
-        console.log({ screenWidth });
-    }, [screenWidth])
-
-
 
     return (
         <header className="header flex">
@@ -42,8 +37,11 @@ function Header() {
             </div>
             <ul className="header__nav flex">
                 <div class="relative">
-                    {screenWidth < 600 &&
+                    {screenWidth < 600 && <>
                         <MenuIcon className="header__menu-icon" onClick={() => setShowMenu(!showMenu)} />
+                        {showMenu && <div onClick={() => setShowMenu(false)} className="screen" />}
+
+                    </>
                     }
                     {(screenWidth >= 600 || showMenu) && <div className={screenWidth < 600 ? 'menu' : 'flex'}>
 
