@@ -9,25 +9,38 @@ import BoxPlayList from '../BoxPlayList/BoxPlayList'
 import Chat from '../Chat/Chat'
 import BoxInfo from '../BoxInfo/BoxInfo'
 import SocialLinks from '../SocialLinks/SocialLinks'
+import YouTube from 'react-youtube'
 //Redux
 import { useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { setCurrSong } from '../../store/actions/songAction.js'
 
-function BoxDetails(props) {
+function BoxDetails(props, state) {
     const { id } = props.match.params
     const [box,setBox] = useState(null)
+    const [videoId,setVideoId] = useState(null)
+    const [currSong,setSong] = useState(null)
     const dispatch = useDispatch();
-
+    const opts = {
+        height: '0',
+        width: '0',
+        playerVars: {
+            autoplay: 1,
+        }
+    }
     function playSong(song){
         dispatch(setCurrSong(song))
+        setSong(song)
+        setVideoId(song.vid)
+        console.log(state);
     }
     function getBox(){
         const box = boxService.getBoxById(id)
         setBox(...box)
     }
+
     useEffect(() => {
         getBox(id)
-        console.log(box);
     }, [])
     return (
         <div className="box-details">
@@ -36,7 +49,8 @@ function BoxDetails(props) {
             <div>
                 <BoxInfo box={box}/>
                 <SocialLinks/>
-                <BoxPlayList playSong={playSong} box={box}/>
+                <BoxPlayList playSong={playSong} box={box} currSong={currSong}/>
+                {videoId&&<YouTube videoId={ videoId } opts={opts}  />}
             </div>
                 </div>
             }
@@ -44,4 +58,9 @@ function BoxDetails(props) {
     )
 }
 
-export default BoxDetails
+const mapStateToProps = state => {
+    return {
+      song: state.song
+    }
+  }
+  export default connect(mapStateToProps)(BoxDetails);

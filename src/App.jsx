@@ -7,7 +7,10 @@ import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
 import BoxDetails from './cmps/BoxDetails/BoxDetails'
 
-function App() {
+import { connect } from 'react-redux'
+import { useEffect } from 'react';
+
+function App(store) {
   return (
     <div className="app">
       <Router>
@@ -25,4 +28,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    song: state.song,
+  }
+}
+
+export default connect(mapStateToProps)(App);
