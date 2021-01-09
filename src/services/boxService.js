@@ -14,6 +14,7 @@ let boxs = [
         _id: '01',
         name: 'eyal golan',
         genre: 'mizrahit',
+        createdBy: 'Maor',
         imgUrl: img,
         chat: [{ _id: 'xxxx', text: 'msg' }],
         playList: [

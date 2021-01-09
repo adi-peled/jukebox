@@ -1,9 +1,11 @@
 import { userReducer } from './reducers/userReducer'
+import { songReducer } from './reducers/songReducer'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk'
 // Only if you have a number of reducers:
 const rootReducer = combineReducers({
-    userReducer
+    userReducer,
+    songReducer
 })
 // This is only for the redux dev tools:
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

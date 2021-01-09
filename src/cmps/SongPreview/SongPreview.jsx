@@ -5,7 +5,7 @@ import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import equalizer from '../../assets/equalizer.gif'
-function SongPreview({song}) {
+function SongPreview({song, playSong}) {
     const [isPlaying, setIsPlaying] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     function changeIsPlaying(){
@@ -23,7 +23,7 @@ function SongPreview({song}) {
     return (
         <div className="flex space-between song-preview">
             <div className="song-preview-section1">
-                {isPlaying ?  <PauseCircleOutlineIcon className="song-preview-svg" onClick={changeIsPlaying}/> : <PlayCircleOutlineIcon className="song-preview-svg" onClick={changeIsPlaying}/>}
+                {isPlaying ?  <PauseCircleOutlineIcon className="song-preview-svg" onClick={changeIsPlaying}/> : <PlayCircleOutlineIcon className="song-preview-svg" onClick={()=>playSong(song)}/>}
                 {song.name}
             </div>
             <div className="song-preview-section2"> 

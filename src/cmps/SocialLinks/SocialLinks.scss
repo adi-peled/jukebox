@@ -1,0 +1,28 @@
+.social-links-section{
+    padding: 1.5rem;
+    div{
+        :hover{
+            cursor: pointer;
+        }
+        svg{
+            transform: scale(2);
+        }
+        a{
+            color: white;
+        }
+    }
+}
+
+.social-links-section-add{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 5vw;
+}
+
+.social-links-section-social{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 7.5vw;
+}
