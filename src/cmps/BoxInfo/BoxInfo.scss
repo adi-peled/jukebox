@@ -1,4 +1,20 @@
 .box-info{
     width: 80vw;
     height: 20vh;
+    background: linear-gradient(rgba(255, 166, 0, 0.349),rgba(172, 172, 123, 0.561),rgba(255, 166, 0, 0.315));
+}
+
+.box-info-img{
+    width: 10vw;
+    height : 20vh;
+    object-fit: cover;
+}
+
+.box-desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem;
+    font-size: 2rem;
+    text-transform: capitalize;
 }

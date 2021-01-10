@@ -36,7 +36,7 @@ function Header() {
                 <SearchIcon className="header__input-container--icon" />
             </div>
             <ul className="header__nav flex">
-                <div class="relative">
+                <div className="relative">
                     {screenWidth < 600 && <>
                         <MenuIcon className="header__menu-icon" onClick={() => setShowMenu(!showMenu)} />
                         {showMenu && <div onClick={() => setShowMenu(false)} className="screen" />}
