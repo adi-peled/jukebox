@@ -30,9 +30,7 @@ function BoxDetails(props, state) {
     }
     function playSong(song) {
         dispatch(setCurrSong(song))
-        setSong(song)
-        setVideoId(song.vid)
-        console.log(state);
+        setVideoId(song.videoId)
     }
     function getBox() {
         const box = boxService.getBoxById(id)
@@ -49,7 +47,7 @@ function BoxDetails(props, state) {
                 <div>
                     <BoxInfo box={box} />
                     <SocialLinks />
-                    <BoxPlayList playSong={playSong} box={box} currSong={currSong} />
+                    <BoxPlayList playSong={playSong} box={box} />
                     {videoId && <YouTube videoId={videoId} opts={opts} />}
                 </div>
             </div>

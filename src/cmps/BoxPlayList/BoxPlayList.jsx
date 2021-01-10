@@ -4,7 +4,7 @@ function BoxPlayList({box, playSong, currSong}) {
     return (
         <div>
             {box&& box.playList.map(song=>{
-                return <SongPreview key={song.vid} song={song} playSong={playSong} currSong={currSong} />
+                return <SongPreview key={song.videoId} song={song} playSong={playSong} />
             })}
         </div>
     )
