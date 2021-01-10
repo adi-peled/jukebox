@@ -11,15 +11,15 @@ import BoxInfo from '../BoxInfo/BoxInfo'
 import SocialLinks from '../SocialLinks/SocialLinks'
 import YouTube from 'react-youtube'
 //Redux
-import { useDispatch } from 'react-redux'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong } from '../../store/actions/songAction.js'
 
 function BoxDetails(props, state) {
     const { id } = props.match.params
-    const [box,setBox] = useState(null)
-    const [videoId,setVideoId] = useState(null)
-    const [currSong,setSong] = useState(null)
+    // const {currSong} = useSelector(state => state.songReducer)
+    const [box, setBox] = useState(null)
+    const [videoId, setVideoId] = useState(null)
+    const [currSong, setSong] = useState(null)
     const dispatch = useDispatch();
     const opts = {
         height: '0',
@@ -28,13 +28,13 @@ function BoxDetails(props, state) {
             autoplay: 1,
         }
     }
-    function playSong(song){
+    function playSong(song) {
         dispatch(setCurrSong(song))
         setSong(song)
         setVideoId(song.vid)
         console.log(state);
     }
-    function getBox(){
+    function getBox() {
         const box = boxService.getBoxById(id)
         setBox(...box)
     }
@@ -44,23 +44,19 @@ function BoxDetails(props, state) {
     }, [])
     return (
         <div className="box-details">
-            { box &&<div className="flex"> 
-                <Chat box={box}/>
-            <div>
-                <BoxInfo box={box}/>
-                <SocialLinks/>
-                <BoxPlayList playSong={playSong} box={box} currSong={currSong}/>
-                {videoId&&<YouTube videoId={ videoId } opts={opts}  />}
-            </div>
+            { box && <div className="flex">
+                <Chat box={box} />
+                <div>
+                    <BoxInfo box={box} />
+                    <SocialLinks />
+                    <BoxPlayList playSong={playSong} box={box} currSong={currSong} />
+                    {videoId && <YouTube videoId={videoId} opts={opts} />}
                 </div>
+            </div>
             }
         </div>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-      song: state.song
-    }
-  }
-  export default connect(mapStateToProps)(BoxDetails);
+
+export default BoxDetails;

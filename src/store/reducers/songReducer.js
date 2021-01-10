@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    user: null
+    currSong: null
 }
 
 export function songReducer(state = INITIAL_STATE, action) {
@@ -7,7 +7,7 @@ export function songReducer(state = INITIAL_STATE, action) {
         case 'PLAY_SONG':
             return {
                 ...state,
-                song: action.song
+                currSong: action.song
             }
         default:
             return state

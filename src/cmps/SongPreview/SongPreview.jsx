@@ -8,7 +8,8 @@ import equalizer from '../../assets/equalizer.gif'
 function SongPreview({song, playSong, currSong}) {
     const [isPlaying, setIsPlaying] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
-
+//todo: currSong from state
+// changre is edit  to remove
     useEffect(() => {
         if(currSong){
             if(song.vid===currSong.vid){
