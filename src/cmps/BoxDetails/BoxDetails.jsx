@@ -12,7 +12,7 @@ import SocialLinks from '../SocialLinks/SocialLinks'
 import YouTube from 'react-youtube'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong } from '../../store/actions/songAction.js'
+import { setCurrSong } from '../../store/actions/boxActions'
 
 function BoxDetails(props, state) {
     const { id } = props.match.params
@@ -38,9 +38,9 @@ function BoxDetails(props, state) {
         dispatch(setCurrSong(song))
         setVideoId(song.videoId)
     }
-    function getBox() {
-        const box = boxService.getBoxById(id)
-        setBox(...box)
+    async function getBox() {
+        const box = await boxService.getBoxById(id)
+        setBox(box)
     }
 
     useEffect(() => {

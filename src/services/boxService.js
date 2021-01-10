@@ -1,15 +1,15 @@
 import img from '../assets/adi.jpeg'
-
+import httpService from './httpService'
 
 export const boxService = {
-    getBoxs,
+    getBoxes,
     getBoxById
 }
 
 // let playLists = [{name: 'mizrahit', songs: [{}]}]
 
 
-let boxs = [
+let boxes = [
     {
         _id: '01',
         name: 'eyal golan',
@@ -285,10 +285,10 @@ let boxs = [
 
 
 
-function getBoxs() {
-    return boxs
+async function getBoxes() {
+    return await httpService.get('box')
 }
 
-function getBoxById(id) {
-    return boxs.filter(box => box._id === id)
+async function getBoxById(id) {
+    return await httpService.get(`box/${id}`)
 }

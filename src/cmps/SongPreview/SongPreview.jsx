@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 function SongPreview({song, playSong}) {
     const [isPlaying, setIsPlaying] = useState(false)
     const [isRemoving, setIsRemoving] = useState(false)
-    const {currSong} =  useSelector(state => state.songReducer)
+    const {currSong} =  useSelector(state => state.boxReducer)
 
     useEffect(() => {
         if(currSong){

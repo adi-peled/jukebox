@@ -1,10 +1,10 @@
 import React from 'react'
 import './BoxList.scss'
 import BoxPreview from '../BoxPreview/BoxPreview'
-function BoxList({ genre,boxs }) {
+function BoxList({ genre,boxes }) {
     return (
         <section className="boxList grid">
-           {boxs && boxs.map(box=>{
+           {boxes && boxes.map(box=>{
                 return <BoxPreview key={box._id} box={box} />
             })
         }
