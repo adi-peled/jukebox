@@ -1,6 +1,6 @@
 .social-links-section{
-    padding: 1.5rem;
-    margin-right:15px ;
+    padding: 1.5rem ;
+    margin-right: 15px;
     div{
         :hover{
             cursor: pointer;
@@ -10,20 +10,45 @@
         }
         a{
             color: white;
+
         }
     }
 }
 
 .social-links-section-add{
     display: flex;
+    svg{
+        margin-right: 15px;
+    }
     justify-content: space-between;
     align-items: center;
     width: 5vw;
 }
 
 .social-links-section-social{
+   
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 7.5vw;
+}
+@media (max-width: 1200px){
+    .social-links-section-social{
+        width: 10vw;
+    }
+}
+@media (max-width: 800px){
+    .social-links-section-social{
+        width: 13vw;
+    }
+}
+@media (max-width: 800px){
+    .social-links-section-social{
+        width: 15vw;
+    }
+}
+@media (max-width: 600px){
+    .social-links-section-social{
+        width: 22vw;
+    }
 }
