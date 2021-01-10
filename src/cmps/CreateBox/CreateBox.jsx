@@ -26,12 +26,7 @@ function CreateBox() {
     return (
         <form className="createBox modal flex">
             <div className="createBox__file-container flex">
-                <FileBase type="file"
-                    multiple={false}
-                    onDone={({ base64 }) => uploadImg(base64)}
-
-                >
-                </FileBase>
+                <FileBase type="file" multiple={false} onDone={({ base64 }) => uploadImg(base64)} />
                 <Upload className="createBox__svg" />
             </div>
 
@@ -63,8 +58,8 @@ function CreateBox() {
                     })}
                 </select>
             </div>
-            <Button  onClick={createBox}>
-            create box
+            <Button onClick={createBox}>
+                create box
             </Button>
         </form >
     )

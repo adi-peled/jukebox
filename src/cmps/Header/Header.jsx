@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './Header.scss'
 import { NavLink, useHistory } from 'react-router-dom'
 import Login from '../Login/Login'
-import { Input } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadLoggedUser, signout } from '../../store/actions/userActions'
 import CreateBox from '../CreateBox/CreateBox'
@@ -72,7 +71,7 @@ function Header() {
             </ul>
 
             {
-                openLoginModal.show &&
+                openLoginModal.show && !user &&
                 <>
                     <Login type={openLoginModal.type} />
                     <div onClick={() => setOpenLoginModal({ show: false, type: '' })} className="screen" />
