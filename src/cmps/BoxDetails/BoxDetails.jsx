@@ -16,11 +16,17 @@ import { setCurrSong } from '../../store/actions/songAction.js'
 
 function BoxDetails(props, state) {
     const { id } = props.match.params
-    // const {currSong} = useSelector(state => state.songReducer)
     const [box, setBox] = useState(null)
     const [videoId, setVideoId] = useState(null)
-    const [currSong, setSong] = useState(null)
     const dispatch = useDispatch();
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+    useEffect(() => {
+        window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
+        return ()=>{
+            window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
+        } 
+    }, [])
     const opts = {
         height: '0',
         width: '0',
@@ -43,8 +49,8 @@ function BoxDetails(props, state) {
     return (
         <div className="box-details">
             { box && <div className="flex">
-                <Chat box={box} />
-                <div>
+                {screenWidth>850 &&<Chat box={box} />}
+                <div className="box-details-section2">
                     <BoxInfo box={box} />
                     <SocialLinks />
                     <BoxPlayList playSong={playSong} box={box} />

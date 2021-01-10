@@ -2,8 +2,8 @@
 $clr1:rgb(24, 25, 26);
 
 .chat-box{
-    height: 70vh;
-    width: 20vw;
+    min-height: 100%;
+    min-width: 300px;
     margin: 2rem;
     padding: 15px;
 }
