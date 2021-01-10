@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, } from 'react'
+//Css
 import './SongPreview.scss'
+//Components
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import equalizer from '../../assets/equalizer.gif'
-function SongPreview({song, playSong, currSong}) {
+//redux
+import { useDispatch, useSelector } from 'react-redux'
+
+function SongPreview({song, playSong}) {
     const [isPlaying, setIsPlaying] = useState(false)
-    const [isEditing, setIsEditing] = useState(false)
-//todo: currSong from state
-// changre is edit  to remove
+    const [isRemoving, setIsRemoving] = useState(false)
+    const {currSong} =  useSelector(state => state.songReducer)
+
     useEffect(() => {
         if(currSong){
-            if(song.vid===currSong.vid){
+            if(song.videoId===currSong.videoId){
                 setIsPlaying(true)
             }else{
                 setIsPlaying(false)
@@ -23,10 +28,10 @@ function SongPreview({song, playSong, currSong}) {
     function changeIsPlaying(){
         setIsPlaying(!isPlaying)
     }
-    function changeIsEditing(){
-        setIsEditing(!isEditing)
+    function changeIsRemoving(){
+        setIsRemoving(!isRemoving)
         setTimeout(()=>{
-            setIsEditing(false)
+            setIsRemoving(false)
         },3000)
     }
 
@@ -37,13 +42,14 @@ function SongPreview({song, playSong, currSong}) {
         <div className="flex space-between song-preview" onDoubleClick={()=>playSong(song)}>
             <div className="song-preview-section1">
                 {isPlaying ?  <PauseCircleOutlineIcon className="song-preview-svg" onClick={changeIsPlaying}/> : <PlayCircleOutlineIcon className="song-preview-svg" onClick={()=>playSong(song)}/>}
-                {song.name}
+                <div>{song.name}</div>
+
             </div>
             <div className="song-preview-section2"> 
                 { isPlaying ? <img className="equalizer-gif" src={equalizer} alt=""/> : <div className="equalizer-gif"></div> }
-                {song.duration}
+                <div>{song.duration}</div>
 
-            {isEditing ? <DeleteOutlineOutlinedIcon onClick={handleDelete} className= "song-preview-svg"/> : <MoreVertIcon onClick={changeIsEditing} className= "song-preview-svg" />}
+            {isRemoving ? <DeleteOutlineOutlinedIcon onClick={handleDelete} className= "song-preview-svg"/> : <MoreVertIcon onClick={changeIsRemoving} className= "song-preview-svg" />}
              
              
             </div>

@@ -20,19 +20,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -47,19 +47,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -74,19 +74,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -101,19 +101,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -128,19 +128,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -155,19 +155,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -182,19 +182,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -209,19 +209,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -236,19 +236,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
@@ -263,19 +263,19 @@ let boxs = [
         playList: [
             {
                 name: 'אייל גולן - טעיתי',
-                vid: 'tGubzVL31r4',
+                videoId: 'tGubzVL31r4',
                 duration: '3:41',
                 // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
-                vid: '-K1LR032-CM',
+                videoId: '-K1LR032-CM',
                 duration: '3:16',
                 // imgUrl: 
             },
             {
                 name: '2אייל גולן - טעיתי',
-                vid: 'aJXd_64QHqo',
+                videoId: 'aJXd_64QHqo',
                 duration: '3:56',
                 // imgUrl: 
             }
