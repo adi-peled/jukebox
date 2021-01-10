@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Filter from '../../cmps/Filter/Filter'
 import BoxList from '../../cmps/BoxList/BoxList'
 import './Main.scss'
 import { boxService } from '../../services/boxService.js'
-
+import { useSelector, useDispatch} from 'react-redux'
+import { loadBoxes } from '../../store/actions/boxActions'
 function Main() {
 
-    const [boxs, setBoxs] = useState(boxService.getBoxs())
+    const { boxes }= useSelector((state)=>state.boxReducer)
     const [genre, setGenre] = useState(null)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(loadBoxes())
+
+    }, [])
+
+
 
     function onFilter(filter) {
         setGenre(filter)
@@ -17,7 +26,7 @@ function Main() {
     return (
         <section className="main">
             <Filter onFilter={onFilter} />
-            <BoxList boxs={boxs} genre={genre} />
+            <BoxList boxes={boxes} genre={genre} />
         </section>
     )
 }

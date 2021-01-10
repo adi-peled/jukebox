@@ -1,7 +1,6 @@
 import React from 'react'
 import './Chat.scss'
 function Chat({box}) {
-
     function handleSubmit (e){
         e.preventDefault()
     }
