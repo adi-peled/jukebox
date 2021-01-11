@@ -28,8 +28,11 @@
         }
     }
 
+
+
     &__file-container {
         align-self: center;
+        justify-content: center;
 
         input {
             opacity: 0;
@@ -41,7 +44,16 @@
         }
     }
 
+    &__img {
+        position: absolute;
+        width: 10rem;
+        height: 10rem;
+
+    }
+
     &__svg {
+        position: absolute;
+
         width: 10rem;
         height: 10rem;
     }
@@ -52,10 +64,14 @@
 
     &__info {
         text-align: center;
-        background-color: antiquewhite;
         cursor: pointer;
-
+        font-size: 1.6rem !important;
         @include absCenter
+    }
+
+
+    &__err {
+        margin-top: 12rem;
     }
 
     .infoIcon {

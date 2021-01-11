@@ -27,7 +27,8 @@ function CreateBox() {
         <form className="createBox modal flex">
             <div className="createBox__file-container flex">
                 <FileBase type="file" multiple={false} onDone={({ base64 }) => uploadImg(base64)} />
-                <Upload className="createBox__svg" />
+                <Upload className={imgString ? "createBox__svg opacity-0" : "createBox__svg"} />
+                {imgString && <img className="createBox__img" src={imgString} />}
             </div>
 
             <div>

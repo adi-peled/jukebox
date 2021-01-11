@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react'
 import './Login.scss'
 import { signup, login } from '../../store/actions/userActions'
 import { Button, Input } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert';
 import { ReactComponent as Upload } from '../../assets/upload.svg';
 import FileBase from 'react-file-base64'
 import { useDispatch } from 'react-redux'
 //icons
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import InfoIcon from '@material-ui/icons/Info';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-function Login({ type }) {
+function Login({ type, showSuccess }) {
 
     const dispatch = useDispatch()
     const [email, setEmail] = useState('')
@@ -22,6 +22,7 @@ function Login({ type }) {
     const [showInfo, setShowInfo] = useState(false)
 
 
+
     useEffect(() => {
         setUsername('')
         setEmail('')
@@ -29,12 +30,11 @@ function Login({ type }) {
         setTxt('')
     }, [type])
 
-    useEffect(() => {
-        console.log({ imgString });
-    }, [imgString])
 
-
-
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 
     function validatePassword(password) {
         var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
@@ -59,19 +59,28 @@ function Login({ type }) {
                 return
             }
         }
+        if (!validateEmail(email)) {
+            setTxt('email isnt valid')
+            return
+        }
         if (!validatePassword(password)) {
             setTxt('password too weak')
             return
         }
-
         let msg
         if (type === 'signup') {
             msg = await dispatch(signup(email, password, username, imgString))
 
+
         } else {
             msg = await dispatch(login(email, password))
+
         }
         setTxt(msg)
+        showSuccess(true)
+        setTimeout(() => {
+            showSuccess(false)
+        }, 2000)
     }
     return (
         <form className="form  modal flex">
@@ -84,10 +93,10 @@ function Login({ type }) {
                 value={username}
                 onChange={(ev) => setUsername(ev.target.value)}
             />}
-
             <Input
                 placeholder="Email"
                 value={email}
+                type="email"
                 onChange={(ev) => setEmail(ev.target.value)}
             />
 
@@ -105,17 +114,17 @@ function Login({ type }) {
                     <VisibilityIcon className="showIcon" onClick={() => toggleShowPassword()} /> :
                     <VisibilityOffIcon className="showIcon" onClick={() => toggleShowPassword()} />}
             </div>
-            {showInfo && <h3 className="form__info" onClick={() => setShowInfo(!showInfo)}>
-                1 capital, 1 lower numbers and 8 digits
-                 </h3>}
+            {showInfo && <Alert severity="info" className="form__info" onClick={() => setShowInfo(!showInfo)}>
+                at least 1 capital, 1 lower, numbers and 8 digits.
+                 </Alert>}
 
-
-            {type === 'signup' && <div className="form__file-container">
+            {type === 'signup' && <div className="form__file-container flex">
                 <FileBase type="file" multiple={false} onDone={({ base64 }) => setImgString(base64)} />
-                <Upload className="form__svg" />
+                <Upload className={imgString ? "form__svg opacity-0" : "form__svg"} />
+                {imgString && <img className="form__img" src={imgString} />}
             </div>}
 
-            {   txt && <h3>{txt}</h3>}
+            {   txt && <h3 className="form__err">{txt}</h3>}
 
             <Button onClick={(ev) => onSubmit(ev)}>
                 {type === 'signup' ? 'Sign up' : 'Login'}

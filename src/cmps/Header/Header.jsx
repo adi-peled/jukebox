@@ -5,6 +5,7 @@ import Login from '../Login/Login'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadLoggedUser, signout } from '../../store/actions/userActions'
 import CreateBox from '../CreateBox/CreateBox'
+import Alert from '@material-ui/lab/Alert';
 //icons
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -19,6 +20,7 @@ function Header() {
     const [openLoginModal, setOpenLoginModal] = useState({ show: false, type: '' })
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+    const [showSuccess, setShowSuccess] = useState(false)
     useEffect(async () => {
         dispatch(loadLoggedUser())
     }, [])
@@ -26,6 +28,9 @@ function Header() {
     useEffect(() => {
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
     }, [])
+
+
+
 
     return (
         <header className="header flex">
@@ -70,21 +75,20 @@ function Header() {
                 </li>
             </ul>
 
-            {
-                openLoginModal.show && !user &&
+            {openLoginModal.show && !user &&
                 <>
-                    <Login type={openLoginModal.type} />
+                    <Login type={openLoginModal.type} showSuccess={setShowSuccess} />
                     <div onClick={() => setOpenLoginModal({ show: false, type: '' })} className="screen" />
-                </>
-            }
+                </>}
 
-            {
-                openCreateModal &&
+            {showSuccess && <Alert className="header__success" severity="success" >
+                success!   you now logged in
+                </Alert>}
+            {openCreateModal &&
                 <>
                     <CreateBox />
                     <div onClick={() => setOpenCreateModal(false)} className="screen" />
-                </>
-            }
+                </>}
 
         </header >
     )
