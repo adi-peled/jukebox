@@ -6,6 +6,7 @@ import Header from './cmps/Header/Header'
 import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
 import BoxDetails from './cmps/BoxDetails/BoxDetails'
+import Player from './cmps/Player/Player'
 
 import { connect } from 'react-redux'
 import { useEffect } from 'react';
@@ -22,6 +23,7 @@ function App(store) {
             <Route component={Home} path="/" />
           </Switch>
         </div>
+        <Player/>
         <Footer />
       </Router>
     </div >

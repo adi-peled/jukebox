@@ -3,7 +3,8 @@ import httpService from './httpService'
 
 export const boxService = {
     getBoxes,
-    getBoxById
+    getBoxById,
+    updateBox
 }
 
 // let playLists = [{name: 'mizrahit', songs: [{}]}]
@@ -22,7 +23,6 @@ let boxes = [
                 name: 'אייל גולן - טעיתי',
                 videoId: 'tGubzVL31r4',
                 duration: '3:41',
-                // imgUrl: 
             },
             {
                 name: 'אאייל גולן - שרק תחייך',
@@ -291,4 +291,8 @@ async function getBoxes() {
 
 async function getBoxById(id) {
     return await httpService.get(`box/${id}`)
+}
+async function updateBox(box) {
+    const id = box._id
+    return await httpService.put(`box/${id}`, box)
 }
