@@ -1,54 +1,70 @@
-.social-links-section{
-    padding: 1.5rem ;
+@import '../../scss/abstracts/mixins';
+
+.social-links {
+    padding: 1.5rem;
     margin-right: 15px;
-    div{
-        :hover{
+
+    div {
+        :hover {
             cursor: pointer;
         }
-        svg{
+
+        svg {
             transform: scale(2);
         }
-        a{
+
+        a {
             color: white;
 
         }
     }
+
+    &__success {
+        font-size: 2rem !important;
+        @include absCenter
+    }
 }
 
-.social-links-section-add{
+.social-links__add {
     display: flex;
-    svg{
+
+    svg {
         margin-right: 15px;
     }
+
     justify-content: space-between;
     align-items: center;
     width: 5vw;
 }
 
-.social-links-section-social{
-   
+.social-links-section-social {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 7.5vw;
 }
-@media (max-width: 1200px){
-    .social-links-section-social{
+
+@media (max-width: 1200px) {
+    .social-links-section-social {
         width: 10vw;
     }
 }
-@media (max-width: 800px){
-    .social-links-section-social{
+
+@media (max-width: 800px) {
+    .social-links-section-social {
         width: 13vw;
     }
 }
-@media (max-width: 800px){
-    .social-links-section-social{
+
+@media (max-width: 800px) {
+    .social-links-section-social {
         width: 15vw;
     }
 }
-@media (max-width: 600px){
-    .social-links-section-social{
+
+@media (max-width: 600px) {
+    .social-links-section-social {
         width: 22vw;
     }
 }

@@ -1,96 +1,78 @@
-
-.song-preview{
+.song-preview {
     min-height: 100px;
-}
 
-.song-preview:hover{
-    background-color: rgba(255, 255, 255, 0.041);
-    cursor: pointer;
-}
-
-.song-preview-svg{
-    transform: scale(1.8);
-}
-
-.song-preview-section1{
-    div{
-        margin-left: 15px;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.041);
+        cursor: pointer;
     }
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    width: 40%;
-    justify-content: space-between;
-}
 
-.song-preview-section2{
-    margin-right: 15px;
+    &-svg {
+        width: 3rem !important;
+        height: 3rem !important;
+        margin-right: 2rem;
+    }
 
-    padding:0 1rem;
-    display: flex;
-    align-items: center;
-    width: 20%;
-    justify-content: space-between;
-}
+    &-img {
+        width: 10rem;
+    }
 
-.equalizer-gif{
-    width: 150px;
+    &-left {
+        div {
+            margin-left: 15px;
+        }
+
+        padding: 1.5rem;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &-right {
+        margin-right: 15px;
+        width: 15rem;
+        padding: 0 1rem;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .equalizer-gif {
+        width: 12rem;
+        margin-right: 3rem;
+    }
+
 }
 
 
 @media (max-width: 1100px) {
-    .song-preview{
+    .song-preview {
         min-height: 80px;
     }
-    .song-preview-section1{
-        width: 50%;
-    }
-    
-    .song-preview-section2{
-        width: 20%;
-    }
-    
-    .equalizer-gif{
+
+    .equalizer-gif {
         width: 80px;
     }
 }
 
 
 
-@media (max-width: 850px) {
-    .song-preview-section1{
-        width: 40%;
-    }
-}
+@media (max-width: 850px) {}
 
-@media (max-width: 700px){
-    .song-preview{
+@media (max-width: 700px) {
+    .song-preview {
         font-size: smaller;
     }
-    .song-preview-section1{
-        width: 40%;
-    }
-    .song-preview-section2{
-        width: 30%;
-    }
-}
-@media (max-width: 600px){
-    .song-preview-section1{
-        width: 45%;
-    }
+
+
+
+
 }
 
-@media (max-width: 550px){
-    .song-preview{
-    
+@media (max-width: 600px) {}
 
-    }
-    .song-preview-section1{
-        width: 50%;
-    }
-    .song-preview-section2{
-        justify-content:flex-start;
+@media (max-width: 550px) {
+
+
+    .song-preview-right {
+        justify-content: flex-start;
         padding: 0;
-        width: 30%;
     }
 }
