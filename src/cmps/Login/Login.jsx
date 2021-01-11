@@ -21,15 +21,12 @@ function Login({ type, showSuccess }) {
     const [passwordType, setPasswordType] = useState('password')
     const [showInfo, setShowInfo] = useState(false)
 
-
-
     useEffect(() => {
         setUsername('')
         setEmail('')
         setPassword('')
         setTxt('')
     }, [type])
-
 
     function validateEmail(email) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -40,7 +37,6 @@ function Login({ type, showSuccess }) {
         var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
         return strongRegex.test(password)
     }
-
 
     const toggleShowPassword = () => {
         passwordType === 'password' ? setPasswordType('text') : setPasswordType('password')
@@ -53,28 +49,27 @@ function Login({ type, showSuccess }) {
             setTxt('Fill all inputs')
             return
         }
+        let msg
         if (type === 'signup') {
             if (!username) {
                 setTxt('Fill all inputs')
                 return
+            } else {
+                if (!validateEmail(email)) {
+                    setTxt('email isnt valid')
+                    return
+                }
+                if (!validatePassword(password)) {
+                    setTxt('password too weak')
+                    return
+                }
             }
-        }
-        if (!validateEmail(email)) {
-            setTxt('email isnt valid')
-            return
-        }
-        if (!validatePassword(password)) {
-            setTxt('password too weak')
-            return
-        }
-        let msg
-        if (type === 'signup') {
             msg = await dispatch(signup(email, password, username, imgString))
-
+            console.log({ msg });
 
         } else {
             msg = await dispatch(login(email, password))
-
+            console.log({ msg });
         }
         setTxt(msg)
         showSuccess(true)

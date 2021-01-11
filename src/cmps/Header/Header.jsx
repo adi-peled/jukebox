@@ -29,9 +29,6 @@ function Header() {
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
     }, [])
 
-
-
-
     return (
         <header className="header flex">
             <img className="header__logo" src="" alt="logo" onClick={() => history.push('/')} />
