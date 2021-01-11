@@ -10,14 +10,16 @@ import Chat from '../Chat/Chat'
 import BoxInfo from '../BoxInfo/BoxInfo'
 import SocialLinks from '../SocialLinks/SocialLinks'
 import YouTube from 'react-youtube'
+import ReactPlayer from 'react-player'
+
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong } from '../../store/actions/boxActions'
+import { setCurrSong, removeSong, loadBox } from '../../store/actions/boxActions'
 
-function BoxDetails(props, state) {
+function BoxDetails(props) {
     const { id } = props.match.params
-    const [box, setBox] = useState(null)
-    const [videoId, setVideoId] = useState(null)
+    const box = useSelector(state => state.boxReducer.currBox) 
+    // const [videoId, setVideoId] = useState(null)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -28,23 +30,21 @@ function BoxDetails(props, state) {
         } 
     }, [])
     const opts = {
-        height: '0',
-        width: '0',
+        height: '300',
+        width: '300',
         playerVars: {
             autoplay: 1,
         }
     }
     function playSong(song) {
         dispatch(setCurrSong(song))
-        setVideoId(song.videoId)
+        // setVideoId(song.videoId)
     }
-    async function getBox() {
-        const box = await boxService.getBoxById(id)
-        setBox(box)
+    async function deleteSong(songId){
+        dispatch(removeSong(id, songId))
     }
-
     useEffect(() => {
-        getBox(id)
+        dispatch(loadBox(id))
     }, [])
     return (
         <div className="box-details">
@@ -53,8 +53,8 @@ function BoxDetails(props, state) {
                 <div className="box-details-section2">
                     <BoxInfo box={box} />
                     <SocialLinks />
-                    <BoxPlayList playSong={playSong} box={box} />
-                    {videoId && <YouTube videoId={videoId} opts={opts} />}
+                    <BoxPlayList  playSong={playSong} deleteSong={deleteSong} box={box}  />
+                    {/* {videoId && <YouTube id="player_id" videoId={videoId} opts={opts} />} */}
                 </div>
             </div>
             }
