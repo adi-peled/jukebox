@@ -33,8 +33,8 @@ function SongPreview({ song, playSong, deleteSong }) {
                 <div>{song.name}</div>
             </div>
             <div className="song-preview-right flex">
+                <div className="song-preview-duration">{song.duration}</div>
                 {isSongPlaying ? <img className="equalizer-gif" src={equalizer} /> : <div className="equalizer-gif"></div>}
-                <div>{song.duration}</div>
                 {isRemoving ? <DeleteOutlineOutlinedIcon onClick={() => deleteSong(song._id)} className="song-preview-svg" /> : <MoreVertIcon onClick={changeIsRemoving} className="song-preview-svg" />}
             </div>
         </div>
