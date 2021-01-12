@@ -13,11 +13,13 @@
     .MuiInputBase-root {
         width: 80%;
         font-size: 3rem;
+        margin-bottom: 1rem;
     }
 
     &__song {
         padding: .5rem;
         color: black;
+        align-items: center;
         cursor: pointer;
         background-color: $color-grey-light-2;
         margin-top: .5rem;
@@ -38,5 +40,15 @@
         cursor: pointer;
         position: absolute;
 
+    }
+
+    &__img {
+        width: 5rem;
+        height: 5rem;
+        margin-right: 1.5rem;
+    }
+
+    &__title {
+        font-size: 2rem;
     }
 }

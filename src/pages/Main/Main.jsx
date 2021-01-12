@@ -19,7 +19,6 @@ function Main(props) {
     }, [props.match.params])
 
 
-
     return (
         <section className="main">
             <Filter />
