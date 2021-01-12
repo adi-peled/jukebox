@@ -1,8 +1,9 @@
-import {youtubeService} from '../../services/youtubeService.js' 
-import { boxService }from '../../services/boxService'
+import { youtubeService } from '../../services/youtubeService.js'
+import { boxService } from '../../services/boxService'
+import { utilService } from '../../services/utilService'
 
 export const setCurrSong = (song) => async dispatch => {
-    song = {...song, isPlaying: !song.isPlaying}
+    song = { ...song, isPlaying: !song.isPlaying }
     dispatch({ type: 'SET_CURR_SONG', song })
 }
 
@@ -15,13 +16,26 @@ export const loadBox = (id) => async dispatch => {
     dispatch({ type: 'LOAD_BOX', box })
 }
 
-export const removeSong = (boxId,songId) => async dispatch => {
+export const removeSong = (boxId, songId) => async dispatch => {
     let box = await boxService.getBoxById(boxId)
-    box.playList = box.playList.filter(song => song._id!==songId)
+    box.playList = box.playList.filter(song => song._id !== songId)
     await boxService.updateBox(box)
     dispatch({ type: 'LOAD_BOX', box })
+}
 
-    // dispatch(loadBoxes())
-    // dispatch({ type: 'REMOVE_SONG', box })
+export const addSong = (song, boxId) => async dispatch => {
+    const box = await boxService.getBoxById(boxId)
+    const { videoId } = song.id
+    const newSong = {
+        id: utilService.makeId(),
+        videoId,
+        name: song.snippet.title,
+        imgUrl: song.snippet.thumbnails.default.url,
+        duration: await youtubeService.getDuration(videoId, song.contentDetails?.duration),
+        isPlaying: false
+    }
+    box.playList.push(newSong)
+    await boxService.updateBox(box)
+    dispatch({ type: 'LOAD_BOX', box })
 }
 

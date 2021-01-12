@@ -1,0 +1,39 @@
+@import '../../scss/abstracts/variables';
+@import '../../scss/abstracts/mixins';
+
+.addSong {
+    height: 70rem;
+    width: 75rem;
+    padding: 3rem;
+    background-color: white;
+    z-index: 999;
+    position: relative;
+    @include absCenter;
+
+    .MuiInputBase-root  {
+        width: 80%;
+        font-size: 3rem;
+    }
+
+    &__song {
+        padding: .5rem;
+        color: black;
+
+        &:hover {
+            background-color: aqua;
+        }
+    }
+
+    &__close {
+        top: 0;
+        right: 0;
+        padding: 5px;
+        margin: 3rem;
+        width: 6rem !important;
+        height: 6rem !important;
+        fill: black !important;
+        cursor: pointer;
+        position: absolute;
+
+    }
+}
