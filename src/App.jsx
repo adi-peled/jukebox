@@ -5,7 +5,7 @@ import Footer from './cmps/Footer/Footer'
 import Header from './cmps/Header/Header'
 import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
-import BoxDetails from './cmps/BoxDetails/BoxDetails'
+import BoxDetails from './pages/BoxDetails/BoxDetails'
 import Player from './cmps/Player/Player'
 
 import { connect } from 'react-redux'

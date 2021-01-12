@@ -5,13 +5,11 @@ import './BoxDetails.scss'
 import { boxService } from '../../services/boxService'
 import { youtubeService } from '../../services/youtubeService'
 //Components
-import BoxPlayList from '../BoxPlayList/BoxPlayList'
-import Chat from '../Chat/Chat'
-import BoxInfo from '../BoxInfo/BoxInfo'
-import SocialLinks from '../SocialLinks/SocialLinks'
-import YouTube from 'react-youtube'
-import ReactPlayer from 'react-player'
-import AddSong from '../AddSong/AddSong'
+import BoxPlayList from '../../cmps/BoxPlayList/BoxPlayList'
+import Chat from '../../cmps/Chat/Chat'
+import BoxInfo from '../../cmps/BoxInfo/BoxInfo'
+import SocialLinks from '../../cmps/SocialLinks/SocialLinks'
+import AddSong from '../../cmps/AddSong/AddSong'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong, removeSong, loadBox, addSong } from '../../store/actions/boxActions'
@@ -34,13 +32,6 @@ function BoxDetails(props) {
         dispatch(loadBox(id))
     }, [])
 
-    const opts = {
-        height: '300',
-        width: '300',
-        playerVars: {
-            autoplay: 1,
-        }
-    }
     function playSong(song) {
         dispatch(setCurrSong(song))
     }
@@ -58,14 +49,8 @@ function BoxDetails(props) {
                 {screenWidth > 850 && <Chat box={box} />}
                 <div className="box-details-section2">
                     <BoxInfo box={box} />
-<<<<<<< HEAD:src/cmps/BoxDetails/BoxDetails.jsx
-                    <SocialLinks />
-                    <BoxPlayList  playSong={playSong} deleteSong={deleteSong} box={box}  />
-=======
                     <SocialLinks showAddSong={setShowAddSong} />
                     <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
-                    {/* {videoId && <YouTube id="player_id" videoId={videoId} opts={opts} />} */}
->>>>>>> 36825180d35b7f587b88f7923d2ce30ce5dff383:src/pages/BoxDetails/BoxDetails.jsx
                 </div>
             </div>
             }

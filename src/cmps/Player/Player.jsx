@@ -71,7 +71,7 @@ function Player() {
             onDuration={(e)=>handleDuration(e)}
             onEnded={()=>skipSong(1)}
             /> }
-            {currSong && <div className={currSong.isPlaying ? "player bgc-animation" : "player" }>
+            {currSong && <div className={currSong.isPlaying ? "player bgc-animation" : "player " }>
                 <div>
                     <img className="player-img" src={currSong.imgUrl} alt=""/>
                     <p>{currSong.name}</p>
@@ -100,9 +100,9 @@ function Player() {
                         <SkipNextIcon/>
                     </button>
                     <button onClick={handleMute}>
-                        { volume==0 && <VolumeOffIcon/>}
-                        { mute==true && <VolumeOffIcon/>}
-                        {volume >0 && volume <0.75 && <VolumeDownIcon/>}
+                        {mute==true && <VolumeOffIcon/>}
+                        {mute===false && volume==0 && <VolumeOffIcon/>}
+                        {mute===false &&volume >0 && volume <0.75 && <VolumeDownIcon/>}
                         {mute===false && volume >=0.75 && volume <=1 && <VolumeUpIcon/>}
                     </button>
 

@@ -15,7 +15,7 @@ function SongPreview({ song, playSong, deleteSong }) {
     const [isRemoving, setIsRemoving] = useState(false)
     const { currSong } = useSelector(state => state.boxReducer)
     const isSongPlaying = (song.id === currSong?.id) && currSong?.isPlaying;
-
+    const isCurrSong = currSong.id===song.id? true:false;
     
 
     function changeIsRemoving() {
@@ -26,7 +26,7 @@ function SongPreview({ song, playSong, deleteSong }) {
     }
 
     return (
-        <div className="flex space-between song-preview" onDoubleClick={() => playSong(song)}>
+        <div className={isCurrSong? "flex space-between song-preview active": "flex space-between song-preview"} onDoubleClick={() => playSong(song)}>
             <div className="song-preview-left flex">
                 {isSongPlaying ? <PauseCircleOutlineIcon className="song-preview-svg" onClick={() => playSong(currSong)} /> :
                     <PlayCircleOutlineIcon className="song-preview-svg" onClick={() => playSong(song)} />}

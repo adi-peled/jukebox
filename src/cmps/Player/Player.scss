@@ -6,13 +6,17 @@
 
 .player{
     width: 100%;
-    min-height: 10rem;
+    height: 80px;
     background-color: black;
+    position:fixed;
+    bottom: 0;
     display: flex;
+    padding: 0 5rem;
     justify-content: space-between;
     img{
-        width: 100%;
-        height: 100%;
+        min-width: 150;
+        max-height:80px;
+        object-fit: cover;
     }
     .player-buttons{
         width: 30%;
@@ -37,9 +41,10 @@
 }
 
 .bgc-animation{
-    background-image: url('https://gfycat.com/givingbelateddingo');
+    background-image: url('../../assets/PlayerSvg2.gif');
     background-size: cover;
 }
+
 .volume-slider {
     transform: rotate(270deg);
     width: 50px;
