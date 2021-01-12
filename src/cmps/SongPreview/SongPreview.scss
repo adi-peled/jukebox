@@ -1,17 +1,10 @@
 .song-preview {
-<<<<<<< HEAD
-    height: 80px;
-
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.192);
-=======
     height: 7rem;
     margin-bottom: 1rem;
     font-size: 2rem;
 
      &:hover {
         background-color: rgba(255, 255, 255, 0.041);
->>>>>>> ba87df9b0e88e84f55fd849d9c25c69bc0722c01
         cursor: pointer;
     }
 
@@ -21,12 +14,7 @@
     }
 
     &-img {
-<<<<<<< HEAD
-        max-height: 80px;
-        width: 10rem;
-=======
         width: 6rem;
->>>>>>> ba87df9b0e88e84f55fd849d9c25c69bc0722c01
         margin-left: 1rem;
     }
 
