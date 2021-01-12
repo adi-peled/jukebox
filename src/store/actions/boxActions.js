@@ -7,8 +7,8 @@ export const setCurrSong = (song) => async dispatch => {
     dispatch({ type: 'SET_CURR_SONG', song })
 }
 
-export const loadBoxes = () => async dispatch => {
-    const boxes = await boxService.getBoxes()
+export const loadBoxes = (filterBy) => async dispatch => {
+    const boxes = await boxService.getBoxes(filterBy)
     dispatch({ type: 'LOAD_BOXES', boxes })
 }
 export const loadBox = (id) => async dispatch => {
@@ -16,9 +16,14 @@ export const loadBox = (id) => async dispatch => {
     dispatch({ type: 'LOAD_BOX', box })
 }
 
+export const createBox = (box) => async dispatch => {
+    await boxService.createBox(box)
+    dispatch({ type: 'ADD_BOX', box })
+}
+
 export const removeSong = (boxId, songId) => async dispatch => {
     let box = await boxService.getBoxById(boxId)
-    box.playList = box.playList.filter(song => song._id !== songId)
+    box.playList = box.playList.filter(song => song.id !== songId)
     await boxService.updateBox(box)
     dispatch({ type: 'LOAD_BOX', box })
 }
@@ -38,4 +43,6 @@ export const addSong = (song, boxId) => async dispatch => {
     await boxService.updateBox(box)
     dispatch({ type: 'LOAD_BOX', box })
 }
+
+
 

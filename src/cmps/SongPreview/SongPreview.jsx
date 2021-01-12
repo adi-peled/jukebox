@@ -16,8 +16,6 @@ function SongPreview({ song, playSong, deleteSong }) {
     const { currSong } = useSelector(state => state.boxReducer)
     const isSongPlaying = (song.id === currSong?.id) && currSong?.isPlaying;
 
-    console.log(currSong, song);
-
     function changeIsRemoving() {
         setIsRemoving(!isRemoving)
         setTimeout(() => {
@@ -36,7 +34,7 @@ function SongPreview({ song, playSong, deleteSong }) {
             <div className="song-preview-right flex">
                 <div className="song-preview-duration">{song.duration}</div>
                 {isSongPlaying ? <img className="equalizer-gif" src={equalizer} /> : <div className="equalizer-gif"></div>}
-                {isRemoving ? <DeleteOutlineOutlinedIcon onClick={() => deleteSong(song._id)} className="song-preview-svg" /> : <MoreVertIcon onClick={changeIsRemoving} className="song-preview-svg" />}
+                {isRemoving ? <DeleteOutlineOutlinedIcon onClick={() => deleteSong(song.id)} className="song-preview-svg" /> : <MoreVertIcon onClick={changeIsRemoving} className="song-preview-svg" />}
             </div>
         </div>
     )

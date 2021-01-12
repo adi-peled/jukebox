@@ -1,7 +1,7 @@
 import React from 'react'
 import './BoxList.scss'
 import BoxPreview from '../BoxPreview/BoxPreview'
-function BoxList({ genre,boxes }) {
+function BoxList({ boxes }) {
     return (
         <section className="boxList grid">
            {boxes && boxes.map(box=>{

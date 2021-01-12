@@ -1,14 +1,11 @@
 @import '../../scss/abstracts/mixins';
 
 .social-links {
-    padding: 1.5rem;
-    margin-right: 15px;
+    margin-top: 1rem;
+    padding: 0 1.5rem;
 
     div {
-        :hover {
-            cursor: pointer;
-        }
-
+        cursor: pointer;
         svg {
             transform: scale(2);
         }
@@ -28,9 +25,7 @@
 .social-links__add {
     display: flex;
 
-    svg {
-        margin-right: 15px;
-    }
+
 
     justify-content: space-between;
     align-items: center;

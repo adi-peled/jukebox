@@ -12,7 +12,6 @@ import SocialLinks from '../SocialLinks/SocialLinks'
 import YouTube from 'react-youtube'
 import ReactPlayer from 'react-player'
 import AddSong from '../AddSong/AddSong'
-
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong, removeSong, loadBox, addSong } from '../../store/actions/boxActions'

@@ -2,15 +2,15 @@
 @import '../../scss/abstracts/mixins';
 
 .addSong {
-    height: 70rem;
     width: 75rem;
+    min-height: 70rem;
     padding: 3rem;
     background-color: white;
     z-index: 999;
     position: relative;
     @include absCenter;
 
-    .MuiInputBase-root  {
+    .MuiInputBase-root {
         width: 80%;
         font-size: 3rem;
     }
@@ -18,9 +18,12 @@
     &__song {
         padding: .5rem;
         color: black;
+        cursor: pointer;
+        background-color: $color-grey-light-2;
+        margin-top: .5rem;
 
         &:hover {
-            background-color: aqua;
+            background-color: $color-grey-light-1;
         }
     }
 
