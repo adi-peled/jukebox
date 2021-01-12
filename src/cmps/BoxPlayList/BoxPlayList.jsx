@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SongPreview from '../SongPreview/SongPreview'
 function BoxPlayList({box, playSong, deleteSong}) {
     return (

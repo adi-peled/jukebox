@@ -38,7 +38,6 @@ function BoxDetails(props) {
     }
     function playSong(song) {
         dispatch(setCurrSong(song))
-        // setVideoId(song.videoId)
     }
     async function deleteSong(songId){
         dispatch(removeSong(id, songId))
@@ -54,7 +53,6 @@ function BoxDetails(props) {
                     <BoxInfo box={box} />
                     <SocialLinks />
                     <BoxPlayList  playSong={playSong} deleteSong={deleteSong} box={box}  />
-                    {/* {videoId && <YouTube id="player_id" videoId={videoId} opts={opts} />} */}
                 </div>
             </div>
             }

@@ -17,6 +17,8 @@ function SongPreview({ song, playSong, deleteSong }) {
     const { currSong } = useSelector(state => state.boxReducer)
     const isSongPlaying = (song._id === currSong?._id) && currSong?.isPlaying;
 
+    
+
     function changeIsRemoving() {
         setIsRemoving(!isRemoving)
         setTimeout(() => {
