@@ -10,12 +10,11 @@ import equalizer from '../../assets/img/equalizer.gif'
 //redux
 import { useSelector } from 'react-redux'
 //img
-import imgjustfornow from '../../assets/img/hero1.jpg'
 
 function SongPreview({ song, playSong, deleteSong }) {
     const [isRemoving, setIsRemoving] = useState(false)
     const { currSong } = useSelector(state => state.boxReducer)
-    const isSongPlaying = (song._id === currSong?._id) && currSong?.isPlaying;
+    const isSongPlaying = (song.id === currSong?.id) && currSong?.isPlaying;
 
     
 
@@ -31,13 +30,13 @@ function SongPreview({ song, playSong, deleteSong }) {
             <div className="song-preview-left flex">
                 {isSongPlaying ? <PauseCircleOutlineIcon className="song-preview-svg" onClick={() => playSong(currSong)} /> :
                     <PlayCircleOutlineIcon className="song-preview-svg" onClick={() => playSong(song)} />}
-                <img className="song-preview-img" src={imgjustfornow} />
+                <img className="song-preview-img" src={song.imgUrl} />
                 <div>{song.name}</div>
             </div>
             <div className="song-preview-right flex">
+                <div className="song-preview-duration">{song.duration}</div>
                 {isSongPlaying ? <img className="equalizer-gif" src={equalizer} /> : <div className="equalizer-gif"></div>}
-                <div>{song.duration}</div>
-                {isRemoving ? <DeleteOutlineOutlinedIcon onClick={() => deleteSong(song._id)} className="song-preview-svg" /> : <MoreVertIcon onClick={changeIsRemoving} className="song-preview-svg" />}
+                {isRemoving ? <DeleteOutlineOutlinedIcon onClick={() => deleteSong(song.id)} className="song-preview-svg" /> : <MoreVertIcon onClick={changeIsRemoving} className="song-preview-svg" />}
             </div>
         </div>
     )

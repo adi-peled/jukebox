@@ -6,11 +6,9 @@ import AddIcon from '@material-ui/icons/Add';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Alert from '@material-ui/lab/Alert';
-
-function SocialLinks() {
+function SocialLinks({showAddSong}) {
     const url = window.location.href
     const [isCopied, setIsCopied] = useState(false)
-
     function copyToClipboard() {
         const el = document.createElement('textarea');
         el.value = url;
@@ -21,18 +19,20 @@ function SocialLinks() {
         el.select();
         document.execCommand('copy');
         document.body.removeChild(el);
-
         setIsCopied(true)
         setTimeout(() => {
             setIsCopied(false)
         }, 1000)
     }
+
+
     return (
         <div className="social-links flex space-between">
             <div className="social-links__add">
                 <FavoriteBorderIcon />
-                <AddIcon />
+                <AddIcon onClick={() => showAddSong(true)} />
             </div>
+        
             {isCopied && <Alert className="social-links__success" severity="success" >
                 success!  Link copied to copy To clipboard
                 </Alert>}

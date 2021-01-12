@@ -21,6 +21,11 @@ export function boxReducer(state = INITIAL_STATE, action) {
                 ...state,
                 currBox: action.box
             }
+        case 'ADD_BOX':
+            return {
+                ...state,
+                boxes: [...state.boxes, action.box]
+            }
         default:
             return state
     }

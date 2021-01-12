@@ -19,11 +19,12 @@ function App(store) {
         <div className="app-container">
           <Switch>
             <Route component={BoxDetails} path="/boxDetails/:id" />
+            <Route component={Main} path="/main/:genre" />
             <Route component={Main} path="/main" />
             <Route component={Home} path="/" />
           </Switch>
         </div>
-        <Player/>
+        <Player />
         <Footer />
       </Router>
     </div >

@@ -3,25 +3,37 @@ import FileBase from 'react-file-base64'
 import './CreateBox.scss'
 import { Button, Input, InputLabel, Select, MenuItem } from '@material-ui/core'
 import { ReactComponent as Upload } from '../../assets/upload.svg';
-
-function CreateBox() {
-
-    const [title, setTitle] = useState('')
+//redux
+import { useDispatch, useSelector } from 'react-redux'
+import { createBox } from '../../store/actions/boxActions'
+function CreateBox({openModal}) {
+    const { user } = useSelector(state => state.userReducer)
+    const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [genre, setGenre] = useState('')
-    const [open, setOpen] = useState(false);
     const [imgString, setImgString] = useState('')
     const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop',
         'Classical', 'alternativ', 'Blues', 'Disco', 'Israeli', 'Arabic']
+    const dispatch = useDispatch();
 
     function uploadImg(imgString) {
         setImgString(imgString)
     }
 
 
-    function createBox() {
-        const box = { title, desc, genre, imgString }
-        console.log(box);
+    function onCreateBox() {
+        const createdBy = user ? user.username : null
+        const box = {
+            name,
+            desc,
+            genre,
+            imgUrl: imgString,
+            createdBy,
+            chat: [],
+            playList: []
+        }
+        dispatch(createBox(box))
+        openModal(false)
     }
     return (
         <form className="createBox modal flex">
@@ -36,8 +48,8 @@ function CreateBox() {
                 <Input
                     className="createBox__input"
                     placeholder="box title"
-                    value={title}
-                    onChange={(ev) => setTitle(ev.target.value)}
+                    value={name}
+                    onChange={(ev) => setName(ev.target.value)}
                 />
             </div>
             <div>
@@ -59,7 +71,7 @@ function CreateBox() {
                     })}
                 </select>
             </div>
-            <Button onClick={createBox}>
+            <Button onClick={onCreateBox}>
                 create box
             </Button>
         </form >

@@ -83,7 +83,7 @@ function Header() {
                 </Alert>}
             {openCreateModal &&
                 <>
-                    <CreateBox />
+                    <CreateBox openModal={setOpenCreateModal} />
                     <div onClick={() => setOpenCreateModal(false)} className="screen" />
                 </>}
 
