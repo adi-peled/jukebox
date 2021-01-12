@@ -31,7 +31,7 @@ function Home() {
         <section className="home">
             <img ref={div => setMyElement(div)} className="home__img" src={heroImg} />
             <h2>  Top Genres</h2>
-            {genres.map(genre => {
+            {boxes && genres.map(genre => {
                 const filteredBoxes = boxes.filter(box => box.genre === genre)
                 return <div key={genre} className="genre">
                     <h3>{genre}</h3>
