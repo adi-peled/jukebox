@@ -6,9 +6,10 @@
     padding: 3rem;
     background-color: transparent;
     margin-bottom: 1rem;
-    position : fixed;
+    position: fixed;
     width: 100%;
     height: 80px;
+    z-index: 3;
 
     @include respon(tab-port) {
         padding: 2.5rem;
@@ -22,7 +23,7 @@
         flex: 0.2;
         position: relative;
         align-items: center;
-        border-bottom: 1px solid rgb(141, 140, 140);
+        border-bottom: 1px solid $color-tertiary;
 
         &--search {
             font: inherit;
@@ -31,8 +32,10 @@
             padding: 6px 0 7px;
             background: none;
 
+
             &:focus {
                 outline: none;
+                color: $color-secondary;
             }
         }
 
@@ -42,7 +45,12 @@
 
         &--search:focus+&--icon {
             transform: scale(1.2);
-            fill: rgb(141, 140, 140);
+            fill: $color-secondary
+        }
+
+        &--search:focus::placeholder {
+
+            color: $color-secondary
         }
 
         &--icon {
@@ -75,7 +83,7 @@
 
 
     &__success {
-        font-size:2rem !important;
+        font-size: 2rem !important;
         @include absCenter
     }
 
@@ -84,23 +92,28 @@
         position: relative;
         cursor: pointer;
 
+
+
         .profile {
             &__list {
                 position: absolute;
-                background-color: lightgray;
                 z-index: 100;
             }
 
             &__item {
                 padding: 1rem;
                 cursor: pointer;
+
             }
         }
 
         &--menu {
             cursor: pointer;
             margin-right: 2rem;
-            background-color: lightgray;
+
+            &:hover {
+                color: $color-secondary;
+            }
 
             @include respon(phone) {
                 width: 10rem;
@@ -110,14 +123,24 @@
 
     }
 
+    .active {
+        color: $color-secondary;
+    }
+
     &__link {
-        color: $color-grey-dark;
+        color: $color-tertiary;
+
+
     }
 
     &__profile {
         cursor: pointer;
         width: 3.5rem !important;
         height: 3.5rem !important;
+
+        &:hover {
+            fill: $color-secondary;
+        }
     }
 
     &__menu-icon {
@@ -134,6 +157,6 @@
     }
 }
 
-.sticky{
-    background-color: black;
+.sticky {
+    background-color: $color-primary;
 }

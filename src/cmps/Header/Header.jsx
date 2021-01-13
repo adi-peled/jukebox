@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import './Header.scss'
 import { NavLink, useHistory } from 'react-router-dom'
-import Login from '../Login/Login'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadLoggedUser, signout } from '../../store/actions/userActions'
-import CreateBox from '../CreateBox/CreateBox'
-import Alert from '@material-ui/lab/Alert';
 //icons
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
 
-function Header() {
+function Header({ toggleShowBox, toggleShowLogin }) {
     const history = useHistory()
     const dispatch = useDispatch()
     const { user } = useSelector(state => state.userReducer)
     const [showProfileMenu, setShowProfileMenu] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
-    const [openLoginModal, setOpenLoginModal] = useState({ show: false, type: '' })
-    const [openCreateModal, setOpenCreateModal] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-    const [showSuccess, setShowSuccess] = useState(false)
+
     const [isScroll, setIsScroll] = useState(false)
 
     function onScroll() {
@@ -42,7 +37,7 @@ function Header() {
     }, [])
 
     return (
-        <header onScroll={onScroll} className={isScroll ?"header flex sticky" : "header flex "}>
+        <header onScroll={onScroll} className={isScroll ? "header flex sticky" : "header flex "}>
             <img className="header__logo" src="" alt="logo" onClick={() => history.push('/')} />
             <div className="header__input-container flex">
                 <input className="header__input-container--search" placeholder="Search" />
@@ -61,7 +56,7 @@ function Header() {
                         <li className="header__item--menu">
                             <NavLink to="/main" className="header__link" exact >Boxes</NavLink>
                         </li>
-                        <li className="header__item--menu" onClick={() => setOpenCreateModal(true)}>
+                        <li className="header__item--menu" onClick={() => toggleShowBox(true)}>
                             Create Box
                        </li>
                     </div>}
@@ -73,8 +68,8 @@ function Header() {
                     {showProfileMenu && <>
                         <ul className="profile__list">
                             {!user && <>
-                                <li onClick={() => setOpenLoginModal({ show: true, type: 'signup' })} className="profile__item">Signup</li>
-                                <li onClick={() => setOpenLoginModal({ show: true, type: 'login' })} className="profile__item">Login</li>
+                                <li onClick={() => toggleShowLogin({ show: true, type: 'signup' })} className="profile__item">Signup</li>
+                                <li onClick={() => toggleShowLogin({ show: true, type: 'login' })} className="profile__item">Login</li>
                             </>}
                             {user && <li onClick={() => dispatch(signout())} className="profile__item">Logout</li>}
                         </ul>
@@ -84,20 +79,9 @@ function Header() {
                 </li>
             </ul>
 
-            {openLoginModal.show && !user &&
-                <>
-                    <Login type={openLoginModal.type} showSuccess={setShowSuccess} />
-                    <div onClick={() => setOpenLoginModal({ show: false, type: '' })} className="screen" />
-                </>}
 
-            {showSuccess && <Alert className="header__success" severity="success" >
-                success!   you now logged in
-                </Alert>}
-            {openCreateModal &&
-                <>
-                    <CreateBox openModal={setOpenCreateModal} />
-                    <div onClick={() => setOpenCreateModal(false)} className="screen" />
-                </>}
+
+
 
         </header >
     )
