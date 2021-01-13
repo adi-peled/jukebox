@@ -5,6 +5,7 @@ import { authService } from "../../services/authService"
 
 export const loadLoggedUser = () => async dispatch => {
     const user = await userService.getUser()
+    console.log(user);
     dispatch({ type: 'SET_USER', user })
 }
 
@@ -41,4 +42,16 @@ export const login = (email, password) => async dispatch => {
     } catch (err) {
         console.log({ err });
     }
+}
+
+export const likeBox = (user, box) => async dispatch => {
+    try {
+        console.log(box);   
+        user.favs.push(box)
+        await userService.updateUser(user)
+        dispatch({ type: 'SET_USER', user })
+    }
+    catch (err) {
+        console.log({ err });
+        }
 }
