@@ -8,21 +8,33 @@
 
     .title {
         margin-bottom: 2rem;
+        color: $color-secondary;
     }
 
     .MuiInputBase-root {
         margin-bottom: 3rem;
         font-size: 3rem;
+        color: $color-primary;
+
+        input {
+
+            &:focus,
+            &::placeholder {
+                color: $color-secondary;
+            }
+        }
     }
 
     .MuiButtonBase-root {
         font-size: 3rem;
         position: absolute;
         bottom: 3rem;
+        color: $color-tertiary;
         background-color: $color-primary;
         width: 70%;
 
         &:hover {
+            color: $color-secondary;
             background-color: $color-primary;
 
         }
@@ -53,7 +65,6 @@
 
     &__svg {
         position: absolute;
-
         width: 10rem;
         height: 10rem;
     }
@@ -74,21 +85,23 @@
         margin-top: 12rem;
     }
 
-    .infoIcon {
-        width: 4rem;
-        height: 4rem;
-        position: absolute;
-        right: 5rem;
-        cursor: pointer;
 
-    }
-
+    .infoIcon,
     .showIcon {
         width: 4rem;
         height: 4rem;
         position: absolute;
         right: 0rem;
         cursor: pointer;
+        fill: $color-primary;
+
+        &:hover {
+            fill: $color-secondary
+        }
+    }
+
+    .infoIcon {
+        right: 5rem;
     }
 }
 

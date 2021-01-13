@@ -6,7 +6,7 @@ import { ReactComponent as Upload } from '../../assets/upload.svg';
 //redux
 import { useDispatch, useSelector } from 'react-redux'
 import { createBox } from '../../store/actions/boxActions'
-function CreateBox({openModal}) {
+function CreateBox({ openModal }) {
     const { user } = useSelector(state => state.userReducer)
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
@@ -23,6 +23,7 @@ function CreateBox({openModal}) {
 
     function onCreateBox() {
         const createdBy = user ? user.username : null
+        if (!name || !desc) return // todo add note to user that need fill inputs
         const box = {
             name,
             desc,

@@ -12,8 +12,8 @@ async function getBoxes(filterBy) {
     if (!filterBy) {
         return await httpService.get('box')
     } else {
-        const { genre } = filterBy
-        console.log(genre);
+        let { genre } = filterBy
+        if (genre === 'All') genre = ''
         return await httpService.get('box' + `?genre=${genre}`)
     }
 }

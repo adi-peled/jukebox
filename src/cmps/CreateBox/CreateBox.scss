@@ -54,6 +54,7 @@
 
     &__label {
         font-size: 2rem !important;
+        color: $color-primary !important;
     }
 
     &__input {
@@ -63,16 +64,29 @@
 
     .MuiInputBase-root {
         width: 100%;
+
+        input {
+            &:focus {
+                color: $color-secondary;
+            }
+
+            &::placeholder {
+                color: $color-secondary;
+            }
+        }
     }
 
 
     .MuiButtonBase-root {
         font-size: 2rem;
         background-color: $color-primary;
+        color: $color-tertiary;
         transition: .5s;
 
         &:hover {
             background-color: $color-primary;
+            color: $color-secondary;
+
         }
     }
 
@@ -85,6 +99,7 @@
         min-width: 0;
         background: none;
         height: auto;
+        color: $color-secondary;
 
         &:focus {
             outline: none;
@@ -93,6 +108,7 @@
 
     &__option {
         width: auto;
+        color: $color-secondary;
         overflow: hidden;
         font-size: 1rem;
         min-height: 48px;

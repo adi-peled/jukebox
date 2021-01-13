@@ -24,9 +24,7 @@
     .react-multi-carousel-item {
         transition: all .3s;
 
-        a {
-            color: black;
-        }
+        a {}
     }
 
 
@@ -34,7 +32,16 @@
 
 .links-container {
     .react-multi-carousel-item {
-        &:hover{
+        a {
+            color: $color-tertiary;
+            font-size: 2rem;
+
+            &:hover {
+                color: $color-secondary;
+            }
+        }
+
+        &:hover {
             transform: skewX(10deg) scale(1.1);
         }
     }
