@@ -17,7 +17,7 @@ function Home() {
     const [myElement, setMyElement] = useState(null)
     const { boxes } = useSelector((state) => state.boxReducer)
     const dispatch = useDispatch()
-    const [userFavs, setUserFavs] = useState(null)
+    const [userFavsBoxes, setUserFavsBoxes] = useState(null)
 
 
     useEffect(() => {
@@ -31,15 +31,17 @@ function Home() {
     }, [])
 
     useEffect(() => {
-        getUserFavs()
-    }, [user])
-
-    const getUserFavs = async () => {
-        if (user) {
-            const x = await boxService.getUserFavs(user.favs)
-            console.log(x);
+        console.log(boxes);
+        if (user && boxes) {
+            let favBoxes = [];
+            user.favs.forEach((favId) => {
+                const filteredBoxes = boxes.filter(box => box._id === favId)
+                favBoxes.push(...filteredBoxes)
+            })
+            setUserFavsBoxes(favBoxes)
         }
-    }
+    }, [user?.favs, boxes])
+
 
 
     return (
@@ -47,6 +49,7 @@ function Home() {
             <img ref={div => setMyElement(div)} className="home__img" src={heroImg} />
 
             <h2 className="title">My Favorite Playlist</h2>
+            {userFavsBoxes && <Carousel items={userFavsBoxes} />}
 
             <h2 className="title">  Top Genres</h2>
             {boxes && genres.map(genre => {

@@ -6,7 +6,6 @@ export const boxService = {
     getBoxById,
     updateBox,
     createBox,
-    getUserFavs
 }
 
 async function getBoxes(filterBy) {
@@ -20,9 +19,6 @@ async function getBoxes(filterBy) {
     }
 }
 
-async function getUserFavs(userFavsIds){
-    return await httpService.get(`box/favs/${userFavsIds}`)
-}
 
 async function getBoxById(id) {
     return await httpService.get(`box/${id}`)
