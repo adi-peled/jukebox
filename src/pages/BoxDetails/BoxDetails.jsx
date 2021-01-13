@@ -64,7 +64,7 @@ function BoxDetails(props) {
 
     return (
         <div className="box-details">
-            { box && <div className="flex">
+            { box && <div className="box-details__container flex ">
                 {screenWidth > 850 && <Chat box={box} />}
                 <div className="box-details-section2">
                     <BoxInfo box={box} />

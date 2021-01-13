@@ -2,7 +2,7 @@ import react, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 //cmps
-import Footer from './cmps/Footer/Footer'
+
 import Header from './cmps/Header/Header'
 import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
@@ -54,7 +54,6 @@ function App() {
           </Switch>
         </div>
         <Player />
-        <Footer />
       </Router>
     </div >
   );

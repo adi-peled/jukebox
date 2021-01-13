@@ -5,12 +5,13 @@ import BoxList from '../../cmps/BoxList/BoxList'
 import heroImg from '../../assets/img/hero2.jpg'
 import { TweenLite } from 'gsap'
 import Carousel from '../../cmps/Carousel/Carousel'
+import Footer from '../../cmps/Footer/Footer';
 //redux
 import { useSelector, useDispatch } from 'react-redux'
 import { loadBoxes } from '../../store/actions/boxActions'
 function Home() {
 
-    const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock','Israeli', 'Pop', 'Classical']
+    const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Israeli', 'Pop', 'Classical']
     const [myTween, setMyTween] = useState(null)
     const [myElement, setMyElement] = useState(null)
     const { boxes } = useSelector((state) => state.boxReducer)
@@ -40,7 +41,7 @@ function Home() {
                     <Carousel items={filteredBoxes} />
                 </div>
             })}
-
+            <Footer />
         </section>
     )
 }

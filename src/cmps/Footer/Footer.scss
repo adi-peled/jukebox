@@ -9,18 +9,16 @@
     background-color: $color-secondary;
     color: white;
     position: relative;
+    z-index: 5;
 
     @include respon(tab-land) {
         font-size: 2rem;
     }
 
-
     @include respon(phone) {
         align-items: center;
         flex-direction: column;
     }
-
-
 
     &__developer {
         padding: .5rem;
