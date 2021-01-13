@@ -3,21 +3,22 @@ import Filter from '../../cmps/Filter/Filter'
 import BoxList from '../../cmps/BoxList/BoxList'
 import './Main.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { loadBoxes } from '../../store/actions/boxActions'
+import { setFilter, loadBoxes } from '../../store/actions/boxActions'
 function Main(props) {
 
-    const { boxes } = useSelector((state) => state.boxReducer)
+    const { boxes, filterBy } = useSelector((state) => state.boxReducer)
     const dispatch = useDispatch()
 
 
     useEffect(() => {
-        const genre= props.match.params.genre?  props.match.params.genre :''
-        const filterBy = {
-            genre
-        }
-        dispatch(loadBoxes(filterBy))
+        let { genre } = props.match.params
+        if (!genre) return
+        dispatch(setFilter({ genre, name: '' }))
     }, [props.match.params])
 
+    useEffect(() => {
+        dispatch(loadBoxes(filterBy))
+    }, [filterBy])
 
     return (
         <section className="main">

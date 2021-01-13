@@ -3,6 +3,7 @@ import './Header.scss'
 import { NavLink, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadLoggedUser, signout } from '../../store/actions/userActions'
+import { setFilter } from '../../store/actions/boxActions'
 //icons
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -15,7 +16,7 @@ function Header({ toggleShowBox, toggleShowLogin }) {
     const [showProfileMenu, setShowProfileMenu] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-
+    const [txt, setTxt] = useState('')
     const [isScroll, setIsScroll] = useState(false)
 
     function onScroll() {
@@ -26,21 +27,30 @@ function Header({ toggleShowBox, toggleShowLogin }) {
             setIsScroll(false)
         }
     }
-    useEffect(async () => {
+
+    useEffect(() => {
         dispatch(loadLoggedUser())
         window.addEventListener("scroll", onScroll)
-
+        window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
     }, [])
 
     useEffect(() => {
-        window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
-    }, [])
+        if (txt) {
+            history.push(`/main`)
+            dispatch(setFilter({ name: txt, genre: '' }))
+        }
+    }, [txt])
+
 
     return (
         <header onScroll={onScroll} className={isScroll ? "header flex sticky" : "header flex "}>
             <img className="header__logo" src="" alt="logo" onClick={() => history.push('/')} />
             <div className="header__input-container flex">
-                <input className="header__input-container--search" placeholder="Search" />
+                <input
+                    className="header__input-container--search"
+                    placeholder="Search"
+                    onChange={(ev) => setTxt(ev.target.value)}
+                />
                 <SearchIcon className="header__input-container--icon" />
             </div>
             <ul className="header__nav flex">

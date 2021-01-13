@@ -12,9 +12,10 @@ async function getBoxes(filterBy) {
     if (!filterBy) {
         return await httpService.get('box')
     } else {
-        let { genre } = filterBy
-        if (genre === 'All') genre = ''
-        return await httpService.get('box' + `?genre=${genre}`)
+        let { genre, name } = filterBy
+        if (genre === 'All' || !genre) genre = ''
+        if (!name) name = ''
+        return await httpService.get('box' + `?genre=${genre}&name=${name}`)
     }
 }
 

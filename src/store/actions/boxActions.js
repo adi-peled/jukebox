@@ -16,6 +16,11 @@ export const loadBox = (id) => async dispatch => {
     dispatch({ type: 'LOAD_BOX', box })
 }
 
+export const setFilter = (filterBy) => async dispatch => {
+    dispatch({ type: 'SET_FILTER', filterBy })
+}
+
+
 export const createBox = (box) => async dispatch => {
     await boxService.createBox(box)
     dispatch({ type: 'ADD_BOX', box })

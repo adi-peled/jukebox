@@ -1,20 +1,19 @@
 import react, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
-import './App.scss';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+//cmps
 import Footer from './cmps/Footer/Footer'
 import Header from './cmps/Header/Header'
 import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
 import BoxDetails from './pages/BoxDetails/BoxDetails'
 import Player from './cmps/Player/Player'
-import { gsap } from 'gsap'
 import Login from './cmps/Login/Login'
 import Alert from '@material-ui/lab/Alert';
-
 import CreateBox from './cmps/CreateBox/CreateBox';
-
-import { connect } from 'react-redux'
+//scss
+import './App.scss';
+import { gsap } from 'gsap'
 
 function App() {
 

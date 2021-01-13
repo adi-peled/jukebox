@@ -3,11 +3,12 @@
 
 .footer {
     justify-content: center;
-    font-size: 2.6rem;
+    font-size: 2rem;
     width: 100%;
     padding: 3rem;
     background-color: $color-secondary;
     color: white;
+    position: relative;
 
     @include respon(tab-land) {
         font-size: 2rem;
@@ -34,7 +35,7 @@
 
         @include respon(phone) {
             justify-content: center;
-            width:80%;
+            width: 80%;
             margin-right: 0;
             margin-bottom: 3rem;
         }

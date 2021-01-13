@@ -1,7 +1,11 @@
 const INITIAL_STATE = {
     currSong: null,
     boxes: null,
-    currBox: null
+    currBox: null,
+    filterBy: {
+        name: '',
+        genre: ''
+    }
 }
 
 export function boxReducer(state = INITIAL_STATE, action) {
@@ -25,6 +29,11 @@ export function boxReducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 boxes: [...state.boxes, action.box]
+            }
+        case 'SET_FILTER':
+            return {
+                ...state,
+                filterBy: { ...action.filterBy }
             }
         default:
             return state
