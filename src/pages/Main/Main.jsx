@@ -17,6 +17,7 @@ function Main(props) {
     }, [props.match.params])
 
     useEffect(() => {
+        console.log({ filterBy });
         dispatch(loadBoxes(filterBy))
     }, [filterBy])
 

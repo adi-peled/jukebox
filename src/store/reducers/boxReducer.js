@@ -9,6 +9,7 @@ const INITIAL_STATE = {
 }
 
 export function boxReducer(state = INITIAL_STATE, action) {
+    console.log(action.filterBy);
     switch (action.type) {
         case 'SET_CURR_SONG':
             return {

@@ -31,7 +31,6 @@ function Home() {
     }, [])
 
     useEffect(() => {
-        console.log(boxes);
         if (user && boxes) {
             let favBoxes = [];
             user.favs.forEach((favId) => {
