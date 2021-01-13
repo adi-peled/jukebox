@@ -21,8 +21,20 @@ function Header() {
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showSuccess, setShowSuccess] = useState(false)
+    const [isScroll, setIsScroll] = useState(false)
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            setIsScroll(true)
+        }
+        else {
+            setIsScroll(false)
+        }
+    }
     useEffect(async () => {
         dispatch(loadLoggedUser())
+        window.addEventListener("scroll", onScroll)
+
     }, [])
 
     useEffect(() => {
@@ -30,7 +42,7 @@ function Header() {
     }, [])
 
     return (
-        <header className="header flex">
+        <header onScroll={onScroll} className={isScroll ?"header flex sticky" : "header flex "}>
             <img className="header__logo" src="" alt="logo" onClick={() => history.push('/')} />
             <div className="header__input-container flex">
                 <input className="header__input-container--search" placeholder="Search" />

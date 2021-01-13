@@ -7,15 +7,17 @@ import Main from './pages/Main/Main'
 import Home from './pages/Home/Home';
 import BoxDetails from './pages/BoxDetails/BoxDetails'
 import Player from './cmps/Player/Player'
+import {gsap} from 'gsap'
 
 import { connect } from 'react-redux'
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 
-function App(store) {
+function App() {
+
   return (
     <div className="app">
       <Router>
-        <Header />
+        <Header/>
         <div className="app-container">
           <Switch>
             <Route component={BoxDetails} path="/boxDetails/:id" />
@@ -31,10 +33,5 @@ function App(store) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    song: state.song,
-  }
-}
 
-export default connect(mapStateToProps)(App);
+export default App;
