@@ -9,13 +9,13 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import equalizer from '../../assets/img/equalizer.gif'
 //redux
 import { useSelector } from 'react-redux'
-//img
+
 
 function SongPreview({ song, playSong, deleteSong }) {
     const [isRemoving, setIsRemoving] = useState(false)
     const { currSong } = useSelector(state => state.boxReducer)
     const isSongPlaying = (song.id === currSong?.id) && currSong?.isPlaying;
-    const isCurrSong = currSong.id===song.id? true:false;
+    const isCurrSong = currSong?.id===song.id? true:false;
     
 
     function changeIsRemoving() {

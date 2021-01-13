@@ -7,7 +7,7 @@ function Filter() {
 
     return (
         <div className="filter">
-            <Carousel genres={genres} />
+            <Carousel items={genres} />
         </div>
     )
 }

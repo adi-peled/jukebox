@@ -1,6 +1,6 @@
 @import '../../scss/abstracts/variables';
 
-.carousel {
+.react-multi-carousel-list {
 
     .react-multi-carousel-dot-list {
         z-index: -100;
@@ -27,11 +27,16 @@
         a {
             color: black;
         }
+    }
 
-        &:hover {
 
+}
+
+.links-container {
+    .react-multi-carousel-item {
+        &:hover{
             transform: skewX(10deg) scale(1.1);
         }
-
     }
+
 }

@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import './AddSong.scss'
 import { Input } from '@material-ui/core'
 import { youtubeService } from '../../services/youtubeService';
 import CancelIcon from '@material-ui/icons/Cancel';
-
+import { debounce } from 'debounce';
 function AddSong({ onClose, onAddSong }) {
     const [txt, setTxt] = useState('')
     const [songs, setSongs] = useState(null)
-    const search = async (ev) => {
-        ev.preventDefault()
+    const debounceLoadData = useCallback(debounce(fetchData, 1000), []);
+    
+    async function fetchData(txt) {
         setSongs(await youtubeService.get(txt))
     }
-
-
+    useEffect(() => {
+            debounceLoadData(txt);
+    }, [txt])
 
     return (
-        <form className="addSong" onSubmit={(ev) => search(ev)} >
+        <form className="addSong" >
             <Input placeholder="Search Song" onChange={(ev) => setTxt(ev.target.value)} />
             {songs && <div className="addSong__songs">
                 {songs.map(song => {
