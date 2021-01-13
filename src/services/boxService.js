@@ -5,7 +5,8 @@ export const boxService = {
     getBoxes,
     getBoxById,
     updateBox,
-    createBox
+    createBox,
+    getUserFavs
 }
 
 async function getBoxes(filterBy) {
@@ -17,6 +18,10 @@ async function getBoxes(filterBy) {
         if (!name) name = ''
         return await httpService.get('box' + `?genre=${genre}&name=${name}`)
     }
+}
+
+async function getUserFavs(userFavsIds){
+    return await httpService.get(`box/favs/${userFavsIds}`)
 }
 
 async function getBoxById(id) {

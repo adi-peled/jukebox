@@ -9,13 +9,15 @@ import Footer from '../../cmps/Footer/Footer';
 //redux
 import { useSelector, useDispatch } from 'react-redux'
 import { loadBoxes } from '../../store/actions/boxActions'
+import { boxService } from '../../services/boxService'
 function Home() {
-
+    const { user } = useSelector(state => state.userReducer)
     const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Israeli', 'Pop', 'Classical']
     const [myTween, setMyTween] = useState(null)
     const [myElement, setMyElement] = useState(null)
     const { boxes } = useSelector((state) => state.boxReducer)
     const dispatch = useDispatch()
+    const [userFavs, setUserFavs] = useState(null)
 
 
     useEffect(() => {
@@ -25,14 +27,28 @@ function Home() {
 
     useEffect(() => {
         dispatch(loadBoxes())
+
     }, [])
 
+    useEffect(() => {
+        getUserFavs()
+    }, [user])
+
+    const getUserFavs = async () => {
+        if (user) {
+            const x = await boxService.getUserFavs(user.favs)
+            console.log(x);
+        }
+    }
 
 
     return (
         <section className="home">
             <img ref={div => setMyElement(div)} className="home__img" src={heroImg} />
-            <h2>  Top Genres</h2>
+
+            <h2 className="title">My Favorite Playlist</h2>
+
+            <h2 className="title">  Top Genres</h2>
             {boxes && genres.map(genre => {
                 const filteredBoxes = boxes.filter(box => box.genre === genre)
                 return <div key={genre} className="genre-container">
