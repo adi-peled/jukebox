@@ -13,7 +13,7 @@ import AddSong from '../../cmps/AddSong/AddSong'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong, removeSong, loadBox, addSong } from '../../store/actions/boxActions'
-import { likeBox } from '../../store/actions/userActions'
+import { toggleLike } from '../../store/actions/userActions'
 
 function BoxDetails(props) {
     const { id } = props.match.params
@@ -30,17 +30,12 @@ function BoxDetails(props) {
         }
     }, [])
     useEffect(() => {
-        if (user && box) {
-            console.log(user.favs);
-            const favBox = user.favs.find(fav => {
-                console.log(box._id, fav._id);
-                return fav._id === box._id
-            })
-            // console.log(isLiked);
-            console.log(favBox);
-            // setIsLiked(liked) 
+        if (user) {
+            const liked = user.favs.includes(id)
+            setIsLiked(liked)
         }
-    }, [user, box])
+    }, [ user?.favs.length])
+
 
     useEffect(() => {
         dispatch(loadBox(id))
@@ -53,10 +48,8 @@ function BoxDetails(props) {
         dispatch(removeSong(id, songId))
     }
     function onLike() {
-        dispatch(likeBox(user, box))
+        dispatch(toggleLike(user, id, isLiked))
     }
-
-
     const onAddSong = (song) => {
         dispatch(addSong(song, id))
     }
@@ -68,7 +61,7 @@ function BoxDetails(props) {
                 {screenWidth > 850 && <Chat box={box} />}
                 <div className="box-details-section2">
                     <BoxInfo box={box} />
-                    <SocialLinks onLike={onLike} showAddSong={setShowAddSong} />
+                    <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} />
                     <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
                 </div>
             </div>
