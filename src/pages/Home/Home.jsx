@@ -4,12 +4,13 @@ import './Home.scss'
 import BoxList from '../../cmps/BoxList/BoxList'
 import heroImg from '../../assets/img/hero2.jpg'
 import { TweenLite } from 'gsap'
+import Carousel from '../../cmps/Carousel/Carousel'
 //redux
 import { useSelector, useDispatch } from 'react-redux'
 import { loadBoxes } from '../../store/actions/boxActions'
 function Home() {
 
-    const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop', 'Classical']
+    const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock','Israeli', 'Pop', 'Classical']
     const [myTween, setMyTween] = useState(null)
     const [myElement, setMyElement] = useState(null)
     const { boxes } = useSelector((state) => state.boxReducer)
@@ -33,9 +34,10 @@ function Home() {
             <h2>  Top Genres</h2>
             {boxes && genres.map(genre => {
                 const filteredBoxes = boxes.filter(box => box.genre === genre)
-                return <div key={genre} className="genre">
+                return <div key={genre} className="genre-container">
                     <h3>{genre}</h3>
-                    <BoxList boxes={filteredBoxes} />
+                    {/* <BoxList boxes={filteredBoxes} carousel /> */}
+                    <Carousel items={filteredBoxes} />
                 </div>
             })}
 

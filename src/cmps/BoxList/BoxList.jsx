@@ -1,7 +1,9 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './BoxList.scss'
 import BoxPreview from '../BoxPreview/BoxPreview'
-function BoxList({ boxes, genre }) {
+import Carousel from '../Carousel/Carousel'
+
+function BoxList({ boxes, genre, carousel }) {
 
     const [filteredBoxes, setFilteredBoxes] = useState(null)
 
@@ -16,10 +18,14 @@ function BoxList({ boxes, genre }) {
 
     return (
         <section className="boxList grid">
-            {boxes && boxes.map(box => {
+            {!carousel && boxes && boxes.map(box => {
                 return <BoxPreview key={box._id} box={box} />
             })
             }
+
+            {/* {
+                carousel && boxes && <Carousel items={boxes} />
+            } */}
         </section>
     )
 }

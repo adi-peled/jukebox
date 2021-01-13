@@ -5,11 +5,16 @@ function BoxInfo({ box }) {
     return (
         <div className="box-info flex">
             <div>
-                <img className="box-info-img" src={box.imgUrl} alt="" />
+                <img className="box-info__img" src={box.imgUrl} />
             </div>
-            <div className="box-desc">
-                <p>name: {box.name}</p>
-                <p>genre: {box.genre}</p>
+            <div className="box-info__details">
+                <h3 className="title">
+                    {box.name}
+                </h3>
+                <p className="box-info__desc">
+                    {box.desc}
+                </p>
+                <span className="box-info__genre">  {box.genre}</span>
                 <p>created by: {box.createdBy ? box.createdBy : 'guest'}</p>
             </div>
         </div>

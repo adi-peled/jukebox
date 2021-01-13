@@ -9,7 +9,7 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import equalizer from '../../assets/img/equalizer.gif'
 //redux
 import { useSelector } from 'react-redux'
-//img
+
 
 function SongPreview({ song, playSong, deleteSong }) {
     const [isRemoving, setIsRemoving] = useState(false)
