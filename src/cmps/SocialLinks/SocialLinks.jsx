@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Alert from '@material-ui/lab/Alert';
-function SocialLinks({showAddSong}) {
+function SocialLinks({showAddSong, onLike}) {
     const url = window.location.href
     const [isCopied, setIsCopied] = useState(false)
     function copyToClipboard() {
@@ -29,7 +29,7 @@ function SocialLinks({showAddSong}) {
     return (
         <div className="social-links flex space-between">
             <div className="social-links__add">
-                <FavoriteBorderIcon />
+                <FavoriteBorderIcon onClick={onLike}/>
                 <AddIcon onClick={() => showAddSong(true)} />
             </div>
         

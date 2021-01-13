@@ -2,7 +2,8 @@ import httpService from './httpService'
 
 
 export const userService = {
-    getUser
+    getUser,
+    updateUser
 }
 
 async function getUser() {
@@ -10,4 +11,7 @@ async function getUser() {
 
 }
 
-
+async function updateUser(user) {
+    const id = user._id
+    return await httpService.put(`user/${id}`, user)
+}

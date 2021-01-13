@@ -13,20 +13,34 @@ import AddSong from '../../cmps/AddSong/AddSong'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong, removeSong, loadBox, addSong } from '../../store/actions/boxActions'
+import { likeBox } from '../../store/actions/userActions'
 
 function BoxDetails(props) {
     const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
-    // const [videoId, setVideoId] = useState(null)
+    const user = useSelector(state => state.userReducer.user)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showAddSong, setShowAddSong] = useState(false)
+    const [isLiked, setIsLiked] = useState(false)
     useEffect(() => {
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
             window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
         }
     }, [])
+    useEffect(() => {
+        if(user&&box){
+            console.log(user.favs);
+            const liked = user.favs.map(fav=>{
+                console.log(box._id,fav._id);
+                return fav._id===box._id
+            })
+            // console.log(isLiked);
+            console.log(liked);
+            // setIsLiked(liked) 
+        }
+    }, [user,box])
 
     useEffect(() => {
         dispatch(loadBox(id))
@@ -38,10 +52,15 @@ function BoxDetails(props) {
     async function deleteSong(songId) {
         dispatch(removeSong(id, songId))
     }
+    function onLike() {
+        dispatch(likeBox(user, box)) 
+    }
+
 
     const onAddSong = (song) => {
         dispatch(addSong(song, id))
     }
+
 
     return (
         <div className="box-details">
@@ -49,7 +68,7 @@ function BoxDetails(props) {
                 {screenWidth > 850 && <Chat box={box} />}
                 <div className="box-details-section2">
                     <BoxInfo box={box} />
-                    <SocialLinks showAddSong={setShowAddSong} />
+                    <SocialLinks onLike={onLike} showAddSong={setShowAddSong} />
                     <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
                 </div>
             </div>
