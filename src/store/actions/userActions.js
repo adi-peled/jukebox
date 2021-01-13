@@ -5,7 +5,6 @@ import { authService } from "../../services/authService"
 
 export const loadLoggedUser = () => async dispatch => {
     const user = await userService.getUser()
-    console.log(user);
     dispatch({ type: 'SET_USER', user })
 }
 
@@ -43,10 +42,14 @@ export const login = (email, password) => async dispatch => {
     }
 }
 
-export const likeBox = (user, box) => async dispatch => {
+export const toggleLike = (user, id, isLiked) => async dispatch => {
     try {
-        console.log(box);   
-        user.favs.push(box)
+        if(!isLiked){
+            user.favs.push(id)
+        }else{
+           var index =  user.favs.indexOf(id)
+           user.favs.splice(index, 1)
+        }
         await userService.updateUser(user)
         dispatch({ type: 'SET_USER', user })
     }
