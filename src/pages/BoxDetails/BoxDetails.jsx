@@ -30,17 +30,17 @@ function BoxDetails(props) {
         }
     }, [])
     useEffect(() => {
-        if(user&&box){
+        if (user && box) {
             console.log(user.favs);
-            const liked = user.favs.map(fav=>{
-                console.log(box._id,fav._id);
-                return fav._id===box._id
+            const favBox = user.favs.find(fav => {
+                console.log(box._id, fav._id);
+                return fav._id === box._id
             })
             // console.log(isLiked);
-            console.log(liked);
+            console.log(favBox);
             // setIsLiked(liked) 
         }
-    }, [user,box])
+    }, [user, box])
 
     useEffect(() => {
         dispatch(loadBox(id))
@@ -53,7 +53,7 @@ function BoxDetails(props) {
         dispatch(removeSong(id, songId))
     }
     function onLike() {
-        dispatch(likeBox(user, box)) 
+        dispatch(likeBox(user, box))
     }
 
 

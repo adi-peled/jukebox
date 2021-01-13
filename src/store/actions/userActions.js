@@ -18,7 +18,6 @@ export const signup = (email, password, username,imgString) => async dispatch =>
 
     try {
         const user = await authService.signup(email, password, username,imgString)
-        console.log({ user });
         if (user) {
             dispatch({ type: 'SET_USER', user })
             return true
