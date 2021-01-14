@@ -24,6 +24,10 @@
         align-items: center;
         border-bottom: 1px solid $color-tertiary;
 
+        @include respon(phone){
+        flex: 0.1;
+
+        }
         &--search {
             font: inherit;
             border: 0;
@@ -60,13 +64,13 @@
     }
 
     &__logo {
-        height: 80px;
+        height:5rem;
         object-fit: contain;
         flex: 0.2;
         cursor: pointer;
 
         @include respon(phone) {
-            margin-right: 3rem;
+            margin-right: 1.5rem;
         }
     }
 
@@ -88,20 +92,26 @@
     }
 
     &__item {
-        margin-right: 1.5rem;
+        // margin-right: 1.5rem;
+        padding-right: 1.5rem;
         position: relative;
         cursor: pointer;
 
         .profile {
             &__list {
+                right: 0;
                 position: absolute;
                 z-index: 100;
+
             }
 
             &__item {
                 padding: 1rem;
+                width: 12rem;
+                border-bottom: 1px solid $color-secondary;
                 cursor: pointer;
-                &:hover{
+
+                &:hover {
                     color: $color-secondary;
                 }
             }
@@ -146,7 +156,8 @@
         cursor: pointer;
         width: 3.5rem !important;
         height: 3.5rem !important;
-        margin-right: 3rem;
+        margin-right: 2rem;
+        margin-left: 2rem;
     }
 
     .menu {
