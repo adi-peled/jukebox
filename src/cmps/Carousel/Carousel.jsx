@@ -37,7 +37,7 @@ export default function AppCarousel({ items, heroImgs }) {
       responsive={responsive}
       infinite={true}
       // autoPlay={this.props.deviceType !== "mobile" ? true : false}
-      autoPlaySpeed={1000}
+      autoPlaySpeed={2000}
       keyBoardControl={false}
       customTransition="all .5"
       transitionDuration={500}
