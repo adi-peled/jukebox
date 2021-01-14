@@ -12,12 +12,17 @@ function Main(props) {
 
     useEffect(() => {
         let { genre } = props.match.params
+        console.log({genre});
         if (!genre) return
         dispatch(setFilter({ genre, name: '' }))
+        return ()=>{
+            console.log('dead');
+        dispatch(setFilter({ genre:'', name: '' }))
+        }
     }, [props.match.params])
 
     useEffect(() => {
-        console.log({ filterBy });
+        console.log({filterBy},'useEfecttt');
         dispatch(loadBoxes(filterBy))
     }, [filterBy])
 

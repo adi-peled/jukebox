@@ -6,6 +6,8 @@ import Alert from '@material-ui/lab/Alert';
 import { ReactComponent as Upload } from '../../assets/upload.svg';
 import FileBase from 'react-file-base64'
 import { useDispatch } from 'react-redux'
+//svg
+import   userSvg  from '../../assets/img/user.svg'
 //icons
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -64,12 +66,10 @@ function Login({ type, showSuccess }) {
                     return
                 }
             }
+          
             msg = await dispatch(signup(email, password, username, imgString))
-            console.log({ msg });
-
         } else {
             msg = await dispatch(login(email, password))
-            console.log({ msg });
         }
         setTxt(msg)
         showSuccess(true)

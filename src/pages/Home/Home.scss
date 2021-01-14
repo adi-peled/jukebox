@@ -1,7 +1,34 @@
+@import '../../scss/abstracts/variables';
+@import '../../scss/abstracts/mixins';
 .home {
 
     &__img {
         height: 65vh;
         width: 100%;
+        object-fit: cover;
+    }
+
+    &-container{
+        padding: 0 8rem;
+        margin-bottom: 8rem;
+        @include respon(phone){
+            padding: 0 2rem;
+            }
+        .boxPreview{
+            margin-right: 1.5rem;
+            @include respon(phone){
+            margin-right: 1.5rem;
+            }
+        }
+
+    }
+
+    .title{
+
+    }
+    .sub-title{
+        font-size: 2.5rem;
+       margin-bottom: 2rem;
+       margin-top: 2rem;
     }
 }

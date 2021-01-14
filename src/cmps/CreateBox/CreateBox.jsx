@@ -6,29 +6,41 @@ import { ReactComponent as Upload } from '../../assets/upload.svg';
 //redux
 import { useDispatch, useSelector } from 'react-redux'
 import { createBox } from '../../store/actions/boxActions'
+//img
+import defaultImgRed from '../../assets/img/jukebox-red.png';
+import defaultImgYellow from '../../assets/img/jukebox-yellow.png';
+import defaultImgBlue from '../../assets/img/jukebox-blue.png';
+import defaultImgGreen from '../../assets/img/jukebox-green.png';
 function CreateBox({ openModal }) {
     const { user } = useSelector(state => state.userReducer)
+    const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [genre, setGenre] = useState('')
     const [imgString, setImgString] = useState('')
     const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop',
         'Classical', 'alternativ', 'Blues', 'Disco', 'Israeli', 'Arabic']
-    const dispatch = useDispatch();
+    const defaultImgs = [defaultImgBlue, defaultImgRed, defaultImgGreen, defaultImgYellow]
+
 
     function uploadImg(imgString) {
         setImgString(imgString)
     }
 
+    function getRandomNumber() {
+        return Math.floor(Math.random() * 4)
+    }
 
     function onCreateBox() {
         const createdBy = user ? user.username : null
+        let imgUrl
         if (!name || !desc) return // todo add note to user that need fill inputs
+        if (!imgString)  imgUrl= defaultImgs[getRandomNumber()]
         const box = {
             name,
             desc,
             genre,
-            imgUrl: imgString,
+            imgUrl: imgString ? imgString : imgUrl,
             createdBy,
             chat: [],
             playList: []

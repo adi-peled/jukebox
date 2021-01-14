@@ -3,6 +3,7 @@ import './AddSong.scss'
 import { Input } from '@material-ui/core'
 import { youtubeService } from '../../services/youtubeService';
 import CancelIcon from '@material-ui/icons/Cancel';
+import ReactLoading from 'react-loading';
 import { debounce } from 'debounce';
 function AddSong({ onClose, onAddSong }) {
     const [txt, setTxt] = useState('')
@@ -14,9 +15,12 @@ function AddSong({ onClose, onAddSong }) {
         setSongs(await youtubeService.get(txt))
         setIsSearching(false)
     }
-
+ 
+    
     useEffect(() => {
-        setIsSearching(true)
+        if (txt) {
+            setIsSearching(true)
+        }
         debounceLoadData(txt);
     }, [txt])
 
@@ -35,8 +39,10 @@ function AddSong({ onClose, onAddSong }) {
                     </div>
                 })}
             </div>}
-            {
-                isSearching && <div>searchhhinggg ....</div>
+            {  isSearching && <>
+                <ReactLoading className="is-loading__svg" type={'spinningBubbles'} color={'blue'} height={50} width={100} />
+                <h3 className="is-loading__txt"> Getting results...</h3>
+            </>
             }
 
             <CancelIcon className="addSong__close" onClick={() => onClose(false)} />
