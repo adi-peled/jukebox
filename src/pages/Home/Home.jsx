@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './Home.scss'
 //cmps
 import BoxList from '../../cmps/BoxList/BoxList'
-import heroImg from '../../assets/img/hero2.jpg'
+import heroImg1 from '../../assets/img/hero1.jpg'
+import heroImg2 from '../../assets/img/hero2.jpg'
+import heroImg3 from '../../assets/img/hero3.jpg'
 import { TweenLite } from 'gsap'
 import Carousel from '../../cmps/Carousel/Carousel'
 import Footer from '../../cmps/Footer/Footer';
@@ -17,8 +19,7 @@ function Home() {
     const [myElement, setMyElement] = useState(null)
     const { boxes } = useSelector((state) => state.boxReducer)
     const dispatch = useDispatch()
-    // const [userFavsBoxes, setUserFavsBoxes] = useState(null)
-
+const heroImgs=[heroImg1,heroImg2,heroImg3]
 
     useEffect(() => {
         // setMyTween(TweenLite.to(myElement, 1, { x: 100, y: 100 }))
@@ -31,7 +32,8 @@ function Home() {
 
     return (
         <section className="home">
-            <img ref={div => setMyElement(div)} className="home__img" src={heroImg} />
+            {/* <img ref={div => setMyElement(div)} className="home__img" src={heroImg} /> */}
+            <Carousel items={heroImgs} heroImgs />
             <div className="home-container">
 
                 <h2 className="title">My Favorite Playlist</h2>

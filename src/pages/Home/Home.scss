@@ -2,8 +2,10 @@
 @import '../../scss/abstracts/mixins';
 .home {
 
+
+
     &__img {
-        height: 65vh;
+        height: 80vh;
         width: 100%;
         object-fit: cover;
     }
