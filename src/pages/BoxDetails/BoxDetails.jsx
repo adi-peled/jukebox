@@ -27,6 +27,9 @@ function BoxDetails(props) {
     const [isLiked, setIsLiked] = useState(false)
     useEffect(() => {
         socket = io(socketService.getUrl())
+        socket.on('msgSent',()=>{
+            dispatch(loadBox(id))
+        })
         console.log(socket);
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
@@ -45,6 +48,7 @@ function BoxDetails(props) {
         }
     }, [ user?.favs?.length])
 
+    
 
     useEffect(() => {
         dispatch(loadBox(id))
@@ -62,14 +66,17 @@ function BoxDetails(props) {
     const onAddSong = (song) => {
         dispatch(addSong(song, id))
     }
-    function checkIo(){
-        io().emit('check','checking')
+    function sendMsg(data){
+        socket.emit('sendMsg',data)
+    }
+    function isTyping(box,userName){
+        socket.emit('typing',box,userName)
     }
 
     return (
         <div className="box-details">
             { box && <div className="box-details__container flex ">
-                {screenWidth > 850 && <Chat box={box} />}
+                {screenWidth > 850 && <Chat isTyping={isTyping} sendMsg={sendMsg} box={box} />}
                 <div className="box-details-section2">
                     <BoxInfo box={box} />
                     <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} />
@@ -81,7 +88,6 @@ function BoxDetails(props) {
                 <AddSong onClose={setShowAddSong} onAddSong={onAddSong} />
                 <div onClick={() => setShowAddSong(false)} className="screen" />
             </>}
-            <button onClick={checkIo}></button>
         </div>
     )
 }
