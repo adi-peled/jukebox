@@ -17,7 +17,6 @@ function Header({ toggleShowBox, toggleShowLogin }) {
     const [showProfileMenu, setShowProfileMenu] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-    const [txt, setTxt] = useState('')
     const [isScroll, setIsScroll] = useState(false)
 
     function onScroll() {
@@ -35,12 +34,11 @@ function Header({ toggleShowBox, toggleShowLogin }) {
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
     }, [])
 
-    useEffect(() => {
-        if (txt) {
-            history.push(`/main`)
-            dispatch(setFilter({ name: txt, genre: '' }))
-        }
-    }, [txt])
+
+    function onSearch(txt) {
+        history.push(`/main`)
+        dispatch(setFilter({ name: txt, genre: '' }))
+    }
 
 
     return (
@@ -50,7 +48,7 @@ function Header({ toggleShowBox, toggleShowLogin }) {
                 <input
                     className="header__input-container--search"
                     placeholder="Search"
-                    onChange={(ev) => setTxt(ev.target.value)}
+                    onChange={(ev) => onSearch(ev.target.value)}
                 />
                 <SearchIcon className="header__input-container--icon" />
             </div>

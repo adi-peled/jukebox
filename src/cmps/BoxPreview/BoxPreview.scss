@@ -1,40 +1,55 @@
 @import '../../scss/abstracts/variables';
+@import '../../scss/abstracts/mixins';
 
 
 .boxPreview {
     margin-right: .5rem;
     flex-direction: column;
     transition: .5s;
-
+    height: 100%;
+    color:$color-tertiary;
     &:hover {
-        transform: scale(1.04);
+        transform: scale(1.1);
+        color: $color-secondary;
     }
 
     &__info {
-        height: 20%;
-        background-color: $color-primary;
+        height: 40%;
+        background-color:lighten( $color-primary,10%);
         padding: 5px;
         align-items: center;
         justify-content: space-between;
+        @include respon(phone){
+            padding: 0;
+        }
     }
 
     &__title {
         margin-left: 0.5rem;
-        font-size: 2rem;
+        font-size: 1.7rem;
         text-transform: capitalize;
         font-family: 'nunito-bold';
-        color: white;
+        color: inherit;
+        @include respon(phone){
+            font-size: 1.4rem;
+            margin-right: 0rem;
+        }
     }
 
     &__img {
-        height: 80%;
+        height: 60%;
         width: 100%;
     }
 
     .MuiSvgIcon-root {
         width: 3.2rem;
         height: 3.2rem;
-        fill: white;
+        fill: currentColor;
         margin-right: 0.5rem;
+        @include respon(phone){
+            // width: 2rem;
+            // height: 2rem;
+            margin-right: 0rem;
+        }
     }
 }

@@ -33,3 +33,32 @@
         transform: translateY(0);
     }
 }
+
+
+@keyframes jumping {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0);
+      transform-origin: 50% 50%;
+    }
+  
+    15% {
+      transform: translateY(10px) rotate(6deg);
+    }
+  
+    30% {
+      transform: translateY(5px) rotate(-6deg);
+    }
+  
+    45% {
+      transform: translateY(-15px) rotate(3.6deg);
+    }
+  
+    60% {
+      transform: translateY(3px) rotate(-2.4deg);
+    }
+  
+    75% {
+      transform: translateY(-2px) rotate(1.2deg);
+    }
+  }

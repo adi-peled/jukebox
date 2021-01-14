@@ -13,10 +13,10 @@ export const signout = () => async dispatch => {
     dispatch({ type: 'SET_USER', user: null })
 }
 
-export const signup = (email, password, username,imgString) => async dispatch => {
+export const signup = (email, password, username, imgString) => async dispatch => {
 
     try {
-        const user = await authService.signup(email, password, username,imgString)
+        const user = await authService.signup(email, password, username, imgString)
         if (user) {
             dispatch({ type: 'SET_USER', user })
             return true
@@ -42,18 +42,18 @@ export const login = (email, password) => async dispatch => {
     }
 }
 
-export const toggleLike = (user, id, isLiked) => async dispatch => {
+export const toggleLike = (user, box, isLiked) => async dispatch => {
     try {
-        if(!isLiked){
-            user.favs.push(id)
-        }else{
-           var index =  user.favs.indexOf(id)
-           user.favs.splice(index, 1)
+        if (!isLiked) {
+            user.favs.push(box)
+        } else {
+            const idx = user.favs.findIndex(favBox => favBox._id === box._id)
+            user.favs.splice(idx, 1)
         }
         await userService.updateUser(user)
         dispatch({ type: 'SET_USER', user })
     }
     catch (err) {
         console.log({ err });
-        }
+    }
 }

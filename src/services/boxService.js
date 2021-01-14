@@ -5,7 +5,7 @@ export const boxService = {
     getBoxes,
     getBoxById,
     updateBox,
-    createBox
+    createBox,
 }
 
 async function getBoxes(filterBy) {
@@ -18,6 +18,7 @@ async function getBoxes(filterBy) {
         return await httpService.get('box' + `?genre=${genre}&name=${name}`)
     }
 }
+
 
 async function getBoxById(id) {
     return await httpService.get(`box/${id}`)

@@ -40,10 +40,14 @@ function BoxDetails(props) {
 
     useEffect(() => {
         if (user) {
-            const liked = user.favs.includes(id)
-            setIsLiked(liked)
+            const idx = user.favs.findIndex(favBox => favBox._id === id)
+            idx === -1 ? setIsLiked(false) : setIsLiked(true)
         }
+<<<<<<< HEAD
     }, [ user?.favs?.length])
+=======
+    }, [user?.favs?.length])
+>>>>>>> d4125b8f2e7b5c76da585cbb019ea2f06ec6b3f8
 
 
     useEffect(() => {
@@ -57,7 +61,7 @@ function BoxDetails(props) {
         dispatch(removeSong(id, songId))
     }
     function onLike() {
-        dispatch(toggleLike(user, id, isLiked))
+        dispatch(toggleLike(user, box, isLiked))
     }
     const onAddSong = (song) => {
         dispatch(addSong(song, id))
