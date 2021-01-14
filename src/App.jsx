@@ -1,6 +1,10 @@
 import react, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+//Socket
+import {socketService} from './services/socketService'
+import io  from 'socket.io-client'
+
 //cmps
 
 import Header from './cmps/Header/Header'
@@ -14,10 +18,8 @@ import CreateBox from './cmps/CreateBox/CreateBox';
 //scss
 import './App.scss';
 import { gsap } from 'gsap'
-
 function App() {
-
-
+  
   const [showCreateBox, setShowCreateBox] = useState(false)
   const [showLogin, setShowLogin] = useState({ show: false, type: '' })
   const [showSuccess, setShowSuccess] = useState(false)
