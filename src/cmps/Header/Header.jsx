@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { loadLoggedUser, signout } from '../../store/actions/userActions'
 import { setFilter } from '../../store/actions/boxActions'
 //icons
+import jukeBox from '../../assets/jukeBox.png'
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
@@ -44,7 +45,7 @@ function Header({ toggleShowBox, toggleShowLogin }) {
 
     return (
         <header onScroll={onScroll} className={isScroll ? "header flex sticky" : "header flex "}>
-            <img className="header__logo" src="" alt="logo" onClick={() => history.push('/')} />
+            <img className="header__logo" src={jukeBox} alt="logo" onClick={() => history.push('/')} />
             <div className="header__input-container flex">
                 <input
                     className="header__input-container--search"

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState  } from 'react'
 //Redux
 import { useDispatch, useSelector} from 'react-redux'
-import { setCurrSong, removeSong, loadBox } from '../../store/actions/boxActions'
+import { setCurrSong } from '../../store/actions/boxActions'
 //Scss
 import './Player.scss'
 //Components 
@@ -22,15 +22,20 @@ function Player() {
     const [duration, setDuration] = useState(0)
     const [mute, setMute] = useState(false)
 
+
+    
     function skipSong(diff){
-        var index = currBox.playList.findIndex(song=>song._id===currSong._id)
-        if(index + diff >= currBox.playList.length){
-            dispatch(setCurrSong(currBox.playList[0]))
-        }else if(index + diff < 0){
-            dispatch(setCurrSong(currBox.playList[currBox.playList.length-1]))
-        }else{
-            dispatch(setCurrSong(currBox.playList[index+diff]))
-        }
+        currBox.playList.forEach((song,index)=>{
+            if(song.id===currSong.id){
+                if(index + diff >= currBox.playList.length){
+                    dispatch(setCurrSong(currBox.playList[0]))
+                }else if(index + diff < 0){
+                    dispatch(setCurrSong(currBox.playList[currBox.playList.length-1]))
+                }else{
+                    dispatch(setCurrSong(currBox.playList[index+diff]))
+                }
+            }
+        })
     }
     
     function handleVolumeChange({ target }){

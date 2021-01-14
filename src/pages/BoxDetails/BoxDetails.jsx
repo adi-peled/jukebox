@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 //Scss
 import './BoxDetails.scss'
-//Services
-import { boxService } from '../../services/boxService'
-import { youtubeService } from '../../services/youtubeService'
 //Components
 import BoxPlayList from '../../cmps/BoxPlayList/BoxPlayList'
 import Chat from '../../cmps/Chat/Chat'
@@ -14,8 +11,13 @@ import AddSong from '../../cmps/AddSong/AddSong'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong, removeSong, loadBox, addSong } from '../../store/actions/boxActions'
 import { toggleLike } from '../../store/actions/userActions'
+//Socket
+import { io } from 'socket.io-client'
+import { socketService } from '../../services/socketService'
+let socket ;
 
 function BoxDetails(props) {
+
     const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
     const user = useSelector(state => state.userReducer.user)
@@ -24,17 +26,24 @@ function BoxDetails(props) {
     const [showAddSong, setShowAddSong] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
     useEffect(() => {
+        socket = io(socketService.getUrl())
+        console.log(socket);
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
             window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
         }
     }, [])
+
+    useEffect(() => {
+       if (box) dispatch(setCurrSong(box.playList[0]))
+    }, [box])
+
     useEffect(() => {
         if (user) {
             const liked = user.favs.includes(id)
             setIsLiked(liked)
         }
-    }, [ user?.favs.length])
+    }, [ user?.favs?.length])
 
 
     useEffect(() => {
@@ -53,7 +62,9 @@ function BoxDetails(props) {
     const onAddSong = (song) => {
         dispatch(addSong(song, id))
     }
-
+    function checkIo(){
+        io().emit('check','checking')
+    }
 
     return (
         <div className="box-details">
@@ -70,6 +81,7 @@ function BoxDetails(props) {
                 <AddSong onClose={setShowAddSong} onAddSong={onAddSong} />
                 <div onClick={() => setShowAddSong(false)} className="screen" />
             </>}
+            <button onClick={checkIo}></button>
         </div>
     )
 }
