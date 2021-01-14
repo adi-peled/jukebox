@@ -10,6 +10,7 @@
     width: 100%;
     height: 80px;
     z-index: 3;
+    align-items: center;
 
     @include respon(tab-port) {
         padding: 2.5rem;
@@ -31,7 +32,6 @@
             height: 1.1876em;
             padding: 6px 0 7px;
             background: none;
-
 
             &:focus {
                 outline: none;
@@ -92,8 +92,6 @@
         position: relative;
         cursor: pointer;
 
-
-
         .profile {
             &__list {
                 position: absolute;
@@ -103,7 +101,9 @@
             &__item {
                 padding: 1rem;
                 cursor: pointer;
-
+                &:hover{
+                    color: $color-secondary;
+                }
             }
         }
 
@@ -117,7 +117,8 @@
 
             @include respon(phone) {
                 width: 12rem;
-
+                padding: 1rem;
+                border-bottom: 1px solid $color-secondary;
             }
         }
 
@@ -142,6 +143,7 @@
     }
 
     &__menu-icon {
+        cursor: pointer;
         width: 3.5rem !important;
         height: 3.5rem !important;
         margin-right: 3rem;
@@ -151,6 +153,7 @@
         flex-direction: column;
         position: absolute;
         z-index: 999;
+
 
     }
 }
