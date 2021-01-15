@@ -4,13 +4,22 @@ import { authService } from "../../services/authService"
 
 
 export const loadLoggedUser = () => async dispatch => {
+  try{
     const user = await userService.getUser()
     dispatch({ type: 'SET_USER', user })
+  }catch(err){
+      console.log(err);
+  }
+
 }
 
 export const signout = () => async dispatch => {
-    await authService.logout()
+    try{
+        await authService.logout()
     dispatch({ type: 'SET_USER', user: null })
+    }catch(err){
+        console.log(err);
+    }
 }
 
 export const signup = (email, password, username, imgString) => async dispatch => {

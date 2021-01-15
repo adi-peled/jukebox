@@ -8,7 +8,7 @@
 
 .title {
     text-align: center;
-    font-size: 35px;
+    font-size:3.5rem;
 }
 
 .align-center {
@@ -75,6 +75,7 @@
     right: 0;
     z-index: 10;
     position: fixed;
+    backdrop-filter: brightness(0.5);
     cursor: pointer;
 }
 

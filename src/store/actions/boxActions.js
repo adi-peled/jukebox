@@ -8,12 +8,20 @@ export const setCurrSong = (song) => async dispatch => {
 }
 
 export const loadBoxes = (filterBy) => async dispatch => {
-    const boxes = await boxService.getBoxes(filterBy)
-    dispatch({ type: 'LOAD_BOXES', boxes })
+    try {
+        const boxes = await boxService.getBoxes(filterBy)
+        dispatch({ type: 'LOAD_BOXES', boxes })
+    } catch (err) {
+        console.log(err);
+    }
 }
 export const loadBox = (id) => async dispatch => {
-    const box = await boxService.getBoxById(id)
-    dispatch({ type: 'LOAD_BOX', box })
+    try {
+        const box = await boxService.getBoxById(id)
+        dispatch({ type: 'LOAD_BOX', box })
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 export const setFilter = (filterBy) => async dispatch => {
@@ -22,33 +30,46 @@ export const setFilter = (filterBy) => async dispatch => {
 
 
 export const createBox = (box) => async dispatch => {
-    await boxService.createBox(box)
-    dispatch({ type: 'ADD_BOX', box })
+    try {
+        await boxService.createBox(box)
+        dispatch({ type: 'ADD_BOX', box })
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 export const removeSong = (boxId, songId) => async dispatch => {
-    let box = await boxService.getBoxById(boxId)
-    box.playList = box.playList.filter(song => song.id !== songId)
-    await boxService.updateBox(box)
-    dispatch({ type: 'LOAD_BOX', box })
+    try {
+        let box = await boxService.getBoxById(boxId)
+        box.playList = box.playList.filter(song => song.id !== songId)
+        await boxService.updateBox(box)
+        dispatch({ type: 'LOAD_BOX', box })
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 
 
 export const addSong = (song, boxId) => async dispatch => {
-    const box = await boxService.getBoxById(boxId)
-    const { videoId } = song.id
-    const newSong = {
-        id: utilService.makeId(),
-        videoId,
-        name: song.snippet.title,
-        imgUrl: song.snippet.thumbnails.default.url,
-        duration: await youtubeService.getDuration(videoId, song.contentDetails?.duration),
-        isPlaying: false
+    try {
+        const box = await boxService.getBoxById(boxId)
+        const { videoId } = song.id
+        const newSong = {
+            id: utilService.makeId(),
+            videoId,
+            name: song.snippet.title,
+            imgUrl: song.snippet.thumbnails.default.url,
+            duration: await youtubeService.getDuration(videoId, song.contentDetails?.duration),
+            isPlaying: false
+        }
+        box.playList.push(newSong)
+        await boxService.updateBox(box)
+        dispatch({ type: 'LOAD_BOX', box })
+    } catch (err) {
+        console.log(err);
     }
-    box.playList.push(newSong)
-    await boxService.updateBox(box)
-    dispatch({ type: 'LOAD_BOX', box })
+
 }
 
 
