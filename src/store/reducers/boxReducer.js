@@ -6,7 +6,6 @@ const INITIAL_STATE = {
         name: '',
         genre: ''
     },
-    chat:null
 }
 
 export function boxReducer(state = INITIAL_STATE, action) {
@@ -21,10 +20,10 @@ export function boxReducer(state = INITIAL_STATE, action) {
                 ...state,
                 boxes: action.boxes
             }
-        case 'LOAD_BOX_CHAT':
+        case 'UPDATE_BOX':
             return {
                 ...state,
-                chat: action.chat
+                currBox: action.box
             }
         case 'LOAD_BOX':
             return {

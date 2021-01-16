@@ -9,7 +9,7 @@ import SocialLinks from '../../cmps/SocialLinks/SocialLinks'
 import AddSong from '../../cmps/AddSong/AddSong'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong, removeSong, loadBox, addSong, loadBoxChat } from '../../store/actions/boxActions'
+import { setCurrSong, removeSong, loadBox, addSong, loadBoxChat, updateBox } from '../../store/actions/boxActions'
 import { toggleLike } from '../../store/actions/userActions'
 //Socket
 import { io } from 'socket.io-client'
@@ -20,7 +20,6 @@ function BoxDetails(props) {
 
     const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
-    const { chat } = useSelector(state => state.boxReducer)
     const user = useSelector(state => state.userReducer.user)
     const guest = useSelector(state => state.userReducer.guest)
     const dispatch = useDispatch();
@@ -29,11 +28,11 @@ function BoxDetails(props) {
     const [isLiked, setIsLiked] = useState(false)
 
     useEffect(() => {
+
         if (user||guest) {
             socket = io(socketService.getUrl())
             socket.on('get data', () => {
                 let data
-                console.log(guest, user);
                 user ? data = { id, user } : data = { id, user: guest }
                 socket.emit('got data', data)
             })
@@ -41,7 +40,10 @@ function BoxDetails(props) {
                 console.log('user is typing', user.username);
               
             })
-            socket.on('msgSent', () => {
+            socket.on('msgSent', (box) => {
+                console.log('msg sent');
+                
+                dispatch(updateBox(box))
                 dispatch(loadBox(id))
             })
             socket.on('user joined', (user) => console.log('hellow user', user))
@@ -56,6 +58,7 @@ function BoxDetails(props) {
     }, [user])
 
     useEffect(() => {
+
         if (box) dispatch(setCurrSong(box.playList[0]))
     }, [box])
 
@@ -65,6 +68,8 @@ function BoxDetails(props) {
             idx === -1 ? setIsLiked(false) : setIsLiked(true)
         }
     }, [user?.favs?.length])
+
+   
 
 
 
@@ -85,6 +90,7 @@ function BoxDetails(props) {
         dispatch(addSong(song, id))
     }
     function sendMsg(data) {
+        dispatch(updateBox(data))
         socket.emit('sendMsg', data)
     }
     function isTyping(box, userName) {
