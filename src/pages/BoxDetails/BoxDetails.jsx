@@ -9,12 +9,12 @@ import SocialLinks from '../../cmps/SocialLinks/SocialLinks'
 import AddSong from '../../cmps/AddSong/AddSong'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong, removeSong, loadBox, addSong ,loadBoxChat } from '../../store/actions/boxActions'
+import { setCurrSong, removeSong, loadBox, addSong, loadBoxChat } from '../../store/actions/boxActions'
 import { toggleLike } from '../../store/actions/userActions'
 //Socket
 import { io } from 'socket.io-client'
 import { socketService } from '../../services/socketService'
-let socket ;
+let socket;
 
 function BoxDetails(props) {
 
@@ -22,23 +22,25 @@ function BoxDetails(props) {
     const box = useSelector(state => state.boxReducer.currBox)
     const { chat } = useSelector(state => state.boxReducer)
     const user = useSelector(state => state.userReducer.user)
+    const guest = useSelector(state => state.userReducer.guest)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showAddSong, setShowAddSong] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
     useEffect(() => {
         socket = io(socketService.getUrl())
-        socket.on('get data',()=>{
-            var data = {id,user}
-            socket.emit('got data',data)
+        socket.on('get data', () => {
+            let data
+            user ? data = { id, user } : data = { id, guest }
+            socket.emit('got data', data)
         })
-        socket.on('user is typing',(user)=>{
-            console.log('user is typing',user.username);
+        socket.on('user is typing', (user) => {
+            console.log('user is typing', user.username);
         })
-        socket.on('msgSent',()=>{
+        socket.on('msgSent', () => {
             dispatch(loadBox(id))
         })
-        socket.on('user joined',(user)=>console.log('hellow user',user))
+        socket.on('user joined', (user) => console.log('hellow user', user))
 
         console.log(socket);
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
@@ -48,7 +50,7 @@ function BoxDetails(props) {
     }, [])
 
     useEffect(() => {
-       if (box) dispatch(setCurrSong(box.playList[0]))
+        if (box) dispatch(setCurrSong(box.playList[0]))
     }, [box])
 
     useEffect(() => {
@@ -56,9 +58,9 @@ function BoxDetails(props) {
             const idx = user.favs.findIndex(favBox => favBox._id === id)
             idx === -1 ? setIsLiked(false) : setIsLiked(true)
         }
-    }, [ user?.favs?.length])
+    }, [user?.favs?.length])
 
-    
+
 
     useEffect(() => {
         dispatch(loadBox(id))
@@ -76,11 +78,11 @@ function BoxDetails(props) {
     const onAddSong = (song) => {
         dispatch(addSong(song, id))
     }
-    function sendMsg(data){
-        socket.emit('sendMsg',data)
+    function sendMsg(data) {
+        socket.emit('sendMsg', data)
     }
-    function isTyping(box,userName){
-        socket.emit('typing',box,userName)
+    function isTyping(box, userName) {
+        socket.emit('typing', box, userName)
     }
 
     return (

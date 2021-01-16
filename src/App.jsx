@@ -1,9 +1,11 @@
 import react, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 //Socket
-import {socketService} from './services/socketService'
-import io  from 'socket.io-client'
+
+import { socketService } from './services/socketService'
+import io from 'socket.io-client'
 
 //cmps
 
@@ -19,11 +21,23 @@ import CreateBox from './cmps/CreateBox/CreateBox';
 import './App.scss';
 import { gsap } from 'gsap'
 function App() {
-  
+
   const [showCreateBox, setShowCreateBox] = useState(false)
   const [showLogin, setShowLogin] = useState({ show: false, type: '' })
   const [showSuccess, setShowSuccess] = useState(false)
   const { user } = useSelector(state => state.userReducer)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (!user) {
+      const guest = {
+        username: 'guest',
+        imgString: '',
+        favs: [],
+      }
+      // sessionStorage.setItem('user', JSON.stringify(guest))
+      dispatch({ type: 'SET_GUEST', guest })
+    }
+  }, [])
 
   return (
     <div className="app">

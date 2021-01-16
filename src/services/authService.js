@@ -33,7 +33,7 @@ async function login(email, password) {
     const userCreds = { email, password }
     try {
         const user = await httpService.post('auth/login', userCreds)
-       
+        sessionStorage.setItem('user', JSON.stringify(user))
         if(user){
             return _handleLogin(user)
         }
