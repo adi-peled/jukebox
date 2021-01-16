@@ -6,13 +6,13 @@
 
     div {
         cursor: pointer;
+
         svg {
             transform: scale(2);
         }
 
         a {
             color: white;
-
         }
     }
 
@@ -24,18 +24,16 @@
 
 .social-links__add {
     display: flex;
-
-
-
     justify-content: space-between;
     align-items: center;
     width: 5vw;
 }
-.liked{
+
+.liked {
     color: rgb(245, 148, 148);
 }
-.social-links-section-social {
 
+.social-links-section-social {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,17 +44,22 @@
     .social-links-section-social {
         width: 10vw;
     }
-}
 
-@media (max-width: 800px) {
-    .social-links-section-social {
-        width: 13vw;
+    .social-links__add {
+        width: 6vw;      
     }
 }
+
+
 
 @media (max-width: 800px) {
     .social-links-section-social {
         width: 15vw;
+    }
+    .social-links__add {
+      >*{
+          margin-right: 2rem;
+      }
     }
 }
 

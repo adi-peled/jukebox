@@ -8,6 +8,10 @@
     width: 100%;
     height: 80px;
     z-index: 3;
+    align-items: center;
+
+
+
 
     @include respon(tab-port) {
         padding: 2.5rem;
@@ -15,6 +19,7 @@
 
     @include respon(phone) {
         padding: 1.5rem;
+        justify-content: space-between;
     }
 
     &__input-container {
@@ -23,13 +28,15 @@
         align-items: center;
         border-bottom: 1px solid $color-tertiary;
 
+        @include respon(phone){
+
+        }
         &--search {
             font: inherit;
             border: 0;
             height: 1.1876em;
             padding: 6px 0 7px;
             background: none;
-
 
             &:focus {
                 outline: none;
@@ -60,13 +67,13 @@
     }
 
     &__logo {
-        height: 80px;
+        height:5rem;
         object-fit: contain;
         flex: 0.2;
         cursor: pointer;
 
         @include respon(phone) {
-            margin-right: 3rem;
+            margin-right: 1.5rem;
         }
     }
 
@@ -79,31 +86,37 @@
         justify-content: flex-end;
         align-items: center;
         position: relative;
+        @include respon(phone) {
+            flex: 0.3;
+        }
     }
 
 
-    &__success {
-        font-size: 2rem !important;
-        @include absCenter
-    }
+  
 
     &__item {
-        margin-right: 1.5rem;
+        // margin-right: 1.5rem;
+        padding-right: 1.5rem;
         position: relative;
         cursor: pointer;
 
-
-
         .profile {
             &__list {
+                right: 0;
                 position: absolute;
                 z-index: 100;
+
             }
 
             &__item {
                 padding: 1rem;
+                width: 12rem;
+                border-bottom: 1px solid $color-secondary;
                 cursor: pointer;
 
+                &:hover {
+                    color: $color-secondary;
+                }
             }
         }
 
@@ -117,7 +130,8 @@
 
             @include respon(phone) {
                 width: 12rem;
-
+                padding: 1rem;
+                border-bottom: 1px solid $color-secondary;
             }
         }
 
@@ -142,15 +156,18 @@
     }
 
     &__menu-icon {
+        cursor: pointer;
         width: 3.5rem !important;
         height: 3.5rem !important;
-        margin-right: 3rem;
+        margin-right: 1rem;
+        margin-left: 1rem;
     }
 
     .menu {
         flex-direction: column;
         position: absolute;
         z-index: 999;
+
 
     }
 }

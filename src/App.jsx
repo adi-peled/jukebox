@@ -44,7 +44,7 @@ function App() {
             <div onClick={() => setShowLogin({ show: false, type: '' })} className="screen" />
           </>}
 
-        {showSuccess && <Alert className="header__success" severity="success" >
+        {showSuccess && <Alert className="success" severity="success" >
           success!   you now logged in
                 </Alert>}
         <div className="app-container">

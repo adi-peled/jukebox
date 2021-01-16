@@ -16,5 +16,12 @@ body {
 
 .app-container {
     min-height: 80vh;
-    padding-top: 12rem;
+    padding-top: 9rem;
+}
+
+
+.success {
+    font-size: 2rem !important;
+    z-index: 5;
+    @include absCenter
 }

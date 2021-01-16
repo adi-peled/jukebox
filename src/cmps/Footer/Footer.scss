@@ -3,21 +3,21 @@
 
 .footer {
     justify-content: center;
-    font-size: 1.5rem;
+    font-size:2rem;
     width: 100%;
     padding: 3rem;
     background-color: $color-secondary;
     color: white;
     position: relative;
     z-index: 5;
-
+min-height: 80px;
     @include respon(tab-land) {
         font-size: 2rem;
+        padding: 1.5rem;
     }
 
     @include respon(phone) {
-        align-items: center;
-        flex-direction: column;
+        font-size: 1.5rem;
     }
 
     &__developer {
@@ -30,12 +30,11 @@
             margin-right: 5rem;
         }
 
-
         @include respon(phone) {
-            justify-content: center;
-            width: 50%;
-            margin-right: 0;
-            margin-bottom: 3rem;
+            justify-content: space-between;
+            width: 40%;
+            margin-right: 2rem;
+            // margin-bottom: 1.5rem;
         }
 
         >* {
@@ -46,15 +45,21 @@
             }
 
             @include respon(phone) {
-                margin-right: 2rem;
+                margin-right:0.5rem;
             }
+        }
+    }
+
+    &__social-icons {
+        >*{
+            margin-right: 1rem;
         }
     }
 
     &__svg {
         fill: white;
-        width: 3.5rem;
-        height: 3.5rem;
+        width: 3rem;
+        height: 3rem;
 
         @include respon(phone) {
             width: 2.5rem;
@@ -68,8 +73,8 @@
         height: 3.5rem;
 
         @include respon(phone) {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 3rem;
+            height: 3rem;
         }
     }
 }

@@ -15,7 +15,7 @@ function BoxInfo({ box }) {
                     {box.desc}
                 </p>
                 <span className="box-info__genre">  {box.genre}</span>
-                <p>created by: {box.createdBy ? box.createdBy : 'guest'}</p>
+                <p className="box-info__createdBy">created by: {box.createdBy ? box.createdBy : 'guest'}</p>
             </div>
         </div>
     )
