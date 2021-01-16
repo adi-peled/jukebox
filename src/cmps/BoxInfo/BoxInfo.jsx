@@ -4,9 +4,9 @@ import './BoxInfo.scss'
 function BoxInfo({ box }) {
     return (
         <div className="box-info flex">
-            <div>
+          
                 <img className="box-info__img" src={box.imgUrl} />
-            </div>
+       
             <div className="box-info__details">
                 <h3 className="title">
                     {box.name}
