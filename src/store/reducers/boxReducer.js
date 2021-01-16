@@ -5,7 +5,8 @@ const INITIAL_STATE = {
     filterBy: {
         name: '',
         genre: ''
-    }
+    },
+    chat:null
 }
 
 export function boxReducer(state = INITIAL_STATE, action) {
@@ -19,6 +20,11 @@ export function boxReducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 boxes: action.boxes
+            }
+        case 'LOAD_BOX_CHAT':
+            return {
+                ...state,
+                chat: action.chat
             }
         case 'LOAD_BOX':
             return {

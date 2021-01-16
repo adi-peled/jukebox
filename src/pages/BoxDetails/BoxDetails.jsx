@@ -9,7 +9,7 @@ import SocialLinks from '../../cmps/SocialLinks/SocialLinks'
 import AddSong from '../../cmps/AddSong/AddSong'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong, removeSong, loadBox, addSong } from '../../store/actions/boxActions'
+import { setCurrSong, removeSong, loadBox, addSong ,loadBoxChat } from '../../store/actions/boxActions'
 import { toggleLike } from '../../store/actions/userActions'
 //Socket
 import { io } from 'socket.io-client'
@@ -20,6 +20,7 @@ function BoxDetails(props) {
 
     const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
+    const { chat } = useSelector(state => state.boxReducer)
     const user = useSelector(state => state.userReducer.user)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
@@ -27,13 +28,17 @@ function BoxDetails(props) {
     const [isLiked, setIsLiked] = useState(false)
     useEffect(() => {
         socket = io(socketService.getUrl())
-        socket.on('get box id',()=>{
-            socket.emit('box id',id)
+        socket.on('get data',()=>{
+            var data = {id,user}
+            socket.emit('got data',data)
+        })
+        socket.on('user is typing',(user)=>{
+            console.log('user is typing',user.username);
         })
         socket.on('msgSent',()=>{
             dispatch(loadBox(id))
         })
-        socket.on('user joined',()=>console.log('hellow user'))
+        socket.on('user joined',(user)=>console.log('hellow user',user))
 
         console.log(socket);
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));

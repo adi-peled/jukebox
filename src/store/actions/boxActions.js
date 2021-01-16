@@ -23,6 +23,14 @@ export const loadBox = (id) => async dispatch => {
         console.log(err);
     }
 }
+export const loadBoxChat = (id) => async dispatch => {
+    try {
+        const box = await boxService.getBoxById(id)
+        dispatch({ type: 'LOAD_BOX_CHAT', chat: box.chat })
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 export const setFilter = (filterBy) => async dispatch => {
     dispatch({ type: 'SET_FILTER', filterBy })
