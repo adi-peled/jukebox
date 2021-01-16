@@ -27,27 +27,33 @@ function BoxDetails(props) {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showAddSong, setShowAddSong] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
-    useEffect(() => {
-        socket = io(socketService.getUrl())
-        socket.on('get data', () => {
-            let data
-            user ? data = { id, user } : data = { id, guest }
-            socket.emit('got data', data)
-        })
-        socket.on('user is typing', (user) => {
-            console.log('user is typing', user.username);
-        })
-        socket.on('msgSent', () => {
-            dispatch(loadBox(id))
-        })
-        socket.on('user joined', (user) => console.log('hellow user', user))
 
-        console.log(socket);
+    useEffect(() => {
+        if (user||guest) {
+            socket = io(socketService.getUrl())
+            socket.on('get data', () => {
+                let data
+                console.log(guest, user);
+                user ? data = { id, user } : data = { id, user: guest }
+                socket.emit('got data', data)
+            })
+            socket.on('user is typing', (user) => {
+                console.log('user is typing', user.username);
+              
+            })
+            socket.on('msgSent', () => {
+                dispatch(loadBox(id))
+            })
+            socket.on('user joined', (user) => console.log('hellow user', user))
+            //  //todo- render user joinned
+
+            console.log(socket);
+        }
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
             window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
         }
-    }, [])
+    }, [user])
 
     useEffect(() => {
         if (box) dispatch(setCurrSong(box.playList[0]))

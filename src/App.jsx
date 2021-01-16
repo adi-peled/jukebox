@@ -29,6 +29,7 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     if (!user) {
+      console.log('no user');
       const guest = {
         username: 'guest',
         imgString: '',
