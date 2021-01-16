@@ -30,7 +30,7 @@ function Chat({box,sendMsg, isTyping}) {
         <div className="chat-box flex column space-between">
             <div>
                 {box && box.chat.map(msg => {
-                    return <p key={msg._id}>{msg.text}</p>
+                    return <p key={msg.createdAt}>{msg.text}</p>
                 })}
             </div>
             <form className="text-form" onSubmit={(e)=>handleSubmit(e)}>

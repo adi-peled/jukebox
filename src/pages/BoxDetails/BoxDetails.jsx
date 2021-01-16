@@ -27,9 +27,14 @@ function BoxDetails(props) {
     const [isLiked, setIsLiked] = useState(false)
     useEffect(() => {
         socket = io(socketService.getUrl())
+        socket.on('get box id',()=>{
+            socket.emit('box id',id)
+        })
         socket.on('msgSent',()=>{
             dispatch(loadBox(id))
         })
+        socket.on('user joined',()=>console.log('hellow user'))
+
         console.log(socket);
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
