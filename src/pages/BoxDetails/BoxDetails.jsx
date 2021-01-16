@@ -44,7 +44,7 @@ function BoxDetails(props) {
                 console.log('msg sent');
                 
                 dispatch(updateBox(box))
-                dispatch(loadBox(id))
+                // dispatch(loadBox(id))
             })
             socket.on('user joined', (user) => console.log('hellow user', user))
             //  //todo- render user joinned
