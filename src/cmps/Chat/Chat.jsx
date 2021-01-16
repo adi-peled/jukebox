@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import './Chat.scss'
 function Chat({box,sendMsg, isTyping}) {
+    const [chat,setChat]=useState(box.chat)
     const [msg, setMsg] = useState('')
     const { currBox }= useSelector(state => state.boxReducer)
     const  currUser = useSelector(state => state.userReducer.user)
     
+    useEffect(() => {
+        
+        setChat(box.chat)
+        
+    }, [ box?.chat?.length])
+
+
     function handleInputChange(e){
         isTyping(currBox,currUser)
         setMsg(e.target.value)
@@ -29,7 +37,7 @@ function Chat({box,sendMsg, isTyping}) {
     return (
         <div className="chat-box flex column space-between">
             <div>
-                {box && box.chat.map(msg => {
+                {chat && chat.map(msg => {
                     return <p key={msg.createdAt}>{msg.text}</p>
                 })}
             </div>
