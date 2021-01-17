@@ -26,7 +26,7 @@ function BoxDetails(props) {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showAddSong, setShowAddSong] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
-
+    const [currCmp,setCurrCmp] = useState('BoxPlayList')
     useEffect(() => {
 
         if (user||guest) {
@@ -62,6 +62,17 @@ function BoxDetails(props) {
         if (box) dispatch(setCurrSong(box.playList[0]))
     }, [box])
 
+    useEffect(() => {
+        getCurrCmp()
+    }, [currCmp])
+
+    function getCurrCmp(){
+        if(currCmp==='Chat' && screenWidth < 850){
+           return <Chat isTyping={isTyping} sendMsg={sendMsg} box={box} />
+        }else if(currCmp==='BoxPlayList'){
+           return <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
+        }
+    }
     useEffect(() => {
         if (user) {
             const idx = user.favs.findIndex(favBox => favBox._id === id)
@@ -103,8 +114,9 @@ function BoxDetails(props) {
                 {screenWidth > 850 && <Chat isTyping={isTyping} sendMsg={sendMsg} box={box} />}
                 <div className="box-details-section2">
                     <BoxInfo box={box} />
-                    <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} />
-                    <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
+                    <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp}/>
+                    {/* {<BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />} */}
+                    {getCurrCmp()}
                 </div>
             </div>
             }
