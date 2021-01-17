@@ -40,6 +40,8 @@
     }
 }
 
+
+
 .bgc-animation{
     background-image: url('../../assets/PlayerSvg2.gif');
     background-size: cover;
@@ -58,4 +60,11 @@
 
 .player-img{
     width: 150px;
+}
+
+@media (max-width: 800px) {
+    .player-buttons{
+        width: 40%;
+        padding: 0 !important;
+    }
 }

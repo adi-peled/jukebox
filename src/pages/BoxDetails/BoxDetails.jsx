@@ -58,8 +58,7 @@ function BoxDetails(props) {
     }, [user])
 
     useEffect(() => {
-
-        if (box) dispatch(setCurrSong(box.playList[0]))
+        if (box?.playlist) dispatch(setCurrSong(box.playList[0]))
     }, [box])
 
     useEffect(() => {

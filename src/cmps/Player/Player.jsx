@@ -1,4 +1,4 @@
-import React, { useState  } from 'react'
+import React, { useState, useEffect  } from 'react'
 //Redux
 import { useDispatch, useSelector} from 'react-redux'
 import { setCurrSong } from '../../store/actions/boxActions'
@@ -21,6 +21,7 @@ function Player() {
     const [secPlayed, setSecPlayed] = useState(0)
     const [duration, setDuration] = useState(0)
     const [mute, setMute] = useState(false)
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
 
     
@@ -37,6 +38,17 @@ function Player() {
             }
         })
     }
+
+    useEffect(()=>{
+        window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
+        if(screenWidth<850){
+            setVolume(1)
+        }
+        return () => {
+            window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
+        }
+    },[])
+
     
     function handleVolumeChange({ target }){
         setVolume(parseFloat(target.value))
@@ -76,12 +88,12 @@ function Player() {
             onDuration={(e)=>handleDuration(e)}
             onEnded={()=>skipSong(1)}
             /> }
-            {currSong && <div className={currSong.isPlaying ? "player bgc-animation" : "player " }>
+            {currSong && <div className={currSong.isPlaying ? "player bgc-animation" : "player "}>
                 <div>
                     <img className="player-img" src={currSong.imgUrl} alt=""/>
-                    <p>{currSong.name}</p>
+                    {screenWidth>850&& <p>{currSong.name}</p>}
                 </div>
-                <div>
+                {screenWidth>850&&  <div>
                     {showTime(secPlayed)}
                     <input className="duration-slider"
                     name="played"
@@ -92,7 +104,8 @@ function Player() {
                     onChange={(e)=>handleDurationChange(e)}
                     />
                     {showTime(duration)}
-                </div>    
+                </div>  }  
+                {screenWidth<850&& <div>{showTime(secPlayed)}</div>}
                     
                 <div className="player-buttons">
                     <button onClick={()=>skipSong(-1)}>
@@ -111,14 +124,14 @@ function Player() {
                         {mute===false && volume >=0.75 && volume <=1 && <VolumeUpIcon/>}
                     </button>
 
-                    <input className="volume-slider" 
+                    {screenWidth>850 && <input className="volume-slider" 
                     value= { volume } 
                     type="range"
                     min={0}
                     step={0.05}
                     max={1}
                     onChange={(e)=>handleVolumeChange(e)}
-                    />
+                    />}
                 </div>
             </div>}
         </div>
