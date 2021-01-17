@@ -29,7 +29,7 @@ function Header({ toggleShowBox, toggleShowLogin }) {
     }
 
     useEffect(() => {
-        dispatch(loadLoggedUser())
+        // dispatch(loadLoggedUser())
         window.addEventListener("scroll", onScroll)
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
     }, [])
@@ -76,11 +76,11 @@ function Header({ toggleShowBox, toggleShowLogin }) {
                     <PersonIcon className="header__profile" onClick={() => setShowProfileMenu(!showProfileMenu)} />
                     {showProfileMenu && <>
                         <ul className="profile__list">
-                            {!user && <>
+                            {(!user|| user.isGuest) && <>
                                 <li onClick={() => toggleShowLogin({ show: true, type: 'signup' })} className="profile__item">Signup</li>
                                 <li onClick={() => toggleShowLogin({ show: true, type: 'login' })} className="profile__item">Login</li>
                             </>}
-                            {user && <li onClick={() => dispatch(signout())} className="profile__item">Logout</li>}
+                            {(user&& !user.isGuest)  && <li onClick={() => dispatch(signout())} className="profile__item">Logout</li>}
                         </ul>
                         <div onClick={() => setShowProfileMenu(false)} className="screen" />
                     </>

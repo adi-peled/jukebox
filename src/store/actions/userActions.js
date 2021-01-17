@@ -4,8 +4,10 @@ import { authService } from "../../services/authService"
 
 
 export const loadLoggedUser = () => async dispatch => {
+
   try{
     const user = await userService.getUser()
+    console.log({user});
     dispatch({ type: 'SET_USER', user })
   }catch(err){
       console.log(err);
@@ -16,7 +18,13 @@ export const loadLoggedUser = () => async dispatch => {
 export const signout = () => async dispatch => {
     try{
         await authService.logout()
-    dispatch({ type: 'SET_USER', user: null })
+        const guest = {
+            username: 'guest',
+            imgString: '',
+            favs: [],
+            isGuest: true
+          }
+    dispatch({ type: 'SET_USER', user: guest })
     }catch(err){
         console.log(err);
     }

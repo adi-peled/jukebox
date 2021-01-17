@@ -21,28 +21,28 @@ function BoxDetails(props) {
     const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
     const user = useSelector(state => state.userReducer.user)
-    const guest = useSelector(state => state.userReducer.guest)
+    // const guest = useSelector(state => state.userReducer.guest)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showAddSong, setShowAddSong] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
-    const [currCmp,setCurrCmp] = useState('BoxPlayList')
+    const [currCmp, setCurrCmp] = useState('BoxPlayList')
+    const [showIsTyping, setShowIsTyping] = useState(null)
     useEffect(() => {
 
-        if (user||guest) {
+        if (user) {
             socket = io(socketService.getUrl())
             socket.on('get data', () => {
                 let data
-                user ? data = { id, user } : data = { id, user: guest }
+                data = { id, user }
                 socket.emit('got data', data)
             })
-            socket.on('user is typing', (user) => {
-                console.log('user is typing', user.username);
-              
+            socket.on('user is typing', (username) => {
+             setShowIsTyping(username)
             })
             socket.on('msgSent', (box) => {
                 console.log('msg sent');
-                
+
                 dispatch(updateBox(box))
                 // dispatch(loadBox(id))
             })
@@ -66,11 +66,11 @@ function BoxDetails(props) {
         getCurrCmp()
     }, [currCmp])
 
-    function getCurrCmp(){
-        if(currCmp==='Chat' && screenWidth < 850){
-           return <Chat isTyping={isTyping} sendMsg={sendMsg} box={box} />
-        }else if(currCmp==='BoxPlayList'){
-           return <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
+    function getCurrCmp() {
+        if (currCmp === 'Chat' && screenWidth < 850) {
+            return <Chat isTyping={isTyping} sendMsg={sendMsg} box={box} />
+        } else if (currCmp === 'BoxPlayList') {
+            return <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
         }
     }
     useEffect(() => {
@@ -80,7 +80,7 @@ function BoxDetails(props) {
         }
     }, [user?.favs?.length])
 
-   
+
 
 
 
@@ -104,17 +104,24 @@ function BoxDetails(props) {
         dispatch(updateBox(data))
         socket.emit('sendMsg', data)
     }
-    function isTyping(box, userName) {
-        socket.emit('typing', box, userName)
+    function isTyping(box, user) {
+        console.log({ user });
+        socket.emit('typing', box, user.username)
     }
 
     return (
         <div className="box-details">
             { box && <div className="box-details__container flex ">
-                {screenWidth > 850 && <Chat isTyping={isTyping} sendMsg={sendMsg} box={box} />}
+                {screenWidth > 850 && <Chat
+                    isTyping={isTyping}
+                    sendMsg={sendMsg}
+                    box={box}
+                    typingUser={showIsTyping}
+                />}
+
                 <div className="box-details-section2">
                     <BoxInfo box={box} />
-                    <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp}/>
+                    <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp} />
                     {/* {<BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />} */}
                     {getCurrCmp()}
                 </div>

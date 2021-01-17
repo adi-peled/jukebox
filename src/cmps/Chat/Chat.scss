@@ -68,6 +68,7 @@ $clr1:rgb(24, 25, 26);
     .user-text {
         border-radius: 10px 0 10px 10px;
     }
+
     &__img {
         width: 3rem;
         height: 3rem;
@@ -106,9 +107,13 @@ $clr1:rgb(24, 25, 26);
 
 
 @media (max-width: 850px) {
-
     .chat-box {
         height: 70rem;
     }
+}
 
+@media (max-width: 500px) {
+    .chat-box {
+        height: 60rem;
+    }
 }
