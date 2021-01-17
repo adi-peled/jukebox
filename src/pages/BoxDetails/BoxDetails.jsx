@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
+import { debounce } from 'debounce';
 //Scss
 import './BoxDetails.scss'
 //Components
@@ -14,22 +15,22 @@ import { toggleLike } from '../../store/actions/userActions'
 //Socket
 import { io } from 'socket.io-client'
 import { socketService } from '../../services/socketService'
+
 let socket;
 
 function BoxDetails(props) {
-
     const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
     const user = useSelector(state => state.userReducer.user)
-    // const guest = useSelector(state => state.userReducer.guest)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showAddSong, setShowAddSong] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
     const [currCmp, setCurrCmp] = useState('BoxPlayList')
     const [showIsTyping, setShowIsTyping] = useState(null)
-    useEffect(() => {
+    const debounceLoadData = useCallback(debounce(fetchData, 1500), []);
 
+    useEffect(() => {
         if (user) {
             socket = io(socketService.getUrl())
             socket.on('get data', () => {
@@ -38,18 +39,14 @@ function BoxDetails(props) {
                 socket.emit('got data', data)
             })
             socket.on('user is typing', (username) => {
-             setShowIsTyping(username)
+                setShowIsTyping(username)
+                debounceLoadData();
             })
             socket.on('msgSent', (box) => {
-                console.log('msg sent');
-
                 dispatch(updateBox(box))
-                // dispatch(loadBox(id))
             })
             socket.on('user joined', (user) => console.log('hellow user', user))
             //  //todo- render user joinned
-
-            console.log(socket);
         }
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
@@ -60,6 +57,10 @@ function BoxDetails(props) {
     useEffect(() => {
         if (box?.playlist) dispatch(setCurrSong(box.playList[0]))
     }, [box])
+
+    async function fetchData() {
+        setShowIsTyping(null)
+    }
 
     useEffect(() => {
         getCurrCmp()
@@ -78,10 +79,6 @@ function BoxDetails(props) {
             idx === -1 ? setIsLiked(false) : setIsLiked(true)
         }
     }, [user?.favs?.length])
-
-
-
-
 
     useEffect(() => {
         dispatch(loadBox(id))
@@ -104,7 +101,6 @@ function BoxDetails(props) {
         socket.emit('sendMsg', data)
     }
     function isTyping(box, user) {
-        console.log({ user });
         socket.emit('typing', box, user.username)
     }
 

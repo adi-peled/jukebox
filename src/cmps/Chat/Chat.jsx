@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+
+
 import './Chat.scss'
 function Chat({ box, sendMsg, isTyping, typingUser }) {
     const [msg, setMsg] = useState('')
@@ -7,7 +9,6 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
     const currUser = useSelector(state => state.userReducer.user)
 
     function handleInputChange(e) {
-        console.log({currUser});
         isTyping(currBox, currUser)
         setMsg(e.target.value)
     }
@@ -28,7 +29,6 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
         setMsg('')
     }
 
-
     function getTime(timestamp) {
         let hour = new Date(timestamp).getHours()
         let minutes = new Date(timestamp).getMinutes()
@@ -37,9 +37,8 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
         return `${hour}:${minutes}`
     }
 
-
     return (
-        <div className="chat-box flex column space-between">
+        <div className="chat-box flex column ">
             <div className="chat-box__container">
                 {box && box.chat.map(msg => {
                     const { username, imgString } = msg.from

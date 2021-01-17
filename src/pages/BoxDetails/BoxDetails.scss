@@ -1,11 +1,16 @@
 @import '../../scss/abstracts/variables';
 
 .box-details {
+    height: 100%;
     color: white;
     background-color: $color-primary;
 
+    &__container {
+        height: 90%;
+    }
+
     // background-image: linear-gradient(black,rgb(51, 51, 51), black);
- 
+
 }
 
 .box-details-section2 {

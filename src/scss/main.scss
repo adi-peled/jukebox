@@ -12,14 +12,26 @@
     margin: 0;
 }
 
+
+html{
+    height: 100%;
+}
 ul {
     list-style: none;
 }
 
+
+#root{
+    height: 100%;
+}
+.app{
+    height: 100%;
+}
 a{
     text-decoration: none;
 }
 
 body {
     font-size: 2.5rem;
+    height: 100%;
 }
