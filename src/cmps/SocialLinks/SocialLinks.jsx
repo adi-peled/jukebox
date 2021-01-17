@@ -44,7 +44,7 @@ function SocialLinks({ showAddSong, onLike, isLiked, setCurrCmp, currCmp }) {
                 <AddIcon onClick={() => showAddSong(true)} />
             </div>
 
-            {screenWidth < 850 && <div className="flex space-between social-links__nav-container">
+            {screenWidth < 850 && <div className="flex social-links__nav-container">
                 <button className={currCmp==='BoxPlayList' ? "social-links__nav-btn active" : "social-links__nav-btn"} onClick={()=>setCurrCmp('BoxPlayList')}>Playlist</button>
                 <button className={currCmp==='Chat' ? "social-links__nav-btn active" : "social-links__nav-btn"} onClick={()=>setCurrCmp('Chat')}>Chat</button>
             </div>}
