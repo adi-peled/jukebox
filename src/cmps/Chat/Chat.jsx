@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
 
@@ -7,6 +7,12 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
     const [msg, setMsg] = useState('')
     const { currBox } = useSelector(state => state.boxReducer)
     const currUser = useSelector(state => state.userReducer.user)
+    const chatRef = useRef();
+
+    useEffect(()=>{
+        scrollToBottom()
+    },[currBox?.chat?.length])
+    
 
     function handleInputChange(e) {
         isTyping(currBox, currUser)
@@ -29,6 +35,7 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
         setMsg('')
     }
 
+   
     function getTime(timestamp) {
         let hour = new Date(timestamp).getHours()
         let minutes = new Date(timestamp).getMinutes()
@@ -37,6 +44,10 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
         return `${hour}:${minutes}`
     }
 
+    function scrollToBottom(){
+        chatRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+    
     return (
         <div className="chat-box flex column ">
             <div className="chat-box__container">
@@ -55,7 +66,9 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
                         </div>
 
                     </div>
+                    
                 })}
+                <div ref={chatRef}></div>
                 {console.log({ typingUser })}
                 {typingUser && <h3>{typingUser} is typing....</h3>}
             </div>
