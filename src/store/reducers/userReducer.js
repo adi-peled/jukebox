@@ -1,6 +1,5 @@
 const INITIAL_STATE = {
-    user: null,
-    guest: null
+    user: null
 }
 
 export function userReducer(state = INITIAL_STATE, action) {
@@ -9,11 +8,6 @@ export function userReducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 user: action.user
-            }
-        case 'SET_GUEST':
-            return {
-                ...state,
-                guest: action.guest
             }
         default:
             return state

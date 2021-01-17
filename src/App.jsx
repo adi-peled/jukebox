@@ -28,17 +28,20 @@ function App() {
   const { user } = useSelector(state => state.userReducer)
   const dispatch = useDispatch()
   useEffect(() => {
+
     if (!user) {
-      console.log('no user');
       const guest = {
         username: 'guest',
         imgString: '',
         favs: [],
+        isGuest: true
       }
       // sessionStorage.setItem('user', JSON.stringify(guest))
-      dispatch({ type: 'SET_GUEST', guest })
+      dispatch({ type: 'SET_USER', user: guest })
     }
   }, [])
+
+
 
   return (
     <div className="app">
@@ -53,7 +56,7 @@ function App() {
             <div onClick={() => setShowCreateBox(false)} className="screen" />
           </>}
 
-        {showLogin.show && !user &&
+        {showLogin.show &&  user.isGuest &&
           <>
             <Login type={showLogin.type} showSuccess={setShowSuccess} />
             <div onClick={() => setShowLogin({ show: false, type: '' })} className="screen" />

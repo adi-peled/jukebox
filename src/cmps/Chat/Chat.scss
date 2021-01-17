@@ -27,8 +27,6 @@ $clr1:rgb(24, 25, 26);
         &::-webkit-scrollbar-corner {
             background: rgba(0, 0, 0, 0);
         }
-
-
     }
 
     .currUser {
@@ -60,19 +58,16 @@ $clr1:rgb(24, 25, 26);
 
     &__txt {
         margin-bottom: 3px;
-        background:$color-secondary;
+        background: $color-secondary;
         border-radius: 0 10px 10px 10px;
         padding: 5px 10px;
         width: fit-content;
         margin: 5px 10px;
     }
 
-
-    .user-text{
+    .user-text {
         border-radius: 10px 0 10px 10px;
-
     }
-
 
     &__img {
         width: 3rem;
@@ -111,4 +106,14 @@ $clr1:rgb(24, 25, 26);
 }
 
 
-@media (max-width: 1100px) {}
+@media (max-width: 850px) {
+    .chat-box {
+        height: 70rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .chat-box {
+        height: 60rem;
+    }
+}

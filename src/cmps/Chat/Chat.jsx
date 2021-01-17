@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import './Chat.scss'
-function Chat({ box, sendMsg, isTyping }) {
+function Chat({ box, sendMsg, isTyping, typingUser }) {
     const [msg, setMsg] = useState('')
     const { currBox } = useSelector(state => state.boxReducer)
     const currUser = useSelector(state => state.userReducer.user)
 
-
-    useEffect(() => {
-        console.log(box);
-
-    }, [])
-
     function handleInputChange(e) {
+        console.log({currUser});
         isTyping(currBox, currUser)
         setMsg(e.target.value)
     }
@@ -49,7 +44,7 @@ function Chat({ box, sendMsg, isTyping }) {
                 {box && box.chat.map(msg => {
                     const { username, imgString } = msg.from
                     const isCurrUser = currUser.username === username ? true : false
-                    return <div className={isCurrUser? 'currUser chat-box__msg  flex' :'chat-box__msg  flex'} key={msg.createdAt}>
+                    return <div className={isCurrUser ? 'currUser chat-box__msg  flex' : 'chat-box__msg  flex'} key={msg.createdAt}>
                         <div className="chat-box__sender flex">
                             {!isCurrUser && <img className="chat-box__img" src={imgString} />}
                             {isCurrUser && <span className="chat-box__username">you </span>}
@@ -62,6 +57,8 @@ function Chat({ box, sendMsg, isTyping }) {
 
                     </div>
                 })}
+                {console.log({ typingUser })}
+                {typingUser && <h3>{typingUser} is typing....</h3>}
             </div>
             <form className="text-form" onSubmit={(e) => handleSubmit(e)}>
                 <input type="text" onChange={(e) => handleInputChange(e)} value={msg} placeholder="Write a message" />
