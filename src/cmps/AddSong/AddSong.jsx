@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import './AddSong.scss'
 import { Input } from '@material-ui/core'
 import { youtubeService } from '../../services/youtubeService';
-import CancelIcon from '@material-ui/icons/Cancel';
+import CloseIcon from '@material-ui/icons/Close';
 import ReactLoading from 'react-loading';
 import { debounce } from 'debounce';
 function AddSong({ onClose, onAddSong }) {
@@ -40,12 +40,12 @@ function AddSong({ onClose, onAddSong }) {
                 })}
             </div>}
             {  isSearching && <>
-                <ReactLoading className="is-loading__svg" type={'spinningBubbles'} color={'blue'} height={50} width={100} />
+                <ReactLoading className="is-loading__svg" type={'spinningBubbles'} color={'blue'} height={40} width={70} />
                 <h3 className="is-loading__txt"> Getting results...</h3>
             </>
             }
 
-            <CancelIcon className="addSong__close" onClick={() => onClose(false)} />
+            <CloseIcon className="addSong__close" onClick={() => onClose(false)} />
         </form>
 
     )

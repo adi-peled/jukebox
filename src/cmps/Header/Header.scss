@@ -26,18 +26,15 @@
         flex: 0.2;
         position: relative;
         align-items: center;
-        border-bottom: 1px solid $color-tertiary;
+        // border-bottom: 1px solid $color-tertiary;
 
-        @include respon(phone){
-
-        }
         &--search {
             font: inherit;
             border: 0;
             height: 1.1876em;
             padding: 6px 0 7px;
             background: none;
-
+            border-bottom: 1px solid $color-tertiary;
             &:focus {
                 outline: none;
                 color: $color-secondary;
@@ -52,9 +49,11 @@
             transform: scale(1.2);
             fill: $color-secondary
         }
+        &--search:focus {
+            border-bottom: 1px solid $color-secondary;
+        }
 
         &--search:focus::placeholder {
-
             color: $color-secondary
         }
 
