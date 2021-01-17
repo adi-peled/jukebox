@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import './Chat.scss'
-function Chat({box,sendMsg, isTyping}) {
+function Chat({ box, sendMsg, isTyping }) {
     const [msg, setMsg] = useState('')
-    const { currBox }= useSelector(state => state.boxReducer)
-    const  currUser = useSelector(state => state.userReducer.user)
+    const { currBox } = useSelector(state => state.boxReducer)
+    const currUser = useSelector(state => state.userReducer.user)
 
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(box);
 
-    },[])
+    }, [])
 
-    function handleInputChange(e){
-        isTyping(currBox,currUser)
+    function handleInputChange(e) {
+        isTyping(currBox, currUser)
         setMsg(e.target.value)
     }
 
@@ -37,8 +37,8 @@ function Chat({box,sendMsg, isTyping}) {
     function getTime(timestamp) {
         let hour = new Date(timestamp).getHours()
         let minutes = new Date(timestamp).getMinutes()
-        hour= hour<10? `0${hour}` : hour
-        minutes= minutes<10? `0${minutes}` : minutes
+        hour = hour < 10 ? `0${hour}` : hour
+        minutes = minutes < 10 ? `0${minutes}` : minutes
         return `${hour}:${minutes}`
     }
 
@@ -48,15 +48,17 @@ function Chat({box,sendMsg, isTyping}) {
             <div className="chat-box__container">
                 {box && box.chat.map(msg => {
                     const { username, imgString } = msg.from
-                    const msgClass = currUser.username === username ? 'currUser ' : ''
-                    return <div className={msgClass + 'chat-box__msg  flex'} key={msg.createdAt}>
+                    const isCurrUser = currUser.username === username ? true : false
+                    return <div className={isCurrUser? 'currUser chat-box__msg  flex' :'chat-box__msg  flex'} key={msg.createdAt}>
                         <div className="chat-box__sender flex">
-                            {!msgClass && <img className="chat-box__img" src={imgString} />}
-                           {msgClass&& <span className="chat-box__username">you </span>}
-                           {!msgClass&& <span className="chat-box__username">{username} </span>}
-                            <span className="chat-box__username"> {getTime(msg.createdAt)}</span>
+                            {!isCurrUser && <img className="chat-box__img" src={imgString} />}
+                            {isCurrUser && <span className="chat-box__username">you </span>}
+                            {!isCurrUser && <span className="chat-box__username">{username} </span>}
+                            <span className="chat-box__time"> {getTime(msg.createdAt)}</span>
                         </div>
-                        <div className="chat-box__txt">   {msg.text}</div>
+                        <div className={isCurrUser ? 'user-text chat-box__txt' : 'chat-box__txt'}>
+                            {msg.text}
+                        </div>
 
                     </div>
                 })}
