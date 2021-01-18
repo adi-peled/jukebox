@@ -46,7 +46,7 @@ function App() {
             username: `guest_${randomNum}`,
             imgString: '',
             favs: [],
-            isGuest: truef
+            isGuest: true
           }
           sessionStorage.setItem('guest', JSON.stringify(guest))
           dispatch({ type: 'SET_USER', user: JSON.parse(guest) })
