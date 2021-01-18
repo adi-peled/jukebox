@@ -3,7 +3,6 @@ import './AddSong.scss'
 import { Input } from '@material-ui/core'
 import { youtubeService } from '../../services/youtubeService';
 import CloseIcon from '@material-ui/icons/Close';
-import ReactLoading from 'react-loading';
 import { CircleLoading } from 'react-loadingg';
 import { debounce } from 'debounce';
 function AddSong({ onClose, onAddSong }) {
@@ -41,7 +40,7 @@ function AddSong({ onClose, onAddSong }) {
                 })}
             </div>}
             {  isSearching && <div className="flex column">
-                <CircleLoading className="is-loading__svg"/>
+                <CircleLoading />
                 <h3 className="is-loading__txt"> Getting results...</h3>
             </div>
             }

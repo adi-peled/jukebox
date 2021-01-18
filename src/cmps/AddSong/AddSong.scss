@@ -3,7 +3,7 @@
 
 .addSong {
     width: 50rem;
-    height:30rem;
+    height: 30rem;
     padding: 2rem;
     background-color: white;
     z-index: 999;
@@ -12,7 +12,7 @@
     @include absCenter;
 
     &__songs {
-        height:90%;
+        height: 90%;
         overflow-y: scroll;
 
         &::-webkit-scrollbar {
@@ -55,7 +55,7 @@
         right: 0;
         padding: 5px;
         margin: 1rem;
-        width:5rem !important;
+        width: 5rem !important;
         height: 5rem !important;
         fill: black !important;
         cursor: pointer;
@@ -77,17 +77,12 @@
     }
 
     .is-loading {
-
-        &__svg {
-            @include absCenter;
-            top: 30%;
-        }
-
         &__txt {
             width: fit-content;
             color: $color-primary;
             font-size: 2.5rem;
             @include absCenter;
+            top: 60%;
         }
     }
 }

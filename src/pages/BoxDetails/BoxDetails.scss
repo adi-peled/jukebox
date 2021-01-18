@@ -4,13 +4,10 @@
     height: 100%;
     color: white;
     background-color: $color-primary;
-
+    padding-top: 80px;
     &__container {
-        height: 90%;
+        height: 90%;;
     }
-
-    // background-image: linear-gradient(black,rgb(51, 51, 51), black);
-
 }
 
 .box-details-section2 {

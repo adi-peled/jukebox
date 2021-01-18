@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 
 import './Chat.scss'
-function Chat({ box, sendMsg, isTyping, typingUser }) {
+function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong }) {
     const [msg, setMsg] = useState('')
     const { currBox } = useSelector(state => state.boxReducer)
     const currUser = useSelector(state => state.userReducer.user)
@@ -75,6 +75,8 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
                 })}
                 <div ref={chatRef}></div>
                 {typingUser && <h3>{typingUser} is typing....</h3>}
+                {joinedUser && joinedUser !== currUser.username && <h3>{joinedUser} joined the room</h3>}
+                {newSong && <h3>{currUser.username} added new song: {newSong}</h3>}
             </div>
             <form className="text-form" onSubmit={(e) => handleSubmit(e)}>
                 <input type="text" onChange={(e) => handleInputChange(e)} value={msg} placeholder="Write a message" />

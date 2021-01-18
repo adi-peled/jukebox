@@ -2,7 +2,7 @@
 
 .main {
     padding: 0 4rem;
-  
+    padding-top: 80px;
 
     @include respon(tab-port) {
         padding: 0 6rem;

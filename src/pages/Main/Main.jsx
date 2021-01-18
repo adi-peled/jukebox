@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from '../../cmps/Filter/Filter'
 import BoxList from '../../cmps/BoxList/BoxList'
 import './Main.scss'
+import { CircleLoading } from 'react-loadingg';
 import { useSelector, useDispatch } from 'react-redux'
 import { setFilter, loadBoxes } from '../../store/actions/boxActions'
 function Main(props) {
@@ -14,8 +15,8 @@ function Main(props) {
         let { genre } = props.match.params
         if (!genre) return
         dispatch(setFilter({ genre, name: '' }))
-        return ()=>{
-        dispatch(setFilter({ genre:'', name: '' }))
+        return () => {
+            dispatch(setFilter({ genre: '', name: '' }))
         }
     }, [props.match.params])
 
@@ -25,8 +26,11 @@ function Main(props) {
 
     return (
         <section className="main">
-            <Filter />
-            <BoxList boxes={boxes} />
+            {!boxes && <CircleLoading />}
+            {boxes && <>
+                <Filter />
+                <BoxList boxes={boxes} />
+            </>}
         </section>
     )
 }
