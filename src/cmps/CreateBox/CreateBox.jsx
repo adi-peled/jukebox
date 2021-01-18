@@ -50,6 +50,7 @@ function CreateBox({ openModal }) {
     }
     return (
         <form className="createBox modal flex">
+            <h2>Create your own box !</h2>
             <div className="createBox__file-container flex">
                 <FileBase type="file" multiple={false} onDone={({ base64 }) => uploadImg(base64)} />
                 <Upload className={imgString ? "createBox__svg opacity-0" : "createBox__svg"} />
@@ -76,7 +77,7 @@ function CreateBox({ openModal }) {
 
             </div>
             <div>
-                <InputLabel id="label" className="createBox__label">genre</InputLabel>
+                <InputLabel id="label" className="createBox__label">Genre</InputLabel>
 
                 <select className="createBox__select" value={genre} onChange={(ev) => setGenre(ev.target.value)}>
                     {genres.map(g => {

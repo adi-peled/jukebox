@@ -20,10 +20,15 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
     }
 
     function handleSubmit(e) {
+        const minUser = {
+            _id: currUser._id,
+            username: currUser.username,
+            imgString: currUser.imgString
+        }
         e.preventDefault()
         let message = {
             text: msg,
-            from: currUser,
+            from: minUser,
             toBoxId: currBox._id,
             createdAt: Date.now()
         }

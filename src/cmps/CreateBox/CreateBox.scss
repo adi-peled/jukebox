@@ -6,7 +6,10 @@
     flex-direction: column;
     height: 57rem;
     justify-content: space-between;
-
+    h2{
+        color :black;
+        text-align: center;
+    }
     &__file-container {
         justify-content: center;
 

@@ -3,6 +3,8 @@ import './SocialLinks.scss'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import AttachFileSharpIcon from '@material-ui/icons/AttachFileSharp';
+import LinkIcon from '@material-ui/icons/Link';
+
 import AddIcon from '@material-ui/icons/Add';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
@@ -53,7 +55,7 @@ function SocialLinks({ showAddSong, onLike, isLiked, setCurrCmp, currCmp }) {
                 success!  Link copied to copy To clipboard
                 </Alert>}
             <div className="social-links-section-social">
-                <AttachFileSharpIcon onClick={copyToClipboard} />
+                <LinkIcon className="copy-to-clip" onClick={copyToClipboard} />
                 <WhatsappShareButton url={url} title="share music box"> 
                 <WhatsAppIcon/>
                 </WhatsappShareButton>
