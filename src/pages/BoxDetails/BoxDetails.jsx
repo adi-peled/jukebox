@@ -3,6 +3,7 @@ import { debounce } from 'debounce';
 //Scss
 import './BoxDetails.scss'
 //Components
+import { CircleLoading } from 'react-loadingg';
 import BoxPlayList from '../../cmps/BoxPlayList/BoxPlayList'
 import Chat from '../../cmps/Chat/Chat'
 import BoxInfo from '../../cmps/BoxInfo/BoxInfo'
@@ -28,8 +29,9 @@ function BoxDetails(props) {
     const [isLiked, setIsLiked] = useState(false)
     const [currCmp, setCurrCmp] = useState('BoxPlayList')
     const [showIsTyping, setShowIsTyping] = useState(null)
+    const [showJoinedUser, setShowJoinedUser] = useState(null)
+    const [showNewSong, setShowNewSong] = useState(null)
     const debounceLoadData = useCallback(debounce(fetchData, 1500), []);
-
     useEffect(() => {
         if (user) {
             socket = io(socketService.getUrl())
@@ -45,8 +47,8 @@ function BoxDetails(props) {
             socket.on('msgSent', (box) => {
                 dispatch(updateBox(box))
             })
-            socket.on('user joined', (user) => console.log('hellow user', user))
-            //  //todo- render user joinned
+            socket.on('user joined', (username) => onJoinedUser(username))
+
         }
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
@@ -59,6 +61,17 @@ function BoxDetails(props) {
             dispatch(setCurrSong(box?.playList[0]))
         }
     },[box])
+    const onJoinedUser = (username) => {
+        setShowJoinedUser(username)
+        setTimeout(() => {
+            setShowJoinedUser(null)
+        }, 5000)
+    }
+
+
+    useEffect(() => {
+        if (box?.playlist) dispatch(setCurrSong(box.playList[0]))
+    }, [box])
 
     async function fetchData() {
         setShowIsTyping(null)
@@ -76,10 +89,8 @@ function BoxDetails(props) {
         }
     }
     useEffect(() => {
-        console.log({ user });
         if (user) {
             const idx = user.favs.findIndex(favBox => favBox._id === id)
-            console.log(idx);
             idx === -1 ? setIsLiked(false) : setIsLiked(true)
         }
     }, [user?.favs?.length])
@@ -99,6 +110,10 @@ function BoxDetails(props) {
     }
     const onAddSong = (song) => {
         dispatch(addSong(song, id))
+        setShowNewSong(song.snippet.title)
+        setTimeout(() => {
+            setShowNewSong(null)
+        }, 3000)
     }
     function sendMsg(data) {
         dispatch(updateBox(data))
@@ -110,26 +125,34 @@ function BoxDetails(props) {
 
     return (
         <div className="box-details">
-            { box && <div className="box-details__container flex ">
-                {screenWidth > 850 && <Chat
-                    isTyping={isTyping}
-                    sendMsg={sendMsg}
-                    box={box}
-                    typingUser={showIsTyping}
-                />}
+            { !box && <CircleLoading />}
+            { box && <>
+                <div className="box-details__container flex ">
+                    {screenWidth > 850 && <Chat
+                        isTyping={isTyping}
+                        sendMsg={sendMsg}
+                        box={box}
+                        typingUser={showIsTyping}
+                        joinedUser={showJoinedUser}
+                        newSong={showNewSong}
+                    />}
 
-                <div className="box-details-section2">
-                    <BoxInfo box={box} />
-                    <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp} />
-                    {screenWidth > 850 && <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />}
-                    {screenWidth < 850 &&  <>{getCurrCmp()}</>}
+                    <div className="box-details-section2">
+                        <BoxInfo box={box} />
+                        <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp} />
+                        {screenWidth > 850 && <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />}
+                        {screenWidth < 850 &&  <>{getCurrCmp()}</>}
+                    </div>
                 </div>
-            </div>
-            }
-            {showAddSong && <>
-                <AddSong onClose={setShowAddSong} onAddSong={onAddSong} />
-                <div onClick={() => setShowAddSong(false)} className="screen" />
+
+                {showAddSong && <>
+                    <AddSong onClose={setShowAddSong} onAddSong={onAddSong} />
+                    <div onClick={() => setShowAddSong(false)} className="screen" />
+                </>}
             </>}
+
+
+
         </div>
     )
 }
