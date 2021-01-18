@@ -49,10 +49,10 @@ function App() {
             isGuest: true
           }
           sessionStorage.setItem('guest', JSON.stringify(guest))
+          dispatch({ type: 'SET_USER', user: JSON.parse(guest) })
+        } else {
+          dispatch({ type: 'SET_USER', user: guest })
         }
-
-        console.log({ guest });
-        dispatch({ type: 'SET_USER', user: JSON.parse(guest) })
       }
     }
   }, [])
