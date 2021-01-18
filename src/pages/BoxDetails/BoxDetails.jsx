@@ -56,7 +56,7 @@ function BoxDetails(props) {
 
     useEffect(() => {
         if (box?.playlist) dispatch(setCurrSong(box.playList[0]))
-    }, [box])
+    }, [])
 
     async function fetchData() {
         setShowIsTyping(null)
