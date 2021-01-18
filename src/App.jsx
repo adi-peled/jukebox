@@ -53,8 +53,6 @@ function App() {
 
         console.log({ guest });
         dispatch({ type: 'SET_USER', user: JSON.parse(guest) })
-        console.log( JSON.parse(guest) );
-
       }
     }
   }, [])
