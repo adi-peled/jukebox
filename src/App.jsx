@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 //Socket
+import { userService } from './services/userService'
 
 import { socketService } from './services/socketService'
 import io from 'socket.io-client'
@@ -27,17 +28,25 @@ function App() {
   const [showSuccess, setShowSuccess] = useState(false)
   const { user } = useSelector(state => state.userReducer)
   const dispatch = useDispatch()
-  useEffect(() => {
-
+  useEffect(async () => {
     if (!user) {
-      const guest = {
-        username: 'guest',
-        imgString: '',
-        favs: [],
-        isGuest: true
+      const loggedUser = await userService.getUser()
+      if (loggedUser) {
+        dispatch({ type: 'SET_USER', user: loggedUser })
+      } else {
+        let guest = sessionStorage.getItem('guest')
+        if (!guest) {
+          const randomNum = Math.floor(Math.random() * 9999)
+          guest = {
+            username: `guest_${randomNum}`,
+            imgString: '',
+            favs: [],
+            isGuest: true
+          }
+        }
+        sessionStorage.setItem('guest', JSON.stringify(guest))
+        dispatch({ type: 'SET_USER', user: guest })
       }
-      // sessionStorage.setItem('user', JSON.stringify(guest))
-      dispatch({ type: 'SET_USER', user: guest })
     }
   }, [])
 
@@ -56,7 +65,7 @@ function App() {
             <div onClick={() => setShowCreateBox(false)} className="screen" />
           </>}
 
-        {showLogin.show &&  user.isGuest &&
+        {showLogin.show && user.isGuest &&
           <>
             <Login type={showLogin.type} showSuccess={setShowSuccess} />
             <div onClick={() => setShowLogin({ show: false, type: '' })} className="screen" />

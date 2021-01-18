@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './Home.scss'
 //cmps
-import heroImg1 from '../../assets/img/hero1.jpg'
+import heroImg6 from '../../assets/img/hero6.jpg'
 import heroImg2 from '../../assets/img/hero2.jpg'
-import heroImg3 from '../../assets/img/hero3.jpg'
+import heroImg7 from '../../assets/img/hero7.jpg'
 import heroImg4 from '../../assets/img/hero4.jpg'
 import heroImg5 from '../../assets/img/hero5.jpg'
 import { TweenLite } from 'gsap'
@@ -20,7 +20,7 @@ function Home() {
     const [myElement, setMyElement] = useState(null)
     const { boxes } = useSelector((state) => state.boxReducer)
     const dispatch = useDispatch()
-const heroImgs=[heroImg1,heroImg2,heroImg3,heroImg4,heroImg5]
+    const heroImgs = [heroImg7, heroImg2, heroImg6, heroImg4, heroImg5]
 
     useEffect(() => {
         // setMyTween(TweenLite.to(myElement, 1, { x: 100, y: 100 }))
@@ -37,7 +37,7 @@ const heroImgs=[heroImg1,heroImg2,heroImg3,heroImg4,heroImg5]
             <Carousel items={heroImgs} heroImgs />
             <div className="home-container">
 
-               {user&& <h2 className="title">My Favorite Playlist</h2>}
+                {user && <h2 className="title">My Favorite Playlist</h2>}
                 {user?.favs && <Carousel items={user.favs} />}
 
                 <h2 className="title">  Top Genres</h2>

@@ -5,27 +5,27 @@ import { authService } from "../../services/authService"
 
 export const loadLoggedUser = () => async dispatch => {
 
-  try{
-    const user = await userService.getUser()
-    console.log({user});
-    dispatch({ type: 'SET_USER', user })
-  }catch(err){
-      console.log(err);
-  }
+    try {
+        const user = await userService.getUser()
+        console.log({ user });
+        dispatch({ type: 'SET_USER', user })
+    } catch (err) {
+        console.log(err);
+    }
 
 }
 
 export const signout = () => async dispatch => {
-    try{
+    try {
         await authService.logout()
         const guest = {
             username: 'guest',
             imgString: '',
             favs: [],
             isGuest: true
-          }
-    dispatch({ type: 'SET_USER', user: guest })
-    }catch(err){
+        }
+        dispatch({ type: 'SET_USER', user: guest })
+    } catch (err) {
         console.log(err);
     }
 }
@@ -62,7 +62,9 @@ export const login = (email, password) => async dispatch => {
 export const toggleLike = (user, box, isLiked) => async dispatch => {
     try {
         if (!isLiked) {
-            user.favs.push(box)
+            const addedBox={...box}
+            delete addedBox.chat
+            user.favs.push(addedBox)
         } else {
             const idx = user.favs.findIndex(favBox => favBox._id === box._id)
             user.favs.splice(idx, 1)

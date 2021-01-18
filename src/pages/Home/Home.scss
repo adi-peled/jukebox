@@ -1,7 +1,11 @@
 @import '../../scss/abstracts/variables';
 @import '../../scss/abstracts/mixins';
+
 .home {
 
+    .title {
+        color: $color-secondary;
+    }
 
 
     &__img {
@@ -10,27 +14,30 @@
         object-fit: cover;
     }
 
-    &-container{
+    &-container {
         padding: 0 8rem;
         margin-bottom: 8rem;
-        @include respon(phone){
+
+        @include respon(phone) {
             padding: 0 2rem;
-            }
-        .boxPreview{
+        }
+
+        .boxPreview {
             margin-right: 1.5rem;
-            @include respon(phone){
-            margin-right: 1.5rem;
+
+            @include respon(phone) {
+                margin-right: 1.5rem;
             }
         }
 
     }
 
-    .title{
 
-    }
-    .sub-title{
+
+    .sub-title {
         font-size: 2.5rem;
-       margin-bottom: 2rem;
-       margin-top: 2rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        color: $color-secondary;
     }
 }

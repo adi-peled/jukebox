@@ -9,10 +9,10 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
     const currUser = useSelector(state => state.userReducer.user)
     const chatRef = useRef();
 
-    useEffect(()=>{
+    useEffect(() => {
         scrollToBottom()
-    },[currBox?.chat?.length])
-    
+    }, [currBox?.chat?.length])
+
 
     function handleInputChange(e) {
         isTyping(currBox, currUser)
@@ -35,7 +35,7 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
         setMsg('')
     }
 
-   
+
     function getTime(timestamp) {
         let hour = new Date(timestamp).getHours()
         let minutes = new Date(timestamp).getMinutes()
@@ -44,14 +44,14 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
         return `${hour}:${minutes}`
     }
 
-    function scrollToBottom(){
+    function scrollToBottom() {
         chatRef.current.scrollIntoView({ behavior: "smooth" });
     }
-    
+
     return (
         <div className="chat-box flex column ">
             <div className="chat-box__container">
-                {box && box.chat.map(msg => {
+                {box && box.chat?.map(msg => {
                     const { username, imgString } = msg.from
                     const isCurrUser = currUser.username === username ? true : false
                     return <div className={isCurrUser ? 'currUser chat-box__msg  flex' : 'chat-box__msg  flex'} key={msg.createdAt}>
@@ -66,10 +66,9 @@ function Chat({ box, sendMsg, isTyping, typingUser }) {
                         </div>
 
                     </div>
-                    
+
                 })}
                 <div ref={chatRef}></div>
-                {console.log({ typingUser })}
                 {typingUser && <h3>{typingUser} is typing....</h3>}
             </div>
             <form className="text-form" onSubmit={(e) => handleSubmit(e)}>

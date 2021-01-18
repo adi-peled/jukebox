@@ -3,23 +3,26 @@
 
 
 .boxPreview {
-    margin-right: .5rem;
+    // margin-right: .5rem;
     flex-direction: column;
     transition: .5s;
     height: 100%;
-    color:$color-tertiary;
+    color: $color-tertiary;
+    height: 20rem;
+
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.06);
         color: $color-secondary;
     }
 
     &__info {
-        height: 40%;
-        background-color:lighten( $color-primary,10%);
+        height: 20%;
+        background-color: lighten($color-primary, 10%);
         padding: 5px;
         align-items: center;
         justify-content: space-between;
-        @include respon(phone){
+
+        @include respon(phone) {
             padding: 0;
         }
     }
@@ -30,14 +33,24 @@
         text-transform: capitalize;
         font-family: 'nunito-bold';
         color: inherit;
-        @include respon(phone){
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        @include respon(phone) {
             font-size: 1.4rem;
             margin-right: 0rem;
         }
     }
 
+    .fullName {
+
+        overflow: unset;
+        text-overflow: ellipsis;
+    }
+
     &__img {
-        height: 60%;
+        height: 80%;
         width: 100%;
     }
 
@@ -46,7 +59,8 @@
         height: 3.2rem;
         fill: currentColor;
         margin-right: 0.5rem;
-        @include respon(phone){
+
+        @include respon(phone) {
             // width: 2rem;
             // height: 2rem;
             margin-right: 0rem;

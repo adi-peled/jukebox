@@ -74,8 +74,10 @@ function BoxDetails(props) {
         }
     }
     useEffect(() => {
+        console.log({ user });
         if (user) {
             const idx = user.favs.findIndex(favBox => favBox._id === id)
+            console.log(idx);
             idx === -1 ? setIsLiked(false) : setIsLiked(true)
         }
     }, [user?.favs?.length])

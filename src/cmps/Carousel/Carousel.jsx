@@ -60,7 +60,7 @@ export default function AppCarousel({ items, heroImgs }) {
 
 
       {heroImgs && items.map(item => {
-        return <img className="home__img" src={item} />
+        return <img key={item} className="home__img" src={item} />
       })}
 
     </Carousel>
