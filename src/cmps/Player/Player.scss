@@ -63,8 +63,12 @@
 }
 
 @media (max-width: 800px) {
+    .player{
+        padding: 0;
+    }
     .player-buttons{
-        width: 40%;
+        width: 50%;
         padding: 0 !important;
+        
     }
 }

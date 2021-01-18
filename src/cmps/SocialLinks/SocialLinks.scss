@@ -2,25 +2,30 @@
 @import '../../scss/abstracts/variables';
 
 .social-links {
-    margin-top: 1rem;
     padding: 0 2rem;
-
+    height: 7rem;
     div {
         cursor: pointer;
 
         svg {
             transform: scale(2);
+            
         }
-
+        
         a {
             color: white;
         }
     }
-
+    
     &__success {
         font-size: 2rem !important;
         @include absCenter
     }
+}
+
+.copy-to-clip{
+    transform: scale(3)  rotate(45deg) !important;
+
 }
 .social-links__nav-container{
     width: 30%;
@@ -58,6 +63,10 @@
     align-items: center;
     width: 7.5vw;
 }
+
+
+
+
 
 @media (max-width: 1200px) {
     .social-links-section-social {

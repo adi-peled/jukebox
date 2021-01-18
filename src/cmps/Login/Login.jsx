@@ -44,6 +44,12 @@ function Login({ type, showSuccess }) {
         passwordType === 'password' ? setPasswordType('text') : setPasswordType('password')
 
     }
+    function showInfoTimeOut(){
+        setShowInfo(true)
+        setTimeout(()=>{
+            setShowInfo(false)
+        },3000)
+    }
 
     const onSubmit = async (ev) => {
         ev.preventDefault()
@@ -103,7 +109,7 @@ function Login({ type, showSuccess }) {
                     value={password}
                     onChange={(ev) => setPassword(ev.target.value)}
                 />
-                <InfoOutlinedIcon className="infoIcon" onClick={() => setShowInfo(!showInfo)} />
+                <InfoOutlinedIcon className="infoIcon" onClick={showInfoTimeOut} />
 
                 {passwordType === 'password' ?
                     <VisibilityIcon className="showIcon" onClick={() => toggleShowPassword()} /> :

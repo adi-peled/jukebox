@@ -4,6 +4,7 @@ import { Input } from '@material-ui/core'
 import { youtubeService } from '../../services/youtubeService';
 import CloseIcon from '@material-ui/icons/Close';
 import ReactLoading from 'react-loading';
+import { CircleLoading } from 'react-loadingg';
 import { debounce } from 'debounce';
 function AddSong({ onClose, onAddSong }) {
     const [txt, setTxt] = useState('')
@@ -39,10 +40,10 @@ function AddSong({ onClose, onAddSong }) {
                     </div>
                 })}
             </div>}
-            {  isSearching && <>
-                <ReactLoading className="is-loading__svg" type={'spinningBubbles'} color={'blue'} height={40} width={70} />
+            {  isSearching && <div className="flex column">
+                <CircleLoading className="is-loading__svg"/>
                 <h3 className="is-loading__txt"> Getting results...</h3>
-            </>
+            </div>
             }
 
             <CloseIcon className="addSong__close" onClick={() => onClose(false)} />

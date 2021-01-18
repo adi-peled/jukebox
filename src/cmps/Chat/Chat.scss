@@ -19,8 +19,8 @@ $clr1:rgb(24, 25, 26);
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: darkgrey;
-            outline: 1px solid slategrey;
+            background-color: transparent;
+            outline: 1px solid transparent;
         }
 
         &::-webkit-scrollbar-corner {
