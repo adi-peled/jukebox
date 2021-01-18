@@ -29,18 +29,13 @@ function App() {
   const { user } = useSelector(state => state.userReducer)
   const dispatch = useDispatch()
   useEffect(async () => {
-    console.log('created');
     if (!user) {
-      console.log('no user');
-
       const loggedUser = await userService.getUser()
       if (loggedUser) {
         dispatch({ type: 'SET_USER', user: loggedUser })
       } else {
         let guest = sessionStorage.getItem('guest')
         if (!guest) {
-          console.log('no guest');
-
           const randomNum = Math.floor(Math.random() * 9999)
           guest = {
             username: `guest_${randomNum}`,
@@ -49,9 +44,9 @@ function App() {
             isGuest: true
           }
           sessionStorage.setItem('guest', JSON.stringify(guest))
-          dispatch({ type: 'SET_USER', user: JSON.parse(guest) })
-        } else {
           dispatch({ type: 'SET_USER', user: guest })
+        } else {
+          dispatch({ type: 'SET_USER', user:JSON.parse(guest) })
         }
       }
     }
