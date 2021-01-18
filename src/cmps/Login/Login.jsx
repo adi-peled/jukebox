@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 //svg
 import   userSvg  from '../../assets/img/user.svg'
 //icons
+import defaultImg from '../../assets/img/defaultUser.jpg'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -19,7 +20,7 @@ function Login({ type, showSuccess }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [txt, setTxt] = useState('')
-    const [imgString, setImgString] = useState('')
+    const [imgString, setImgString] = useState(null)
     const [passwordType, setPasswordType] = useState('password')
     const [showInfo, setShowInfo] = useState(false)
 
@@ -72,7 +73,7 @@ function Login({ type, showSuccess }) {
                     return
                 }
             }
-          
+            if(!imgString) setImgString(defaultImg) 
             msg = await dispatch(signup(email, password, username, imgString))
         } else {
             msg = await dispatch(login(email, password))

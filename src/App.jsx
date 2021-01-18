@@ -2,11 +2,7 @@ import react, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
-//Socket
 import { userService } from './services/userService'
-
-import { socketService } from './services/socketService'
-import io from 'socket.io-client'
 
 //cmps
 
@@ -20,6 +16,7 @@ import Alert from '@material-ui/lab/Alert';
 import CreateBox from './cmps/CreateBox/CreateBox';
 //scss
 import './App.scss';
+import defaultImg from './assets/img/defaultUser.jpg'
 import { gsap } from 'gsap'
 function App() {
 
@@ -44,7 +41,7 @@ function App() {
           const randomNum = Math.floor(Math.random() * 9999)
           guest = {
             username: `guest_${randomNum}`,
-            imgString: '',
+            imgString: defaultImg ,
             favs: [],
             isGuest: true
           }
