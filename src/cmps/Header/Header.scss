@@ -9,8 +9,7 @@
     height: 80px;
     z-index: 3;
     align-items: center;
-
-
+    transition: all .8s;
 
 
     @include respon(tab-port) {
@@ -35,6 +34,7 @@
             padding: 6px 0 7px;
             background: none;
             border-bottom: 1px solid $color-tertiary;
+
             &:focus {
                 outline: none;
                 color: $color-secondary;
@@ -49,6 +49,7 @@
             transform: scale(1.2);
             fill: $color-secondary
         }
+
         &--search:focus {
             border-bottom: 1px solid $color-secondary;
         }
@@ -66,7 +67,7 @@
     }
 
     &__logo {
-        height:5rem;
+        height: 5rem;
         object-fit: contain;
         flex: 0.2;
         cursor: pointer;
@@ -85,13 +86,14 @@
         justify-content: flex-end;
         align-items: center;
         position: relative;
+
         @include respon(phone) {
             flex: 0.3;
         }
     }
 
 
-  
+
 
     &__item {
         // margin-right: 1.5rem;

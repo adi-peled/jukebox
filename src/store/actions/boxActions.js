@@ -48,8 +48,8 @@ export const setFilter = (filterBy) => async dispatch => {
 
 export const createBox = (box) => async dispatch => {
     try {
-        await boxService.createBox(box)
-        dispatch({ type: 'ADD_BOX', box })
+        const newBox = await boxService.createBox(box)
+        dispatch({ type: 'ADD_BOX', box:newBox })
     } catch (err) {
         console.log(err);
     }

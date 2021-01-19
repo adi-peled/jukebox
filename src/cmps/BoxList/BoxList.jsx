@@ -3,18 +3,9 @@ import './BoxList.scss'
 import BoxPreview from '../BoxPreview/BoxPreview'
 import Carousel from '../Carousel/Carousel'
 
-function BoxList({ boxes, genre, carousel }) {
+function BoxList({ boxes,  carousel }) {
 
-    const [filteredBoxes, setFilteredBoxes] = useState(null)
 
-    // useEffect(() => {
-    //     console.log(genre);
-    //     if (genre) {
-    //         setFilteredBoxes(boxes?.filter(box => box.genre === genre))
-    //     } else {
-    //         setFilteredBoxes(boxes)
-    //     }
-    // }, [genre])
 
     return (
         <section className="boxList grid">
@@ -22,10 +13,6 @@ function BoxList({ boxes, genre, carousel }) {
                 return <BoxPreview key={box._id} box={box} />
             })
             }
-
-            {/* {
-                carousel && boxes && <Carousel items={boxes} />
-            } */}
         </section>
     )
 }

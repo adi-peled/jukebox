@@ -8,11 +8,6 @@
 
 html {
     font-size: 62.5%; //1rem=10px
-
-    @include respon(big-desktop) {
-        font-size: 75%; //1rem=12px
-    }
-
     @include respon(tab-land) {
         font-size: 56.25%; //1rem=9px
     }
@@ -24,5 +19,4 @@ html {
 
 body {
     box-sizing: border-box;
-
 }
