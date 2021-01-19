@@ -32,6 +32,7 @@ function BoxDetails(props) {
     const [showJoinedUser, setShowJoinedUser] = useState(null)
     const [showNewSong, setShowNewSong] = useState(null)
     const debounceLoadData = useCallback(debounce(fetchData, 1500), []);
+    
     useEffect(() => {
         if (user) {
             socket = io(socketService.getUrl())

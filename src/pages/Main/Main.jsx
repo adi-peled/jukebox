@@ -10,7 +10,6 @@ function Main(props) {
     const { boxes, filterBy } = useSelector((state) => state.boxReducer)
     const dispatch = useDispatch()
 
-
     useEffect(() => {
         let { genre } = props.match.params
         if (!genre) return
@@ -19,6 +18,8 @@ function Main(props) {
             dispatch(setFilter({ genre: '', name: '' }))
         }
     }, [props.match.params])
+
+
 
     useEffect(() => {
         dispatch(loadBoxes(filterBy))

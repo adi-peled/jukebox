@@ -16,7 +16,6 @@ function AddSong({ onClose, onAddSong }) {
         setIsSearching(false)
     }
  
-    
     useEffect(() => {
         if (txt) {
             setIsSearching(true)
@@ -24,10 +23,9 @@ function AddSong({ onClose, onAddSong }) {
         debounceLoadData(txt);
     }, [txt])
 
-
     useEffect(() => {
-
     }, [isSearching])
+
     return (
         <form className="addSong" >
             <Input placeholder="Search Song" onChange={(ev) => setTxt(ev.target.value)} />
