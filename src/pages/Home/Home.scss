@@ -41,3 +41,13 @@
         color: $color-secondary;
     }
 }
+
+.scroll-to-boxes{
+    font-size: 8rem;
+    text-shadow: 0 0 12px #fff;
+    position: absolute;
+    @include absCenter;
+    &:hover{
+        cursor: pointer;
+    }
+}
