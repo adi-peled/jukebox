@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Home.scss'
 //cmps
 import heroImg6 from '../../assets/img/hero6.jpg'
@@ -19,21 +19,24 @@ function Home() {
     const { boxes } = useSelector((state) => state.boxReducer)
     const dispatch = useDispatch()
     const heroImgs = [heroImg7, heroImg2, heroImg6, heroImg4, heroImg5]
-
+    const boxesRef = useRef()
     useEffect(() => {
         dispatch(loadBoxes())
     }, [])
-
+    function handleClick(){
+        boxesRef.current.scrollIntoView({ behavior: "smooth" });
+    }
     return (
         <section className="home">
             {!boxes && <CircleLoading />}
             { boxes && <>
                 <Carousel items={heroImgs} heroImgs />
+                <h1 className="scroll-to-boxes" onClick={handleClick} >Enjoy the beart</h1>
                 <div className="home-container">
                     {user && <h2 className="title">My Favorite Playlist</h2>}
                     {user?.favs && <Carousel items={user.favs} />}
 
-                    <h2 className="title">  Top Genres</h2>
+                    <h2 ref={boxesRef} className="title">  Top Genres</h2>
                     {genres.map(genre => {
                         const filteredBoxes = boxes.filter(box => box.genre === genre)
                         return <div key={genre} className="genre-container">
