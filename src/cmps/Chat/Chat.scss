@@ -3,7 +3,7 @@
 $clr1:rgb(24, 25, 26);
 
 .chat-box {
-    min-width: 20vw;
+    width: 30vw;
     &__container {
         overflow-y: scroll;
         padding: 0 10px;
