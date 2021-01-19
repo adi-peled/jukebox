@@ -57,6 +57,11 @@ function BoxDetails(props) {
         }
     }, [user])
 
+    useEffect(()=>{
+        if(box?.playList[0]){
+            dispatch(setCurrSong(box?.playList[0]))
+        }
+    },[box])
     const onJoinedUser = (username) => {
         setShowJoinedUser(username)
         setTimeout(() => {
@@ -81,7 +86,7 @@ function BoxDetails(props) {
         if (currCmp === 'Chat' && screenWidth < 850) {
             return <Chat isTyping={isTyping} sendMsg={sendMsg} box={box} />
         } else if (currCmp === 'BoxPlayList') {
-            return <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
+            return <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box}/>
         }
     }
     useEffect(() => {
@@ -136,8 +141,8 @@ function BoxDetails(props) {
                     <div className="box-details-section2">
                         <BoxInfo box={box} />
                         <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp} />
-                        {/* {<BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />} */}
-                        {getCurrCmp()}
+                        {screenWidth > 850 && <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />}
+                        {screenWidth < 850 &&  <>{getCurrCmp()}</>}
                     </div>
                 </div>
 

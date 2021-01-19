@@ -111,7 +111,7 @@ function Player() {
                     <button onClick={()=>skipSong(-1)}>
                         <SkipPreviousIcon/>
                     </button>
-                    <button onClick={()=>dispatch(setCurrSong(currSong))}>{currSong.isPlaying ? <PauseCircleOutlineIcon/> 
+                    <button onClick={()=>dispatch(setCurrSong(currSong))}>{currSong?.isPlaying ? <PauseCircleOutlineIcon/> 
                     : <PlayCircleOutlineIcon />}
                     </button>
                     <button onClick={()=>skipSong(1)}>
