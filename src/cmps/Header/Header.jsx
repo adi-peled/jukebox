@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { loadLoggedUser, signout } from '../../store/actions/userActions'
 import { setFilter } from '../../store/actions/boxActions'
 //icons
-import jukeBox from '../../assets/jukeBox.svg'
+import jukeBox from '../../assets/img/equalizerLogo.png'
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
