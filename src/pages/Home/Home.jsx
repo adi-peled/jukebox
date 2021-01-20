@@ -15,7 +15,7 @@ import { loadBoxes } from '../../store/actions/boxActions'
 import { boxService } from '../../services/boxService'
 function Home() {
     const { user } = useSelector(state => state.userReducer)
-    const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Israeli', 'Pop', 'Classical']
+    const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Israeli', 'Pop']
     const { boxes } = useSelector((state) => state.boxReducer)
     const dispatch = useDispatch()
     const heroImgs = [heroImg7, heroImg2, heroImg6, heroImg4, heroImg5]

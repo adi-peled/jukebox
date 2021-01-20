@@ -5,8 +5,8 @@ function BoxPlayList({box, playSong, deleteSong}) {
 
     return (
         <div className="playlist">
-            {box&& box.playList.map(song=>{
-                return <SongPreview key={song.videoId} song={song} playSong={playSong} deleteSong={deleteSong} />
+            {box&& box.playList.map((song, idx)=>{
+                return <SongPreview key={idx} song={song} playSong={playSong} deleteSong={deleteSong} />
             })}
         </div>
     )

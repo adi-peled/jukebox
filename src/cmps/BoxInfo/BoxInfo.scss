@@ -4,8 +4,8 @@
 .box-info {
     width: 100%;
     height: 20vh;
-    background-color: $color-secondary;
-    // background: linear-gradient(rgba(255, 166, 0, 0.349), rgba(172, 172, 123, 0.561), rgba(255, 166, 0, 0.315));
+    // background-color: $color-secondary;
+    background: linear-gradient($color-secondary, rgba(196, 255, 218, 0.822), $color-secondary);
     padding: 1.5rem;
 
     .title {
