@@ -23,6 +23,7 @@ export const loadBox = (id) => async dispatch => {
         console.log(err);
     }
 }
+
 export const updateBox = (data) => async dispatch => {
     try {
         data.currBox.chat.push(data.message)
@@ -32,6 +33,7 @@ export const updateBox = (data) => async dispatch => {
         console.log(err);
     }
 }
+
 export const loadBoxChat = (id) => async dispatch => {
     try {
         const box = await boxService.getBoxById(id)
@@ -66,8 +68,6 @@ export const removeSong = (boxId, songId) => async dispatch => {
     }
 }
 
-
-
 export const addSong = (song, boxId) => async dispatch => {
     try {
         const box = await boxService.getBoxById(boxId)
@@ -86,7 +86,6 @@ export const addSong = (song, boxId) => async dispatch => {
     } catch (err) {
         console.log(err);
     }
-
 }
 
 

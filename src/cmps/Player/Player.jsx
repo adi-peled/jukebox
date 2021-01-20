@@ -23,8 +23,6 @@ function Player() {
     const [mute, setMute] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
-
-    
     function skipSong(diff){
         currBox.playList.forEach((song,index)=>{
             if(song.id===currSong.id){
@@ -49,7 +47,6 @@ function Player() {
         }
     },[])
 
-    
     function handleVolumeChange({ target }){
         setVolume(parseFloat(target.value))
     }

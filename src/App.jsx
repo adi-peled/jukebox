@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { userService } from './services/userService'
-
+import { utilService } from './services/utilService'
 //cmps
 
 import Header from './cmps/Header/Header'
@@ -36,14 +36,15 @@ function App() {
           const randomNum = Math.floor(Math.random() * 9999)
           guest = {
             username: `guest_${randomNum}`,
-            imgString: defaultImg ,
+            imgString: defaultImg,
             favs: [],
-            isGuest: true
+            isGuest: true,
+            _id: utilService.makeId()
           }
           sessionStorage.setItem('guest', JSON.stringify(guest))
           dispatch({ type: 'SET_USER', user: guest })
         } else {
-          dispatch({ type: 'SET_USER', user:JSON.parse(guest) })
+          dispatch({ type: 'SET_USER', user: JSON.parse(guest) })
         }
       }
     }
