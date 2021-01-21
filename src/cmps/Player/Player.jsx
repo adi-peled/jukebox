@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, createRef } from 'react'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong } from '../../store/actions/boxActions'
@@ -26,6 +26,8 @@ function Player() {
     const [duration, setDuration] = useState(0)
     const [mute, setMute] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+    const [seeking, setSeeking] = useState(false)
+    const elPlayer = createRef()
 
     function skipSong(diff) {
         currBox.playList.forEach((song, index) => {
@@ -59,15 +61,16 @@ function Player() {
         setVolume(parseFloat(newVal))
     }
     function handleProgress(e) {
-        setSecPlayed(e.playedSeconds)
+            // if (!seeking && !isSyncing) {
+            if (!seeking) {
+                setSecPlayed(e.playedSeconds)
+                // setSecPlayed(playedSeconds)
+                // this.props.updateProgress(state.playedSeconds);
+            }
     }
 
     function handleDuration(e) {
         setDuration(e)
-    }
-
-    function handleDurationChange() {
-
     }
 
     function pauseSong() {
@@ -77,6 +80,26 @@ function Player() {
 
     function handleMute() {
         setMute(!mute)
+    }
+
+    function seekTo(){
+        elPlayer.seekTo(secPlayed);
+    }
+
+    function handleSeekMouseDown(){
+        setSeeking(true)
+    }
+
+    function handleSeekChange({ target },newVal){
+        // console.log(newVal);
+        setSecPlayed(newVal);
+    }
+    
+    function handleSeekMouseUp(){
+        // console.log(secPlayed);
+        setSeeking(false)
+
+        // socketService.emit('update player seek', this.state.secPlayed);
     }
 
     function showTime(seconds) {
@@ -94,6 +117,7 @@ function Player() {
     return (
         <div>
             {currSong && <ReactPlayer
+                ref={elPlayer}
                 className="hidden"
                 playing={currSong.isPlaying}
                 url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}
@@ -112,10 +136,13 @@ function Player() {
                     {showTime(secPlayed)}
                     <Slider className="duration-slider"
                         name="played"
-                        value={secPlayed}  
                         min={0}
                         max={duration}
-                        onChange={(e) => handleDurationChange(e)}
+                        onMouseDown={handleSeekMouseDown}
+                        onMouseUp={handleSeekMouseUp}
+                        onChange={handleSeekChange}
+                        onTouchEnd={handleSeekMouseUp}
+                        value={secPlayed}  
                     />
                     {showTime(duration)}
                 </div>}
@@ -140,7 +167,8 @@ function Player() {
 
                     {screenWidth > 850 && <Slider className="volume-slider"
                         aria-labelledby="continuous-slider"
-                        defaultValue ={volume}
+                        key={`slider`} 
+                        value ={volume}
                         orientation="vertical"
                         min={0}
                         step={0.05}

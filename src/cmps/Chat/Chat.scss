@@ -92,10 +92,19 @@ $clr1:rgb(24, 25, 26);
 .users-list{
     height: 15%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     
+}
+.user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    img{
+        width: 50px;
+        border-radius: 50%;
+    }
 }
 
 .chat-box__mobile{

@@ -70,7 +70,7 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
                 {screenWidth > 850 &&
                 <ul className="users-list">
                 {userList && userList.map(user => {
-                                return <li key={user._id} className="user"><img src={user.img} alt=""/> {user.username}</li>
+                                return <li key={user._id} className="user"><img src={user.imgUrl} alt=""/></li>
                             })}
                 </ul>}
             <div className={screenWidth>850 ? "chat-box__container" : "chat-box__mobile"}>
