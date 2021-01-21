@@ -11,11 +11,12 @@ import SocialLinks from '../../cmps/SocialLinks/SocialLinks'
 import AddSong from '../../cmps/AddSong/AddSong'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong, removeSong, loadBox, addSong, loadBoxChat, updateBox } from '../../store/actions/boxActions'
+import { setCurrSong, removeSong, loadBox, addSong, updateBox } from '../../store/actions/boxActions'
 import { toggleLike } from '../../store/actions/userActions'
 //Socket
 import { io } from 'socket.io-client'
 import { socketService } from '../../services/socketService'
+import { boxService } from '../../services/boxService'
 
 function BoxDetails(props) {
     const { id } = props.match.params
@@ -32,9 +33,21 @@ function BoxDetails(props) {
     const [showNewSong, setShowNewSong] = useState(null)
     const debounceLoadData = useCallback(debounce(fetchData, 1500), []);
     const [userList, setUserList] = useState(null)
+    const [newSong, setNewSong] = useState('')
+    useEffect(() => {
+        dispatch(loadBox(id))
+        socketService.setup()
+    }, [])
 
     useEffect(() => {
-        socketService.setup()
+        if (user) {
+            const idx = user.favs.findIndex(favBox => favBox._id === id)
+            idx === -1 ? setIsLiked(false) : setIsLiked(true)
+        }
+    }, [user?.favs?.length])
+
+
+    useEffect(() => {
         if (user) {
             socketService.on('get data', () => {
                 socketService.emit('got data', { boxId: id, user })
@@ -47,20 +60,20 @@ function BoxDetails(props) {
         socketService.on('msgSent', (box) => {
             dispatch(updateBox(box))
         })
-        socketService.on('send box status', (boxStatus) => {
-            console.log({ boxStatus });
-        })
         socketService.on('user joined', ({ username, userList }) => onJoinedUser(username, userList))
         socketService.on('user leave', (updateUserList) => {
             console.log(updateUserList);
             setUserList(updateUserList)
         })
-        socketService.on('set currSong', (song) => {
-            // console.log({ currSong, song });
-
-            // console.log(song.videoId, currSong.videoId, currSong.videoId === song.videoId);
-            // if (currSong.videoId === song.videoId) return
-            // dispatch(setCurrSong(song))
+        socketService.on('set song', async song => {
+            if (!song) {
+                const box = await boxService.getBoxById(id)
+                dispatch(setCurrSong(box.playList[0]))
+                socketService.emit('update song', box.playList[0])
+            } else {
+                setNewSong(song)
+                dispatch(setCurrSong(song))
+            }
         })
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
@@ -70,11 +83,6 @@ function BoxDetails(props) {
         }
     }, [user])
 
-    useEffect(() => {
-        if (box?.playList[0]) {
-            dispatch(setCurrSong(box?.playList[0]))
-        }
-    }, [box])
     const onJoinedUser = (username, userList) => {
         setShowJoinedUser(username)
         setUserList(userList)
@@ -83,15 +91,12 @@ function BoxDetails(props) {
         }, 5000)
     }
 
-
     useEffect(() => {
-        socketService.emit('currSong changed', currSong)
+        if (!currSong && !newSong) return
+        if (newSong.videoId === currSong.videoId) return
+        socketService.emit('update song', currSong)
+
     }, [currSong])
-
-    useEffect(() => {
-        socketService.emit('check box users list')
-        if (box?.playlist) dispatch(setCurrSong(box.playList[0]))
-    }, [box])
 
     async function fetchData() {
         setShowIsTyping(null)
@@ -108,17 +113,6 @@ function BoxDetails(props) {
             return <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
         }
     }
-    useEffect(() => {
-        if (user) {
-            const idx = user.favs.findIndex(favBox => favBox._id === id)
-            idx === -1 ? setIsLiked(false) : setIsLiked(true)
-        }
-    }, [user?.favs?.length])
-
-    useEffect(() => {
-        dispatch(loadBox(id))
-
-    }, [])
 
     function playSong(song) {
         dispatch(setCurrSong(song))
