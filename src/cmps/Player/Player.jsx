@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, createRef } from 'react'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong } from '../../store/actions/boxActions'
 //Scss
 import './Player.scss'
 //Components 
+import Slider from '@material-ui/core/Slider';
 import ReactPlayer from 'react-player/youtube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
@@ -25,6 +26,8 @@ function Player() {
     const [duration, setDuration] = useState(0)
     const [mute, setMute] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+    const [seeking, setSeeking] = useState(false)
+    const elPlayer = createRef()
 
     function skipSong(diff) {
         currBox.playList.forEach((song, index) => {
@@ -54,19 +57,20 @@ function Player() {
     }, [])
 
 
-    function handleVolumeChange({ target }) {
-        setVolume(parseFloat(target.value))
+    function handleVolumeChange({ target },newVal) {
+        setVolume(parseFloat(newVal))
     }
     function handleProgress(e) {
-        setSecPlayed(e.playedSeconds)
+            // if (!seeking && !isSyncing) {
+            if (!seeking) {
+                setSecPlayed(e.playedSeconds)
+                // setSecPlayed(playedSeconds)
+                // this.props.updateProgress(state.playedSeconds);
+            }
     }
 
     function handleDuration(e) {
         setDuration(e)
-    }
-
-    function handleDurationChange() {
-
     }
 
     function pauseSong() {
@@ -76,6 +80,26 @@ function Player() {
 
     function handleMute() {
         setMute(!mute)
+    }
+
+    function seekTo(){
+        elPlayer.seekTo(secPlayed);
+    }
+
+    function handleSeekMouseDown(){
+        setSeeking(true)
+    }
+
+    function handleSeekChange({ target },newVal){
+        // console.log(newVal);
+        setSecPlayed(newVal);
+    }
+    
+    function handleSeekMouseUp(){
+        // console.log(secPlayed);
+        setSeeking(false)
+
+        // socketService.emit('update player seek', this.state.secPlayed);
     }
 
     function showTime(seconds) {
@@ -93,6 +117,7 @@ function Player() {
     return (
         <div>
             {currSong && <ReactPlayer
+                ref={elPlayer}
                 className="hidden"
                 playing={currSong.isPlaying}
                 url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}
@@ -109,13 +134,15 @@ function Player() {
                 </div>
                 {screenWidth > 850 && <div>
                     {showTime(secPlayed)}
-                    <input className="duration-slider"
+                    <Slider className="duration-slider"
                         name="played"
-                        value={secPlayed}
-                        type="range"
                         min={0}
                         max={duration}
-                        onChange={(e) => handleDurationChange(e)}
+                        onMouseDown={handleSeekMouseDown}
+                        onMouseUp={handleSeekMouseUp}
+                        onChange={handleSeekChange}
+                        onTouchEnd={handleSeekMouseUp}
+                        value={secPlayed}  
                     />
                     {showTime(duration)}
                 </div>}
@@ -138,13 +165,15 @@ function Player() {
                         {mute === false && volume >= 0.75 && volume <= 1 && <VolumeUpIcon />}
                     </button>
 
-                    {screenWidth > 850 && <input className="volume-slider"
-                        value={volume}
-                        type="range"
+                    {screenWidth > 850 && <Slider className="volume-slider"
+                        aria-labelledby="continuous-slider"
+                        key={`slider`} 
+                        value ={volume}
+                        orientation="vertical"
                         min={0}
                         step={0.05}
                         max={1}
-                        onChange={(e) => handleVolumeChange(e)}
+                        onChange={handleVolumeChange}
                     />}
                 </div>
             </div>}
