@@ -11,17 +11,17 @@ import SocialLinks from '../../cmps/SocialLinks/SocialLinks'
 import AddSong from '../../cmps/AddSong/AddSong'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong, removeSong, loadBox, addSong, loadBoxChat, updateBox } from '../../store/actions/boxActions'
+import { setCurrSong, removeSong, loadBox, addSong, updateBox } from '../../store/actions/boxActions'
 import { toggleLike } from '../../store/actions/userActions'
 //Socket
 import { io } from 'socket.io-client'
 import { socketService } from '../../services/socketService'
-
-let socket;
+import { boxService } from '../../services/boxService'
 
 function BoxDetails(props) {
     const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
+    const { currSong } = useSelector(state => state.boxReducer)
     const user = useSelector(state => state.userReducer.user)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
@@ -32,47 +32,71 @@ function BoxDetails(props) {
     const [showJoinedUser, setShowJoinedUser] = useState(null)
     const [showNewSong, setShowNewSong] = useState(null)
     const debounceLoadData = useCallback(debounce(fetchData, 1500), []);
+    const [userList, setUserList] = useState(null)
+    const [newSong, setNewSong] = useState('')
+    useEffect(() => {
+        dispatch(loadBox(id))
+        socketService.setup()
+    }, [])
 
     useEffect(() => {
         if (user) {
-            socket = io(socketService.getUrl())
-            socket.on('get data', () => {
-                let data
-                data = { id, user }
-                socket.emit('got data', data)
-            })
-            socket.on('user is typing', (username) => {
-                setShowIsTyping(username)
-                debounceLoadData();
-            })
-            socket.on('msgSent', (box) => {
-                dispatch(updateBox(box))
-            })
-            socket.on('user joined', (username) => onJoinedUser(username))
-
+            const idx = user.favs.findIndex(favBox => favBox._id === id)
+            idx === -1 ? setIsLiked(false) : setIsLiked(true)
         }
+    }, [user?.favs?.length])
+
+
+    useEffect(() => {
+        if (user) {
+            socketService.on('get data', () => {
+                socketService.emit('got data', { boxId: id, user })
+            })
+        }
+        socketService.on('user is typing', (username) => {
+            setShowIsTyping(username)
+            debounceLoadData();
+        })
+        socketService.on('msgSent', (box) => {
+            dispatch(updateBox(box))
+        })
+        socketService.on('user joined', ({ username, userList }) => onJoinedUser(username, userList))
+        socketService.on('user leave', (updateUserList) => {
+            console.log(updateUserList);
+            setUserList(updateUserList)
+        })
+        socketService.on('set song', async song => {
+            if (!song) {
+                const box = await boxService.getBoxById(id)
+                dispatch(setCurrSong(box.playList[0]))
+                socketService.emit('update song', box.playList[0])
+            } else {
+                setNewSong(song)
+                dispatch(setCurrSong(song))
+            }
+        })
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
+            console.log('dead');
             window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
+            socketService.emit('user left', user)
         }
     }, [user])
 
-    useEffect(() => {
-        if (box?.playList[0]) {
-            dispatch(setCurrSong(box?.playList[0]))
-        }
-    }, [box])
-    const onJoinedUser = (username) => {
+    const onJoinedUser = (username, userList) => {
         setShowJoinedUser(username)
+        setUserList(userList)
         setTimeout(() => {
             setShowJoinedUser(null)
         }, 5000)
     }
 
-
     useEffect(() => {
-        if (box?.playlist) dispatch(setCurrSong(box.playList[0]))
-    }, [box])
+        if (!currSong && !newSong) return
+        if (newSong.videoId === currSong.videoId) return
+        socketService.emit('update song', currSong)
+
+    }, [currSong])
 
     async function fetchData() {
         setShowIsTyping(null)
@@ -89,16 +113,6 @@ function BoxDetails(props) {
             return <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
         }
     }
-    useEffect(() => {
-        if (user) {
-            const idx = user.favs.findIndex(favBox => favBox._id === id)
-            idx === -1 ? setIsLiked(false) : setIsLiked(true)
-        }
-    }, [user?.favs?.length])
-
-    useEffect(() => {
-        dispatch(loadBox(id))
-    }, [])
 
     function playSong(song) {
         dispatch(setCurrSong(song))
@@ -118,10 +132,10 @@ function BoxDetails(props) {
     }
     function sendMsg(data) {
         dispatch(updateBox(data))
-        socket.emit('sendMsg', data)
+        socketService.emit('sendMsg', data)
     }
     function isTyping(box, user) {
-        socket.emit('typing', box, user.username)
+        socketService.emit('typing', box, user.username)
     }
 
     return (
@@ -139,6 +153,9 @@ function BoxDetails(props) {
                     />}
 
                     <div className="box-details-section2">
+                        {userList && userList.map(user => {
+                            return <div key={user._id} className="user">{user.username}</div>
+                        })}
                         <BoxInfo box={box} />
                         <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp} />
                         {screenWidth > 850 && <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />}

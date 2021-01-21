@@ -1,6 +1,6 @@
-import React, { useState, useEffect  } from 'react'
+import React, { useState, useEffect } from 'react'
 //Redux
-import { useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong } from '../../store/actions/boxActions'
 //Scss
 import './Player.scss'
@@ -23,45 +23,46 @@ function Player() {
     const [mute, setMute] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
-
-    
-    function skipSong(diff){
-        currBox.playList.forEach((song,index)=>{
-            if(song.id===currSong.id){
-                if(index + diff >= currBox.playList.length){
+    function skipSong(diff) {
+        currBox.playList.forEach((song, index) => {
+            if (song.id === currSong.id) {
+                if (index + diff >= currBox.playList.length) {
                     dispatch(setCurrSong(currBox.playList[0]))
-                }else if(index + diff < 0){
-                    dispatch(setCurrSong(currBox.playList[currBox.playList.length-1]))
-                }else{
-                    dispatch(setCurrSong(currBox.playList[index+diff]))
+                } else if (index + diff < 0) {
+                    dispatch(setCurrSong(currBox.playList[currBox.playList.length - 1]))
+                } else {
+                    dispatch(setCurrSong(currBox.playList[index + diff]))
                 }
             }
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
-        if(screenWidth<850){
+        if (screenWidth < 850) {
             setVolume(1)
         }
         return () => {
             window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
         }
-    },[])
+    }, [])
 
-    
-    function handleVolumeChange({ target }){
+    useEffect(() => {
+
+    }, [currSong])
+
+    function handleVolumeChange({ target }) {
         setVolume(parseFloat(target.value))
     }
-    function handleProgress(e){
+    function handleProgress(e) {
         setSecPlayed(e.playedSeconds)
     }
-    function handleDuration(e){
+    function handleDuration(e) {
         setDuration(e)
     }
-    function handleDurationChange(e){
+    function handleDurationChange(e) {
     }
-    function handleMute(){
+    function handleMute() {
         setMute(!mute)
     }
     function showTime(seconds) {
@@ -79,58 +80,58 @@ function Player() {
     return (
         <div>
             {currSong && <ReactPlayer
-            className="hidden"
-            playing={currSong.isPlaying}
-            url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}
-            volume={volume}
-            muted={mute}
-            onProgress={(e)=>handleProgress(e)}
-            onDuration={(e)=>handleDuration(e)}
-            onEnded={()=>skipSong(1)}
-            /> }
+                className="hidden"
+                playing={currSong.isPlaying}
+                url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}
+                volume={volume}
+                muted={mute}
+                onProgress={(e) => handleProgress(e)}
+                onDuration={(e) => handleDuration(e)}
+                onEnded={() => skipSong(1)}
+            />}
             {currSong && <div className={currSong.isPlaying ? "player bgc-animation" : "player "}>
                 <div>
-                    <img className="player-img" src={currSong.imgUrl} alt=""/>
-                    {screenWidth>850&& <p>{currSong.name}</p>}
+                    <img className="player-img" src={currSong.imgUrl} alt="" />
+                    {screenWidth > 850 && <p>{currSong.name}</p>}
                 </div>
-                {screenWidth>850&&  <div>
+                {screenWidth > 850 && <div>
                     {showTime(secPlayed)}
                     <input className="duration-slider"
-                    name="played"
-                    value={secPlayed}
-                    type="range"
-                    min={0}
-                    max={duration}
-                    onChange={(e)=>handleDurationChange(e)}
+                        name="played"
+                        value={secPlayed}
+                        type="range"
+                        min={0}
+                        max={duration}
+                        onChange={(e) => handleDurationChange(e)}
                     />
                     {showTime(duration)}
-                </div>  }  
-                {screenWidth<850&& <div>{showTime(secPlayed)}</div>}
-                    
+                </div>}
+                {screenWidth < 850 && <div>{showTime(secPlayed)}</div>}
+
                 <div className="player-buttons">
-                    <button onClick={()=>skipSong(-1)}>
-                        <SkipPreviousIcon/>
+                    <button onClick={() => skipSong(-1)}>
+                        <SkipPreviousIcon />
                     </button>
-                    <button onClick={()=>dispatch(setCurrSong(currSong))}>{currSong?.isPlaying ? <PauseCircleOutlineIcon/> 
-                    : <PlayCircleOutlineIcon />}
+                    <button onClick={() => dispatch(setCurrSong(currSong))}>{currSong?.isPlaying ? <PauseCircleOutlineIcon />
+                        : <PlayCircleOutlineIcon />}
                     </button>
-                    <button onClick={()=>skipSong(1)}>
-                        <SkipNextIcon/>
+                    <button onClick={() => skipSong(1)}>
+                        <SkipNextIcon />
                     </button>
                     <button onClick={handleMute}>
-                        {mute==true && <VolumeOffIcon/>}
-                        {mute===false && volume==0 && <VolumeOffIcon/>}
-                        {mute===false &&volume >0 && volume <0.75 && <VolumeDownIcon/>}
-                        {mute===false && volume >=0.75 && volume <=1 && <VolumeUpIcon/>}
+                        {mute == true && <VolumeOffIcon />}
+                        {mute === false && volume == 0 && <VolumeOffIcon />}
+                        {mute === false && volume > 0 && volume < 0.75 && <VolumeDownIcon />}
+                        {mute === false && volume >= 0.75 && volume <= 1 && <VolumeUpIcon />}
                     </button>
 
-                    {screenWidth>850 && <input className="volume-slider" 
-                    value= { volume } 
-                    type="range"
-                    min={0}
-                    step={0.05}
-                    max={1}
-                    onChange={(e)=>handleVolumeChange(e)}
+                    {screenWidth > 850 && <input className="volume-slider"
+                        value={volume}
+                        type="range"
+                        min={0}
+                        step={0.05}
+                        max={1}
+                        onChange={(e) => handleVolumeChange(e)}
                     />}
                 </div>
             </div>}
