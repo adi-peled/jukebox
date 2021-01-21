@@ -5,6 +5,7 @@ import { setCurrSong } from '../../store/actions/boxActions'
 //Scss
 import './Player.scss'
 //Components 
+import Slider from '@material-ui/core/Slider';
 import ReactPlayer from 'react-player/youtube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
@@ -51,8 +52,8 @@ function Player() {
 
     }, [currSong])
 
-    function handleVolumeChange({ target }) {
-        setVolume(parseFloat(target.value))
+    function handleVolumeChange({ target },newVal) {
+        setVolume(parseFloat(newVal))
     }
     function handleProgress(e) {
         setSecPlayed(e.playedSeconds)
@@ -96,10 +97,9 @@ function Player() {
                 </div>
                 {screenWidth > 850 && <div>
                     {showTime(secPlayed)}
-                    <input className="duration-slider"
+                    <Slider className="duration-slider"
                         name="played"
-                        value={secPlayed}
-                        type="range"
+                        value={secPlayed}  
                         min={0}
                         max={duration}
                         onChange={(e) => handleDurationChange(e)}
@@ -125,13 +125,14 @@ function Player() {
                         {mute === false && volume >= 0.75 && volume <= 1 && <VolumeUpIcon />}
                     </button>
 
-                    {screenWidth > 850 && <input className="volume-slider"
-                        value={volume}
-                        type="range"
+                    {screenWidth > 850 && <Slider className="volume-slider"
+                        aria-labelledby="continuous-slider"
+                        defaultValue ={volume}
+                        orientation="vertical"
                         min={0}
                         step={0.05}
                         max={1}
-                        onChange={(e) => handleVolumeChange(e)}
+                        onChange={handleVolumeChange}
                     />}
                 </div>
             </div>}

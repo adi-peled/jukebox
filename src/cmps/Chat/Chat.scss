@@ -4,10 +4,24 @@ $clr1:rgb(24, 25, 26);
 
 .chat-box {
     width: 30vw;
+    .chat-header{
+        height: 10%;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        border-bottom: 1px solid white;
+        border-top: 1px solid white;
+        h2{
+            font-size: 4rem;
+            align-self: center;
+        }
+    }
     &__container {
+        width: 100%;
         overflow-y: scroll;
         padding: 0 10px;
-        height: 79vh;
+        height: 60vh;
         &::-webkit-scrollbar-track {
             box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         }
@@ -25,7 +39,7 @@ $clr1:rgb(24, 25, 26);
             background: rgba(0, 0, 0, 0);
         }
     }
-
+    
     .currUser {
         align-items: flex-end;
 
@@ -75,7 +89,19 @@ $clr1:rgb(24, 25, 26);
     }
 }
 
+.users-list{
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
 
+.chat-box__mobile{
+    width: 100%;
+    height: 55vh;
+}
 .text-form {
     width: 100%;
     input {

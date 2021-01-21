@@ -3,16 +3,23 @@ import { useSelector } from 'react-redux'
 
 
 import './Chat.scss'
-function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong }) {
+function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userList }) {
     const [msg, setMsg] = useState('')
     const { currBox } = useSelector(state => state.boxReducer)
     const currUser = useSelector(state => state.userReducer.user)
     const chatRef = useRef();
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
     useEffect(() => {
         scrollToBottom()
     }, [currBox?.chat?.length])
 
+    useEffect(() => {
+    window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
+    return () => {
+        window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
+    }
+}, [])
 
     function handleInputChange(e) {
         isTyping(currBox, currUser)
@@ -54,17 +61,28 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong }) {
     }
 
     return (
-        <div className="chat-box flex column ">
-            <div className="chat-box__container">
+        <div className={screenWidth>850 ?"chat-box flex column ": "chat-box chat-box__mobile"}>
+            {screenWidth > 850 &&
+                <div className="chat-header">
+                    <h2>Chat Box</h2>
+                </div>
+                }
+                {screenWidth > 850 &&
+                <ul className="users-list">
+                {userList && userList.map(user => {
+                                return <li key={user._id} className="user"><img src={user.img} alt=""/> {user.username}</li>
+                            })}
+                </ul>}
+            <div className={screenWidth>850 ? "chat-box__container" : "chat-box__mobile"}>
                 {box && box.chat?.map(msg => {
                     const { username, imgString } = msg.from
                     const isCurrUser = currUser.username === username ? true : false
                     return <div className={isCurrUser ? 'currUser chat-box__msg  flex' : 'chat-box__msg  flex'} key={msg.createdAt}>
                         <div className="chat-box__sender flex">
                             {!isCurrUser && <img className="chat-box__img" src={imgString} />}
-                            {isCurrUser && <span className="chat-box__username">you </span>}
+                            {/* {isCurrUser && <span className="chat-box__username">You</span>} */}
                             {!isCurrUser && <span className="chat-box__username">{username} </span>}
-                            <span className="chat-box__time"> {getTime(msg.createdAt)}</span>
+                            -&nbsp; <span className="chat-box__time"> {getTime(msg.createdAt)}</span>
                         </div>
                         <div className={isCurrUser ? 'user-text chat-box__txt' : 'chat-box__txt'}>
                             {msg.text}

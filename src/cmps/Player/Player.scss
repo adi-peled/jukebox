@@ -17,10 +17,11 @@
         min-width: 150;
         max-height:80px;
         object-fit: cover;
+        margin-right: 15px;
     }
     .player-buttons{
         width: 30%;
-        padding: 4rem;
+        padding: 20px;
     }
     div{
         width: 30%;
@@ -47,16 +48,19 @@
     background-size: cover;
 }
 
-.volume-slider {
-    transform: rotate(270deg);
-    width: 50px;
+.MuiSlider-root {
+    &.volume-slider{
+        color: white;
+        width: 50px;
+        height: 50px;
+    }
+    &.duration-slider {
+        flex-grow: 1;
+        color: white;
+        margin: 0 15px;
+    }
 }
 
-.duration-slider {
-    flex-grow: 1;
-    color: white;
-    margin: 0 15px;
-}
 
 .player-img{
     width: 150px;

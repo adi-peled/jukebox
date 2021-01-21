@@ -108,7 +108,7 @@ function BoxDetails(props) {
 
     function getCurrCmp() {
         if (currCmp === 'Chat' && screenWidth < 850) {
-            return <Chat isTyping={isTyping} sendMsg={sendMsg} box={box} />
+            return <Chat userList={userList} isTyping={isTyping} sendMsg={sendMsg} box={box} />
         } else if (currCmp === 'BoxPlayList') {
             return <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />
         }
@@ -145,6 +145,7 @@ function BoxDetails(props) {
                 <div className="box-details__container flex ">
                     {screenWidth > 850 && <Chat
                         isTyping={isTyping}
+                        userList={userList}
                         sendMsg={sendMsg}
                         box={box}
                         typingUser={showIsTyping}
@@ -153,9 +154,6 @@ function BoxDetails(props) {
                     />}
 
                     <div className="box-details-section2">
-                        {userList && userList.map(user => {
-                            return <div key={user._id} className="user">{user.username}</div>
-                        })}
                         <BoxInfo box={box} />
                         <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp} />
                         {screenWidth > 850 && <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />}
