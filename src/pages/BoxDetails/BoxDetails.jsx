@@ -36,7 +36,6 @@ function BoxDetails(props) {
     const [newSong, setNewSong] = useState('')
     useEffect(() => {
         dispatch(loadBox(id))
-        socketService.setup()
     }, [])
 
     useEffect(() => {
@@ -46,23 +45,20 @@ function BoxDetails(props) {
         }
     }, [user?.favs?.length])
 
-
     useEffect(() => {
         if (user) {
-            socketService.on('get data', () => {
-
-                socketService.emit('got data', { boxId: id, user })
-            })
+            socketService.emit('join box', { boxId: id, user })
         }
         socketService.on('user is typing', (username) => {
             setShowIsTyping(username)
             debounceLoadData();
         })
-        socketService.on('msgSent', (box) => {
-            dispatch(updateBox(box))
+        socketService.on('msgSent', () => {
+            dispatch(loadBox(id))
         })
         socketService.on('user joined', ({ username, userList }) => onJoinedUser(username, userList))
         socketService.on('user leave', (updateUserList) => {
+
             setUserList(updateUserList)
         })
         socketService.on('set song', async song => {
@@ -85,7 +81,6 @@ function BoxDetails(props) {
     const onJoinedUser = (username, userList) => {
         setShowJoinedUser(username)
         setUserList(userList)
-        console.log({ userList });
         setTimeout(() => {
             setShowJoinedUser(null)
         }, 5000)
@@ -135,7 +130,7 @@ function BoxDetails(props) {
         socketService.emit('sendMsg', data)
     }
     function isTyping(box, user) {
-        socketService.emit('typing', box, user.username)
+        socketService.emit('typing', { box, username: user.username })
     }
 
     return (

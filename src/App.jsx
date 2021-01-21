@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { userService } from './services/userService'
 import { utilService } from './services/utilService'
+import { socketService } from './services/socketService'
 //cmps
 
 import Header from './cmps/Header/Header'
@@ -17,7 +18,6 @@ import CreateBox from './cmps/CreateBox/CreateBox';
 //scss
 import './App.scss';
 import defaultImg from './assets/img/defaultUser.jpg'
-import { gsap } from 'gsap'
 function App() {
 
   const [showCreateBox, setShowCreateBox] = useState(false)
@@ -26,6 +26,7 @@ function App() {
   const { user } = useSelector(state => state.userReducer)
   const dispatch = useDispatch()
   useEffect(async () => {
+    // socketService.setup()
     if (!user) {
       const loggedUser = await userService.getUser()
       if (loggedUser) {
