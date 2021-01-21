@@ -7,13 +7,6 @@ export const setCurrSong = (song) => async dispatch => {
     dispatch({ type: 'SET_CURR_SONG', song })
 }
 
-// export const setCurrSong = (newSong) => async (dispatch, getState) => {
-//     const { currSong } = getState().boxReducer
-
-//     newSong = { ...newSong, isPlaying: !newSong.isPlaying }
-//     dispatch({ type: 'SET_CURR_SONG', song: newSong })
-// }
-
 export const loadBoxes = (filterBy) => async dispatch => {
     try {
         const boxes = await boxService.getBoxes(filterBy)

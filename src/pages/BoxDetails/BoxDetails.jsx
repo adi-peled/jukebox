@@ -50,6 +50,7 @@ function BoxDetails(props) {
     useEffect(() => {
         if (user) {
             socketService.on('get data', () => {
+
                 socketService.emit('got data', { boxId: id, user })
             })
         }
@@ -62,7 +63,6 @@ function BoxDetails(props) {
         })
         socketService.on('user joined', ({ username, userList }) => onJoinedUser(username, userList))
         socketService.on('user leave', (updateUserList) => {
-            console.log(updateUserList);
             setUserList(updateUserList)
         })
         socketService.on('set song', async song => {
@@ -72,20 +72,20 @@ function BoxDetails(props) {
                 socketService.emit('update song', box.playList[0])
             } else {
                 setNewSong(song)
-                dispatch(setCurrSong(song))
+                dispatch(setCurrSong({ ...song, isPlaying: song.isPlaying }))
             }
         })
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
         return () => {
-            console.log('dead');
             window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
-            socketService.emit('user left', user)
+            // socketService.emit('user left', user)
         }
     }, [user])
 
     const onJoinedUser = (username, userList) => {
         setShowJoinedUser(username)
         setUserList(userList)
+        console.log({ userList });
         setTimeout(() => {
             setShowJoinedUser(null)
         }, 5000)
@@ -94,7 +94,7 @@ function BoxDetails(props) {
     useEffect(() => {
         if (!currSong && !newSong) return
         if (newSong.videoId === currSong.videoId) return
-        socketService.emit('update song', currSong)
+        socketService.emit('update song', { ...currSong, isPlaying: !currSong.isPlaying })
 
     }, [currSong])
 
