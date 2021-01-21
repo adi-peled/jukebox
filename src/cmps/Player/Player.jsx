@@ -14,6 +14,9 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import VolumeDownIcon from '@material-ui/icons/VolumeDown';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+//services
+import { socketService } from '../../services/socketService'
+
 function Player() {
     const dispatch = useDispatch()
     const { currSong } = useSelector(state => state.boxReducer)
@@ -29,10 +32,13 @@ function Player() {
             if (song.id === currSong.id) {
                 if (index + diff >= currBox.playList.length) {
                     dispatch(setCurrSong(currBox.playList[0]))
+                    socketService.emit('update song', currBox.playList[0])
                 } else if (index + diff < 0) {
                     dispatch(setCurrSong(currBox.playList[currBox.playList.length - 1]))
+                    socketService.emit('update song', currBox.playList[currBox.playList.length - 1])
                 } else {
                     dispatch(setCurrSong(currBox.playList[index + diff]))
+                    socketService.emit('update song', currBox.playList[index + diff])
                 }
             }
         })
@@ -48,9 +54,6 @@ function Player() {
         }
     }, [])
 
-    useEffect(() => {
-
-    }, [currSong])
 
     function handleVolumeChange({ target },newVal) {
         setVolume(parseFloat(newVal))
@@ -58,14 +61,24 @@ function Player() {
     function handleProgress(e) {
         setSecPlayed(e.playedSeconds)
     }
+
     function handleDuration(e) {
         setDuration(e)
     }
-    function handleDurationChange(e) {
+
+    function handleDurationChange() {
+
     }
+
+    function pauseSong() {
+        dispatch(setCurrSong(currSong))
+        socketService.emit('update song', { ...currSong, isPlaying: currSong.isPlaying })
+    }
+
     function handleMute() {
         setMute(!mute)
     }
+
     function showTime(seconds) {
         var mins;
         var secs;
@@ -112,7 +125,7 @@ function Player() {
                     <button onClick={() => skipSong(-1)}>
                         <SkipPreviousIcon />
                     </button>
-                    <button onClick={() => dispatch(setCurrSong(currSong))}>{currSong?.isPlaying ? <PauseCircleOutlineIcon />
+                    <button onClick={() => pauseSong()}>{currSong?.isPlaying ? <PauseCircleOutlineIcon />
                         : <PlayCircleOutlineIcon />}
                     </button>
                     <button onClick={() => skipSong(1)}>
