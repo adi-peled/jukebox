@@ -25,7 +25,6 @@ async function getBoxById(id) {
 }
 async function updateBox(box) {
     const id = box._id
-    console.log(box);
     return await httpService.put(`box/${id}`, box)
 }
 

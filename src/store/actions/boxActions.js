@@ -24,11 +24,12 @@ export const loadBox = (id) => async dispatch => {
     }
 }
 
-export const updateBox = (data) => async dispatch => {
+export const updateBox = ({ currBox, message }) => async dispatch => {
     try {
-        data.currBox.chat.push(data.message)
-        await boxService.updateBox(data.currBox)
-        dispatch({ type: 'UPDATE_BOX', box: data.currBox })
+        console.log({currBox});
+        currBox.chat.push(message)
+        await boxService.updateBox(currBox)
+        dispatch({ type: 'UPDATE_BOX', box: currBox })
     } catch (err) {
         console.log(err);
     }

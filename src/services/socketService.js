@@ -2,19 +2,19 @@ import io from 'socket.io-client';
 
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/' : '//localhost:5000';
 
-let socket;
+let socket = io(BASE_URL);
 
 export const socketService = {
-    setup,
+    // setup,
     terminate,
     on,
     off,
     emit,
 };
 
-function setup() {
-    socket = io(BASE_URL);
-}
+// function setup() {
+//     socket = io(BASE_URL);
+// }
 
 function terminate() {
     socket = null;
