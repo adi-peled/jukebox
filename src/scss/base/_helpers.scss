@@ -8,7 +8,7 @@
 
 .title {
     text-align: center;
-    font-size:3.5rem;
+    font-size: 3.5rem;
 }
 
 .align-center {
@@ -89,4 +89,9 @@
     background-color: #fff;
     @include absCenter;
     position: fixed;
+}
+
+.brightness{
+    // filter: blur(1px);
+    filter: brightness(50%);
 }

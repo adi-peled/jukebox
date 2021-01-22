@@ -57,16 +57,16 @@ function Player() {
     }, [])
 
 
-    function handleVolumeChange({ target },newVal) {
+    function handleVolumeChange({ target }, newVal) {
         setVolume(parseFloat(newVal))
     }
     function handleProgress(e) {
-            // if (!seeking && !isSyncing) {
-            if (!seeking) {
-                setSecPlayed(e.playedSeconds)
-                // setSecPlayed(playedSeconds)
-                // this.props.updateProgress(state.playedSeconds);
-            }
+        // if (!seeking && !isSyncing) {
+        if (!seeking) {
+            setSecPlayed(e.playedSeconds)
+            // setSecPlayed(playedSeconds)
+            // this.props.updateProgress(state.playedSeconds);
+        }
     }
 
     function handleDuration(e) {
@@ -82,19 +82,19 @@ function Player() {
         setMute(!mute)
     }
 
-    function seekTo(){
+    function seekTo() {
         elPlayer.seekTo(secPlayed);
     }
 
-    function handleSeekMouseDown(){
+    function handleSeekMouseDown() {
         setSeeking(true)
     }
 
-    function handleSeekChange({ target },newVal){
+    function handleSeekChange({ target }, newVal) {
         setSecPlayed(newVal);
     }
-    
-    function handleSeekMouseUp(e){
+
+    function handleSeekMouseUp(e) {
         // var value = e.target.getAttribute('aria-valuenow')
         elPlayer.current.seekTo(parseFloat(secPlayed))
         setSeeking(false)
@@ -143,7 +143,7 @@ function Player() {
                         onMouseUp={handleSeekMouseUp}
                         onChange={handleSeekChange}
                         onTouchEnd={handleSeekMouseUp}
-                        value={secPlayed}  
+                        value={secPlayed}
                     />
                     {showTime(duration)}
                 </div>}
@@ -168,8 +168,8 @@ function Player() {
 
                     {screenWidth > 850 && <Slider className="volume-slider"
                         aria-labelledby="continuous-slider"
-                        key={`slider`} 
-                        value ={volume}
+                        key={`slider`}
+                        value={volume}
                         orientation="vertical"
                         min={0}
                         step={0.05}

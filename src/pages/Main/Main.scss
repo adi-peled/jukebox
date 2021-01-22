@@ -6,9 +6,11 @@
 
     @include respon(tab-port) {
         padding: 0 6rem;
+        padding-top: 80px;
     }
 
     @include respon(phone) {
         padding: 0;
+        padding-top: 80px;
     }
 }

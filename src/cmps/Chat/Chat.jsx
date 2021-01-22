@@ -15,11 +15,11 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
     }, [currBox?.chat?.length])
 
     useEffect(() => {
-    window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
-    return () => {
-        window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
-    }
-}, [])
+        window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
+        return () => {
+            window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
+        }
+    }, [])
 
     function handleInputChange(e) {
         isTyping(currBox, currUser)
@@ -61,19 +61,19 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
     }
 
     return (
-        <div className={screenWidth>850 ?"chat-box flex column ": "chat-box chat-box__mobile"}>
+        <div className={screenWidth > 850 ? "chat-box flex column " : "chat-box chat-box__mobile"}>
             {screenWidth > 850 &&
                 <div className="chat-header">
                     <h2>Chat Box</h2>
                 </div>
-                }
-                {screenWidth > 850 &&
+            }
+            {screenWidth > 850 &&
                 <ul className="users-list">
-                {userList && userList.map(user => {
-                                return <li key={user._id} className="user"><img src={user.imgUrl} alt=""/></li>
-                            })}
+                    {userList && userList.map(user => {
+                        return <li key={user._id} className="user"><img src={user.imgUrl} /></li>
+                    })}
                 </ul>}
-            <div className={screenWidth>850 ? "chat-box__container" : "chat-box__mobile"}>
+            <div className={screenWidth > 850 ? "chat-box__container" : "chat-box__mobile"}>
                 {box && box.chat?.map(msg => {
                     const { username, imgString } = msg.from
                     const isCurrUser = currUser.username === username ? true : false
