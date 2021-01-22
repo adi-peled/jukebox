@@ -5,13 +5,13 @@
 .boxPreview {
     // margin-right: .5rem;
     flex-direction: column;
-    transition: .5s;
     height: 100%;
     color: $color-tertiary;
     height: 20rem;
-    
+    position: relative;
+
     &:hover {
-        color: $color-secondary;
+        // color: $color-secondary;
     }
 
     &__info {
@@ -54,24 +54,35 @@
         width: 100%;
     }
 
-    .MuiSvgIcon-root {
-        width: 3.2rem;
-        height: 3.2rem;
-        fill: currentColor;
-        margin-right: 0.5rem;
-
-        @include respon(phone) {
-            // width: 2rem;
-            // height: 2rem;
-            margin-right: 0rem;
-        }
+    &:hover .MuiSvgIcon-root {
+        opacity: 1;
+        filter: brightness(130%);
     }
-}
 
-.bgi-playbutton{
-    fill: white;
-    opacity: 0.1;
-    height: 80%;
-    object-fit: cover;
-    width: 100%;
+    &:hover .play-icon {
+        opacity: 1;
+        filter: brightness(130%);
+    }
+
+
+    .play-icon {
+        width: 10rem;
+        height: 10rem;
+        fill: white;
+        @include absCenter;
+        opacity: 0;
+        top: 45%;
+        z-index: 5;
+        transition: all ease-in .3s;
+    }
+
+    // .MuiSvgIcon-root {
+    //     width: 10rem;
+    //     height: 10rem;
+    //     fill: currentColor;
+    //     @include absCenter;
+    //     opacity: 1;
+    //     z-index: 5;
+    //     transition: all ease-in .3s;
+    // }
 }
