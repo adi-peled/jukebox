@@ -4,7 +4,7 @@ import './Footer.scss'
 import { ReactComponent as Gitgub } from '../../assets/github.svg';
 import { ReactComponent as Linkedin } from '../../assets/linkedin.svg';
 import adiImg from '../../assets/adi.jpeg'
-import maorImg from '../../assets/adi.jpeg'
+import maorImg from '../../assets/maor.jpg'
 function Footer() {
     return (
         <footer className="footer flex">

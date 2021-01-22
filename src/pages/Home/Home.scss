@@ -44,9 +44,20 @@
 
 .scroll-to-boxes{
     font-size: 8rem;
-    text-shadow: 0 0 12px #fff;
-    position: absolute;
+    text-shadow: 0 0 12px rgb(36, 32, 32);
     @include absCenter;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.arrow-down{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: white;
+    transform: scale(10);
     &:hover{
         cursor: pointer;
     }
