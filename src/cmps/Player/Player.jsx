@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, createRef } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong } from '../../store/actions/boxActions'
@@ -57,18 +57,22 @@ function Player() {
     }, [])
 
 
-    function handleVolumeChange({ target },newVal) {
+    function handleVolumeChange({ target }, newVal) {
         setVolume(parseFloat(newVal))
     }
-    function handleProgress(e) {
-            // if (!seeking && !isSyncing) {
-            if (!seeking) {
-                setSecPlayed(e.playedSeconds)
-                // setSecPlayed(playedSeconds)
-                // this.props.updateProgress(state.playedSeconds);
-            }
+
+    function handleProgress(state) {
+        console.log(elPlayer.current);
+
+        if (!seeking) {
+            setSecPlayed(state.playedSeconds)
+        }
     }
 
+
+    function handleReady(e) {
+        console.log(e);
+    }
     function handleDuration(e) {
         setDuration(e)
     }
@@ -82,24 +86,16 @@ function Player() {
         setMute(!mute)
     }
 
-    function seekTo(){
-        elPlayer.seekTo(secPlayed);
-    }
-
-    function handleSeekMouseDown(){
+    function handleSeekMouseDown() {
         setSeeking(true)
     }
 
-    function handleSeekChange({ target },newVal){
-        // console.log(newVal);
+    function handleSeekChange({ target }, newVal) {
         setSecPlayed(newVal);
     }
-    
-    function handleSeekMouseUp(){
-        // console.log(secPlayed);
-        setSeeking(false)
 
-        // socketService.emit('update player seek', this.state.secPlayed);
+    function handleSeekMouseUp() {
+        setSeeking(false)
     }
 
     function showTime(seconds) {
@@ -125,6 +121,7 @@ function Player() {
                 muted={mute}
                 onProgress={(e) => handleProgress(e)}
                 onDuration={(e) => handleDuration(e)}
+                onReady={(e) => handleReady(e)}
                 onEnded={() => skipSong(1)}
             />}
             {currSong && <div className={currSong.isPlaying ? "player bgc-animation" : "player "}>
@@ -142,7 +139,7 @@ function Player() {
                         onMouseUp={handleSeekMouseUp}
                         onChange={handleSeekChange}
                         onTouchEnd={handleSeekMouseUp}
-                        value={secPlayed}  
+                        value={secPlayed}
                     />
                     {showTime(duration)}
                 </div>}
@@ -167,8 +164,8 @@ function Player() {
 
                     {screenWidth > 850 && <Slider className="volume-slider"
                         aria-labelledby="continuous-slider"
-                        key={`slider`} 
-                        value ={volume}
+                        key={`slider`}
+                        value={volume}
                         orientation="vertical"
                         min={0}
                         step={0.05}
