@@ -90,104 +90,99 @@ function Player() {
         setSeeking(true)
     }
 
-<<<<<<< HEAD
     function handleSeekChange({ target }, newVal) {
         setSecPlayed(newVal);
     }
-=======
-    function handleSeekChange({ target },newVal){
-        setSecPlayed(newVal);
-    }
-    
-    function handleSeekMouseUp(e){
+
+    function handleSeekMouseUp(e) {
         // var value = e.target.getAttribute('aria-valuenow')
         elPlayer.current.seekTo(parseFloat(secPlayed))
         setSeeking(false)
->>>>>>> 562a600bbdbeaf12735f944030e77b814c692eb8
 
-    function handleSeekMouseUp() {
-        setSeeking(false)
-    }
-
-    function showTime(seconds) {
-        var mins;
-        var secs;
-        if (seconds >= 60) {
-            mins = (parseInt(seconds / 60)).toString();
-            secs = (parseInt(seconds - mins * 60)).toString().padStart(2, '0');
-        } else {
-            mins = '0';
-            secs = (parseInt(seconds)).toString().padStart(2, '0');
+        function handleSeekMouseUp() {
+            setSeeking(false)
         }
-        return `${mins}:${secs}`
-    }
-    return (
-        <div>
-            {currSong && <ReactPlayer
-                ref={elPlayer}
-                className="hidden"
-                controls={false}
-                playing={currSong.isPlaying}
-                url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}
-                volume={volume}
-                muted={mute}
-                onProgress={(e) => handleProgress(e)}
-                onDuration={(e) => handleDuration(e)}
-                onReady={(e) => handleReady(e)}
-                onEnded={() => skipSong(1)}
-            />}
-            {currSong && <div className={currSong.isPlaying ? "player bgc-animation" : "player "}>
-                <div>
-                    <img className="player-img" src={currSong.imgUrl} alt="" />
-                    {screenWidth > 850 && <p>{currSong.name}</p>}
-                </div>
-                {screenWidth > 850 && <div>
-                    {showTime(secPlayed)}
-                    <Slider className="duration-slider"
-                        name="played"
-                        min={0}
-                        max={duration}
-                        onMouseDown={handleSeekMouseDown}
-                        onMouseUp={handleSeekMouseUp}
-                        onChange={handleSeekChange}
-                        onTouchEnd={handleSeekMouseUp}
-                        value={secPlayed}
-                    />
-                    {showTime(duration)}
+
+        function showTime(seconds) {
+            var mins;
+            var secs;
+            if (seconds >= 60) {
+                mins = (parseInt(seconds / 60)).toString();
+                secs = (parseInt(seconds - mins * 60)).toString().padStart(2, '0');
+            } else {
+                mins = '0';
+                secs = (parseInt(seconds)).toString().padStart(2, '0');
+            }
+            return `${mins}:${secs}`
+        }
+        return (
+            <div>
+                {currSong && <ReactPlayer
+                    ref={elPlayer}
+                    className="hidden"
+                    controls={false}
+                    playing={currSong.isPlaying}
+                    url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}
+                    volume={volume}
+                    muted={mute}
+                    onProgress={(e) => handleProgress(e)}
+                    onDuration={(e) => handleDuration(e)}
+                    onReady={(e) => handleReady(e)}
+                    onEnded={() => skipSong(1)}
+                />}
+                {currSong && <div className={currSong.isPlaying ? "player bgc-animation" : "player "}>
+                    <div>
+                        <img className="player-img" src={currSong.imgUrl} alt="" />
+                        {screenWidth > 850 && <p>{currSong.name}</p>}
+                    </div>
+                    {screenWidth > 850 && <div>
+                        {showTime(secPlayed)}
+                        <Slider className="duration-slider"
+                            name="played"
+                            min={0}
+                            max={duration}
+                            onMouseDown={handleSeekMouseDown}
+                            onMouseUp={handleSeekMouseUp}
+                            onChange={handleSeekChange}
+                            onTouchEnd={handleSeekMouseUp}
+                            value={secPlayed}
+                        />
+                        {showTime(duration)}
+                    </div>}
+                    {screenWidth < 850 && <div>{showTime(secPlayed)}</div>}
+
+                    <div className="player-buttons">
+                        <button onClick={() => skipSong(-1)}>
+                            <SkipPreviousIcon />
+                        </button>
+                        <button onClick={() => pauseSong()}>{currSong?.isPlaying ? <PauseCircleOutlineIcon />
+                            : <PlayCircleOutlineIcon />}
+                        </button>
+                        <button onClick={() => skipSong(1)}>
+                            <SkipNextIcon />
+                        </button>
+                        <button onClick={handleMute}>
+                            {mute == true && <VolumeOffIcon />}
+                            {mute === false && volume == 0 && <VolumeOffIcon />}
+                            {mute === false && volume > 0 && volume < 0.75 && <VolumeDownIcon />}
+                            {mute === false && volume >= 0.75 && volume <= 1 && <VolumeUpIcon />}
+                        </button>
+
+                        {screenWidth > 850 && <Slider className="volume-slider"
+                            aria-labelledby="continuous-slider"
+                            key={`slider`}
+                            value={volume}
+                            orientation="vertical"
+                            min={0}
+                            step={0.05}
+                            max={1}
+                            onChange={handleVolumeChange}
+                        />}
+                    </div>
                 </div>}
-                {screenWidth < 850 && <div>{showTime(secPlayed)}</div>}
+            </div>
+        )
+    }
 
-                <div className="player-buttons">
-                    <button onClick={() => skipSong(-1)}>
-                        <SkipPreviousIcon />
-                    </button>
-                    <button onClick={() => pauseSong()}>{currSong?.isPlaying ? <PauseCircleOutlineIcon />
-                        : <PlayCircleOutlineIcon />}
-                    </button>
-                    <button onClick={() => skipSong(1)}>
-                        <SkipNextIcon />
-                    </button>
-                    <button onClick={handleMute}>
-                        {mute == true && <VolumeOffIcon />}
-                        {mute === false && volume == 0 && <VolumeOffIcon />}
-                        {mute === false && volume > 0 && volume < 0.75 && <VolumeDownIcon />}
-                        {mute === false && volume >= 0.75 && volume <= 1 && <VolumeUpIcon />}
-                    </button>
-
-                    {screenWidth > 850 && <Slider className="volume-slider"
-                        aria-labelledby="continuous-slider"
-                        key={`slider`}
-                        value={volume}
-                        orientation="vertical"
-                        min={0}
-                        step={0.05}
-                        max={1}
-                        onChange={handleVolumeChange}
-                    />}
-                </div>
-            </div>}
-        </div>
-    )
 }
-
 export default Player
