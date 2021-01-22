@@ -90,9 +90,20 @@ function Player() {
         setSeeking(true)
     }
 
+<<<<<<< HEAD
     function handleSeekChange({ target }, newVal) {
         setSecPlayed(newVal);
     }
+=======
+    function handleSeekChange({ target },newVal){
+        setSecPlayed(newVal);
+    }
+    
+    function handleSeekMouseUp(e){
+        // var value = e.target.getAttribute('aria-valuenow')
+        elPlayer.current.seekTo(parseFloat(secPlayed))
+        setSeeking(false)
+>>>>>>> 562a600bbdbeaf12735f944030e77b814c692eb8
 
     function handleSeekMouseUp() {
         setSeeking(false)
@@ -115,6 +126,7 @@ function Player() {
             {currSong && <ReactPlayer
                 ref={elPlayer}
                 className="hidden"
+                controls={false}
                 playing={currSong.isPlaying}
                 url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}
                 volume={volume}
