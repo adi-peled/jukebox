@@ -91,12 +91,12 @@ function Player() {
     }
 
     function handleSeekChange({ target },newVal){
-        // console.log(newVal);
         setSecPlayed(newVal);
     }
     
-    function handleSeekMouseUp(){
-        // console.log(secPlayed);
+    function handleSeekMouseUp(e){
+        // var value = e.target.getAttribute('aria-valuenow')
+        elPlayer.current.seekTo(parseFloat(secPlayed))
         setSeeking(false)
 
         // socketService.emit('update player seek', this.state.secPlayed);
@@ -119,6 +119,7 @@ function Player() {
             {currSong && <ReactPlayer
                 ref={elPlayer}
                 className="hidden"
+                controls={false}
                 playing={currSong.isPlaying}
                 url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}
                 volume={volume}
