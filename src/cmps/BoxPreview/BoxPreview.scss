@@ -9,9 +9,8 @@
     height: 100%;
     color: $color-tertiary;
     height: 20rem;
-
+    
     &:hover {
-        transform: scale(1.06);
         color: $color-secondary;
     }
 
@@ -67,4 +66,12 @@
             margin-right: 0rem;
         }
     }
+}
+
+.bgi-playbutton{
+    fill: white;
+    opacity: 0.1;
+    height: 80%;
+    object-fit: cover;
+    width: 100%;
 }

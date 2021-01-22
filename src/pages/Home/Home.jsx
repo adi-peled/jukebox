@@ -9,6 +9,7 @@ import heroImg5 from '../../assets/img/hero5.jpg'
 import { CircleLoading } from 'react-loadingg';
 import Carousel from '../../cmps/Carousel/Carousel'
 import Footer from '../../cmps/Footer/Footer';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 //redux
 import { useSelector, useDispatch } from 'react-redux'
 import { loadBoxes } from '../../store/actions/boxActions'
@@ -31,9 +32,10 @@ function Home() {
             {!boxes && <CircleLoading />}
             { boxes && <>
                 <Carousel items={heroImgs} heroImgs />
-                <h1 className="scroll-to-boxes" onClick={handleClick} >Enjoy the beart</h1>
+                <h1 className="scroll-to-boxes" onClick={handleClick} >Enjoy the beat</h1>
+                <KeyboardArrowDownIcon onClick={handleClick} className="arrow-down"/>
                 <div className="home-container">
-                    {user && <h2 className="title">My Favorite Playlist</h2>}
+                    {user?.favs.length>0 && <h2 className="title">My Favorite Playlist</h2>}
                     {user?.favs && <Carousel items={user.favs} />}
 
                     <h2 ref={boxesRef} className="title">  Top Genres</h2>
