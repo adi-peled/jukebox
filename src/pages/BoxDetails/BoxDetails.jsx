@@ -281,7 +281,8 @@ function BoxDetails(props) {
         console.log(song);
         if (song.videoId !== currSong?.videoId) {
             song = { ...song, secPlayed: 0 }
-        } else {
+        } 
+        else {
             song = { ...song, isPlaying: song.isPlaying }
         }
         dispatch(setCurrSong(song))
