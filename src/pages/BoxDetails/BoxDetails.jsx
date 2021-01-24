@@ -180,7 +180,6 @@ import { socketService } from '../../services/socketService'
 import { boxService } from '../../services/boxService'
 
 function BoxDetails(props) {
-
     const [id, setId] = useState(props.match.params.id)
     const box = useSelector(state => state.boxReducer.currBox)
     const { currSong } = useSelector(state => state.boxReducer)
@@ -257,10 +256,7 @@ function BoxDetails(props) {
     useEffect(() => {
 
         if (!currSong || !newSong) return
-        console.log(newSong.videoId === currSong.videoId);
         if (newSong.videoId === currSong.videoId) return
-        console.log('didnt return???');
-
         socketService.emit('update song', { ...currSong, isPlaying: !currSong.isPlaying })
 
     }, [currSong])
@@ -283,7 +279,7 @@ function BoxDetails(props) {
 
     function playSong(song) {
         console.log(song);
-        if (song.videoId !== currSong.videoId) {
+        if (song.videoId !== currSong?.videoId) {
             song = { ...song, secPlayed: 0 }
         } else {
             song = { ...song, isPlaying: song.isPlaying }

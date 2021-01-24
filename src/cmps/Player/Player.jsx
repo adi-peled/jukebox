@@ -97,7 +97,10 @@ function Player() {
     }
 
     function seekTo(sec) {
-        elPlayer.current.seekTo(parseFloat(sec), 'seconds');
+        if(sec!==secPlayed){
+            console.log('seeking');
+            elPlayer.current.seekTo(parseFloat(sec), 'seconds');
+        }
     }
 
     function handleSeekMouseDown() {
@@ -131,6 +134,7 @@ function Player() {
             {currSong && <ReactPlayer
                 ref={elPlayer}
                 className="hidden"
+                playsinline={true}
                 controls={false}
                 playing={currSong.isPlaying}
                 url={`https://www.youtube.com/watch?v=${currSong?.videoId}`}

@@ -38,6 +38,7 @@
     margin: 0 10px;
     color: white;
     outline: none;
+    cursor: pointer;
     &.active{
         color: $color-secondary;
         border-bottom:1px $color-secondary solid;
