@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong } from '../../store/actions/boxActions'
+import { setCurrSong, updateProgress } from '../../store/actions/boxActions'
 //Scss
 import './Player.scss'
 //Components 
@@ -27,6 +27,7 @@ function Player() {
     const [mute, setMute] = useState(false)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [seeking, setSeeking] = useState(false)
+    const [newBox, setNewBox] = useState(null)
     const elPlayer = createRef()
 
     function skipSong(diff) {
@@ -56,18 +57,31 @@ function Player() {
         }
     }, [])
 
+    useEffect(() => {
+        if (currBox) {
+
+        }
+    }, [currBox])
 
     function handleVolumeChange({ target }, newVal) {
         setVolume(parseFloat(newVal))
     }
+
     function handleProgress(e) {
         // if (!seeking && !isSyncing) {
         if (!seeking) {
             setSecPlayed(e.playedSeconds)
-            // setSecPlayed(playedSeconds)
-            // this.props.updateProgress(state.playedSeconds);
+            // if (currBox._id !== newBox._id) setNewBox(currBox)
+            dispatch(updateProgress((e.playedSeconds)))
         }
     }
+
+    useEffect(() => {
+        if (currSong) {
+            // setSecPlayed(currSong.secPlayed)
+            seekTo(currSong.secPlayed)
+        }
+    }, [currSong])
 
     function handleDuration(e) {
         setDuration(e)
@@ -82,8 +96,8 @@ function Player() {
         setMute(!mute)
     }
 
-    function seekTo() {
-        elPlayer.seekTo(secPlayed);
+    function seekTo(sec) {
+        elPlayer.current.seekTo(parseFloat(sec), 'seconds');
     }
 
     function handleSeekMouseDown() {
@@ -95,11 +109,9 @@ function Player() {
     }
 
     function handleSeekMouseUp(e) {
-        // var value = e.target.getAttribute('aria-valuenow')
+        console.log('lo kore');
         elPlayer.current.seekTo(parseFloat(secPlayed))
         setSeeking(false)
-
-        // socketService.emit('update player seek', this.state.secPlayed);
     }
 
     function showTime(seconds) {

@@ -1,9 +1,11 @@
 import { youtubeService } from '../../services/youtubeService.js'
 import { boxService } from '../../services/boxService'
 import { utilService } from '../../services/utilService'
+import { socketService } from '../../services/socketService.js'
 
 export const setCurrSong = (song) => async dispatch => {
     song = { ...song, isPlaying: !song.isPlaying }
+    console.log({ song });
     dispatch({ type: 'SET_CURR_SONG', song })
 }
 
@@ -26,7 +28,7 @@ export const loadBox = (id) => async dispatch => {
 
 export const updateBox = ({ currBox, message }) => async dispatch => {
     try {
-        console.log({currBox});
+        console.log({ currBox });
         currBox.chat.push(message)
         await boxService.updateBox(currBox)
         dispatch({ type: 'UPDATE_BOX', box: currBox })
@@ -88,6 +90,21 @@ export const addSong = (song, boxId) => async dispatch => {
         console.log(err);
     }
 }
+
+
+
+export function updateProgress(secPlayed) {
+    return (dispatch, getState) => {
+        const song = {
+            ...getState().boxReducer.currSong, secPlayed
+        }
+        console.log({ secPlayed });
+        // socketService.emit('update song', song)
+        socketService.emit('update sec', secPlayed)
+        dispatch({ type: 'SET_CURR_SONG', song });
+    }
+}
+
 
 
 
