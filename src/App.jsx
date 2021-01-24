@@ -50,6 +50,10 @@ function App() {
         }
       }
     }
+    return () => {
+      //user leave  app without chance room
+      socketService.emit('user leave', user)
+    }
   }, [])
 
 

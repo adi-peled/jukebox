@@ -10,6 +10,7 @@
     .react-multiple-carousel__arrow {
         min-height: 33px;
         min-width: 30px;
+        z-index: 3;
 
         &--left {
             left: 0;
