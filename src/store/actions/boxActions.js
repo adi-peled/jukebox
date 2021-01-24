@@ -93,16 +93,16 @@ export const addSong = (song, boxId) => async dispatch => {
 
 
 
-// export function updateProgress(secPlayed) {
-//     return (dispatch, getState) => {
-//         const currSong = {
-//             ...getState().boxReducer.currSong, secPlayed
-//         }
-//         console.log(currSong.secPlayed);
-//         socketService.emit('update song', currSong)
-//         dispatch({ type: 'SET_CURR_SONG', song: currSong });
-//     }
-// }
+export function updateProgress(secPlayed) {
+    return (dispatch, getState) => {
+        const song = {
+            ...getState().boxReducer.currSong, secPlayed
+        }
+        console.log(song.secPlayed);
+        socketService.emit('update song', song)
+        dispatch({ type: 'SET_CURR_SONG', song });
+    }
+}
 
 
 

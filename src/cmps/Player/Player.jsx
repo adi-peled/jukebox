@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from 'react'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrSong } from '../../store/actions/boxActions'
+import { setCurrSong, updateProgress } from '../../store/actions/boxActions'
 //Scss
 import './Player.scss'
 //Components 
@@ -64,6 +64,7 @@ function Player() {
         // if (!seeking && !isSyncing) {
         if (!seeking) {
             setSecPlayed(e.playedSeconds)
+            // dispatch(updateProgress(e.playedSeconds))
             // setSecPlayed(playedSeconds)
             // this.props.updateProgress(state.playedSeconds);
         }

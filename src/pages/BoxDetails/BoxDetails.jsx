@@ -258,6 +258,7 @@ function BoxDetails(props) {
         console.log(newSong?.videoId === currSong?.videoId);
         if (!currSong || !newSong) return
         if (newSong.videoId === currSong.videoId) return
+        console.log('didnt return???');
         socketService.emit('update song', { ...currSong, isPlaying: !currSong.isPlaying })
 
     }, [currSong])
@@ -280,7 +281,8 @@ function BoxDetails(props) {
 
     function playSong(song) {
         dispatch(setCurrSong(song))
-        socketService.emit('update song', { ...song, isPlaying: !song.isPlaying })
+        socketService.emit('update song', song)
+        // socketService.emit('update song', { ...song, isPlaying: !song.isPlaying })
         setNewSong(song)
     }
     async function deleteSong(songId) {
