@@ -19,11 +19,12 @@ function CreateBox({ openModal }) {
     const [genre, setGenre] = useState('Hip-hop')
     const [imgString, setImgString] = useState('')
     const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop',
-        'Classical', 'alternativ', 'Blues', 'Disco', 'Israeli', 'Arabic']
+        'Classical', 'alternativ', 'Blues', 'Disco', 'Israeli']
     const defaultImgs = [defaultImgBlue, defaultImgRed, defaultImgGreen, defaultImgYellow]
 
 
     function uploadImg(imgString) {
+        console.log(imgString);
         setImgString(imgString)
     }
 
