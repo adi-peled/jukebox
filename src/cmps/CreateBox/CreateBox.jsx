@@ -16,7 +16,7 @@ function CreateBox({ openModal }) {
     const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
-    const [genre, setGenre] = useState('')
+    const [genre, setGenre] = useState('Hip-hop')
     const [imgString, setImgString] = useState('')
     const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Pop',
         'Classical', 'alternativ', 'Blues', 'Disco', 'Israeli', 'Arabic']
