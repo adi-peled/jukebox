@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react'
+import React, { useState, useEffect } from 'react'
 //Css
 import './SongPreview.scss'
 //Components
@@ -11,22 +11,20 @@ import equalizer from '../../assets/img/equalizer.gif'
 import { useSelector } from 'react-redux'
 
 
-function SongPreview({ song, playSong, deleteSong }) {
+function SongPreview({ song, playSong, deleteSong, idx }) {
     const [isRemoving, setIsRemoving] = useState(false)
     const { currSong } = useSelector(state => state.boxReducer)
     const isSongPlaying = (song.id === currSong?.id) && currSong?.isPlaying;
     const isCurrSong = currSong?.id===song.id? true:false;
-    
-
     function changeIsRemoving() {
         setIsRemoving(!isRemoving)
         setTimeout(() => {
             setIsRemoving(false)
         }, 3000)
     }
-
     return (
-        <div className={isCurrSong? "flex space-between song-preview active": "flex space-between song-preview"} onDoubleClick={() => playSong(song)}>
+    
+            <div className={isCurrSong? "flex space-between song-preview active": "flex space-between song-preview"} onDoubleClick={() => playSong(song)}>
             <div className="song-preview-left flex">
                 {isSongPlaying ? <PauseCircleOutlineIcon className="song-preview-svg" onClick={() => playSong(currSong)} /> :
                     <PlayCircleOutlineIcon className="song-preview-svg" onClick={() => playSong(song)} />}
