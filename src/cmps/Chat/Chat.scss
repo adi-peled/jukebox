@@ -120,6 +120,11 @@ $clr1:rgb(24, 25, 26);
 .text-form {
     width: 100%;
 
+    @include respon(phone) {
+        position: absolute;
+        bottom: 0;
+    }
+
     input {
         height: 30px;
         width: 80%;
@@ -148,6 +153,8 @@ $clr1:rgb(24, 25, 26);
 
 @media (max-width:400px) {
     .chat-box__mobile {
-        height: 60vh;
+        overflow-y: scroll;
+        height: 52vh;
+        position: relative;
     }
 }

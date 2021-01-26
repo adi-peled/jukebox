@@ -9,7 +9,9 @@
 
         svg {
             transform: scale(2);
-            
+            @include respon(phone){
+            transform: scale(1.6);
+            }
         }
         
         a {
@@ -25,7 +27,9 @@
 
 .copy-to-clip{
     transform: scale(3)  rotate(45deg) !important;
-
+    @include respon(phone){
+        transform: scale(2.3)  rotate(45deg) !important;
+        }
 }
 .social-links__nav-container{
     width: 30%;
@@ -35,7 +39,7 @@
     border-bottom: 1px white solid;
     padding: 5px;
     background-color: transparent;
-    margin: 0 10px;
+    margin-right: 10px;
     color: white;
     outline: none;
     cursor: pointer;

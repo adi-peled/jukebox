@@ -66,7 +66,7 @@ function Header({ toggleShowBox, toggleShowLogin }) {
                             <NavLink to="/main" className="header__link" exact >Boxes</NavLink>
                         </li>
                         <li className="header__item--menu" onClick={() => toggleShowBox(true)}>
-                            Create Box
+                            New Box
                        </li>
                     </div>}
 
