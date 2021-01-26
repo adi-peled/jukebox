@@ -25,7 +25,7 @@
         flex: 0.2;
         position: relative;
         align-items: center;
-        // border-bottom: 1px solid $color-tertiary;
+        border-bottom: 1px solid $color-tertiary;
 
         &--search {
             font: inherit;
@@ -34,7 +34,7 @@
             padding: 6px 0 7px;
             background: none;
             color: $color-tertiary;
-            border-bottom: 1px solid $color-tertiary;
+            // border-bottom: 1px solid $color-tertiary;
 
             &:focus {
                 outline: none;
@@ -51,9 +51,10 @@
             fill: $color-secondary
         }
 
-        &--search:focus {
+        &:focus-within {
             border-bottom: 1px solid $color-secondary;
         }
+
 
         &--search:focus::placeholder {
             color: $color-secondary
