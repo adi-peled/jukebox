@@ -1,6 +1,5 @@
 .song-preview {
     height: 7rem;
-    margin-bottom: 1rem;
     font-size: 2rem;
 
     &:hover {
@@ -80,9 +79,14 @@
 
 @media (max-width: 550px) {
 
-
+   .song-preview{
     .song-preview-right {
         justify-content: flex-start;
         padding: 0;
+        margin-right: .5rem;
     }
+    .equalizer-gif {
+        margin-right: .5rem ;
+    }
+   }
 }

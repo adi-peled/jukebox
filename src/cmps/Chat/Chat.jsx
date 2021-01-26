@@ -73,7 +73,7 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
                         return <li key={user._id} className="user"><img src={user.imgUrl} /></li>
                     })}
                 </ul>}
-            <div className={screenWidth > 850 ? "chat-box__container" : "chat-box__mobile"}>
+            <div className="chat-box__container">
                 {box && box.chat?.map(msg => {
                     const { username, imgString } = msg.from
                     const isCurrUser = currUser.username === username ? true : false

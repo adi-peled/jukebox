@@ -25,9 +25,11 @@ function App() {
   const [showLogin, setShowLogin] = useState({ show: false, type: '' })
   const [showSuccess, setShowSuccess] = useState(false)
   const { user } = useSelector(state => state.userReducer)
+  const [boolean, setBoolean] = useState(false)
+
   const dispatch = useDispatch()
   useEffect(async () => {
-    // socketService.setup()
+
     if (!user) {
       const loggedUser = await userService.getUser()
       if (loggedUser) {
@@ -49,10 +51,6 @@ function App() {
           dispatch({ type: 'SET_USER', user: JSON.parse(guest) })
         }
       }
-    }
-    return () => {
-      //user leave  app without chance room
-      socketService.emit('user leave', user)
     }
   }, [])
 
