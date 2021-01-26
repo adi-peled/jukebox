@@ -35,6 +35,19 @@ function BoxDetails(props) {
     const [userList, setUserList] = useState(null)
     const [newSong, setNewSong] = useState(null)
 
+
+    function reorder(list, startIndex, endIndex){
+        const result = Array.from(list)
+        const [removed] = result.splice(startIndex, 1)
+        console.log(startIndex, endIndex.index);
+        result.splice(endIndex.index, 0, removed)
+        result.filter(val => val)
+        box.playList=result;
+        if(currSong.videoId!==box.playList[0].videoId){
+            playSong(box.playList[0])
+        }
+      }
+
     useEffect(() => {
         setId(props.match.params.id)
     }, [props.match.params])
@@ -168,7 +181,7 @@ function BoxDetails(props) {
                     <div className="box-details-section2">
                         <BoxInfo box={box} />
                         <SocialLinks isLiked={isLiked} onLike={onLike} showAddSong={setShowAddSong} setCurrCmp={setCurrCmp} currCmp={currCmp} />
-                        {screenWidth > 850 && <BoxPlayList playSong={playSong} deleteSong={deleteSong} box={box} />}
+                        {screenWidth > 850 && <BoxPlayList reorder={reorder} playSong={playSong} deleteSong={deleteSong} box={box} />}
                         {screenWidth < 850 && <>{getCurrCmp()}</>}
                     </div>
                 </div>
