@@ -5,7 +5,6 @@ import { socketService } from '../../services/socketService.js'
 
 export const setCurrSong = (song) => async dispatch => {
     song = { ...song, isPlaying: !song.isPlaying }
-    console.log({ song });
     dispatch({ type: 'SET_CURR_SONG', song })
 }
 
@@ -28,7 +27,6 @@ export const loadBox = (id) => async dispatch => {
 
 export const updateBox = ({ currBox, message }) => async dispatch => {
     try {
-        console.log({ currBox });
         currBox.chat.push(message)
         await boxService.updateBox(currBox)
         dispatch({ type: 'UPDATE_BOX', box: currBox })

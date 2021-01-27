@@ -32,8 +32,6 @@ function Player() {
 
     function skipSong(diff) {
         currBox.playList.forEach((song, index) => {
-            console.log('set curr song player skip');
-
             if (song.id === currSong.id) {
                 if (index + diff >= currBox.playList.length) {
                     dispatch(setCurrSong(currBox.playList[0]))
@@ -90,8 +88,6 @@ function Player() {
     }
 
     function pauseSong() {
-        console.log('set curr song pouse song');
-
         dispatch(setCurrSong(currSong))
         socketService.emit('update song', { ...currSong, isPlaying: currSong.isPlaying })
     }

@@ -36,17 +36,17 @@ function BoxDetails(props) {
     const [newSong, setNewSong] = useState(null)
 
 
-    function reorder(list, startIndex, endIndex){
+    function reorder(list, startIndex, endIndex) {
         const result = Array.from(list)
         const [removed] = result.splice(startIndex, 1)
         console.log(startIndex, endIndex.index);
         result.splice(endIndex.index, 0, removed)
         result.filter(val => val)
-        box.playList=result;
-        if(currSong.videoId!==box.playList[0].videoId){
+        box.playList = result;
+        if (currSong.videoId !== box.playList[0].videoId) {
             playSong(box.playList[0])
         }
-      }
+    }
 
     useEffect(() => {
         dispatch(loadBox(id))
@@ -78,13 +78,14 @@ function BoxDetails(props) {
         })
         let counter = 0
         socketService.on('set song', async song => {
-            if (counter) return
-            counter++
+
             if (!song) {
+                // if (counter) return
+                counter++
                 const boxId = props.match.params.id
                 const box = await boxService.getBoxById(boxId)
+                console.log(box, boxId);
                 const song = { ...box.playList[0], secPlayed: 0 }
-                console.log('set curr song details', { boxId }, 'id');
                 dispatch(setCurrSong(song))
                 socketService.emit('update song', song)
             } else {
@@ -111,7 +112,6 @@ function BoxDetails(props) {
         if (!currSong || !newSong) return
         if (newSong.videoId === currSong.videoId) return
         socketService.emit('update song', { ...currSong, isPlaying: !currSong.isPlaying })
-        console.log('update song');
 
     }, [currSong])
 
