@@ -77,7 +77,6 @@ function Player() {
     }
 
     useEffect(() => {
-        console.log({ currSong });
         if (currSong) {
             // setSecPlayed(currSong.secPlayed)
             seekTo(currSong.secPlayed)
@@ -98,7 +97,6 @@ function Player() {
     }
 
     function seekTo(sec) {
-        console.log({ sec, secPlayed });
         if (sec !== secPlayed) {
             elPlayer.current.seekTo(parseFloat(sec), 'seconds');
         }
@@ -113,7 +111,6 @@ function Player() {
     }
 
     function handleSeekMouseUp(e) {
-        console.log('lo kore');
         elPlayer.current.seekTo(parseFloat(secPlayed))
         const song = { ...currSong, secPlayed, isPlaying: !currSong.isPlaying }
         dispatch(setCurrSong(song))
