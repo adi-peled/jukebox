@@ -9,7 +9,7 @@
     background-color: $color-secondary;
     color: white;
     position: relative;
-    z-index: 5;
+    z-index: 10;
 min-height: 80px;
     @include respon(tab-land) {
         font-size: 2rem;

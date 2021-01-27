@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
-
+import { Input ,TextField } from '@material-ui/core'
 
 import './Chat.scss'
 function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userList }) {
@@ -96,9 +96,9 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
                 {joinedUser && joinedUser !== currUser.username && <h3>{joinedUser} joined the room</h3>}
                 {newSong && <h3>{currUser.username} added new song: {newSong}</h3>}
             </div>
-            <form className="text-form" onSubmit={(e) => handleSubmit(e)}>
-                <input type="text" onChange={(e) => handleInputChange(e)} value={msg} placeholder="Write a message" />
-                <button type="submit">Send</button>
+            <form className="text-form flex" onSubmit={(e) => handleSubmit(e)}>
+                <Input  type="text" onChange={(e) => handleInputChange(e)} value={msg} placeholder="Write a message"  />
+                {/* <button type="submit">Send</button> */}
             </form>
         </div>
     )

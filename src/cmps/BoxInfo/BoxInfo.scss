@@ -10,7 +10,7 @@
 
     .title {
         text-align: left;
-        line-height: 1;
+        line-height: 48px;
 
         @include respon(phone) {
             font-size: 2.8rem;

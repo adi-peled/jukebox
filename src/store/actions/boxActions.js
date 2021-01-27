@@ -4,6 +4,8 @@ import { utilService } from '../../services/utilService'
 import { socketService } from '../../services/socketService.js'
 
 export const setCurrSong = (song) => async dispatch => {
+    console.log('set curr song action');
+
     song = { ...song, isPlaying: !song.isPlaying }
     dispatch({ type: 'SET_CURR_SONG', song })
 }
@@ -26,6 +28,7 @@ export const loadBox = (id) => async dispatch => {
 }
 
 export const updateBox = ({ currBox, message }) => async dispatch => {
+    console.log('update box action');
     try {
         currBox.chat.push(message)
         await boxService.updateBox(currBox)

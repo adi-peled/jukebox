@@ -5,6 +5,7 @@
 
     .title {
         color: $color-secondary;
+        line-height: 60px;
     }
 
 
@@ -16,7 +17,7 @@
 
     &-container {
         padding: 0 8rem;
-        margin-bottom: 8rem;
+        padding-bottom: 12rem;
 
         @include respon(phone) {
             padding: 0 2rem;
@@ -44,6 +45,7 @@
 
 .scroll-to-boxes{
     font-size: 8rem;
+    line-height: 100px;
     text-shadow: 0 0 12px rgb(36, 32, 32);
     @include absCenter;
     &:hover{

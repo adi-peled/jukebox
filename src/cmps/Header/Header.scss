@@ -7,10 +7,9 @@
     position: fixed;
     width: 100%;
     height: 80px;
-    z-index: 3;
+    z-index: 5;
     align-items: center;
     transition: all .8s;
-
 
     @include respon(tab-port) {
         padding: 2.5rem;
@@ -30,7 +29,7 @@
         &--search {
             font: inherit;
             border: 0;
-            height: 1.1876em;
+            height:1.8em;
             padding: 6px 0 7px;
             background: none;
             color: $color-tertiary;

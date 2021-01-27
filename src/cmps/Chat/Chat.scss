@@ -16,6 +16,7 @@ $clr1:rgb(24, 25, 26);
         h2 {
             font-size: 4rem;
             align-self: center;
+            line-height: 40px;
         }
     }
 
@@ -119,24 +120,43 @@ $clr1:rgb(24, 25, 26);
 
 .text-form {
     width: 100%;
+    justify-content: center;
+    margin-top: 10px;
 
     // @include respon(phone) {
     //     position: absolute;
     //     bottom: 0;
     // }
 
-    input {
+    @include respon(tab-port){
+       justify-content: flex-start;
+       margin-left: 10px;
+    }
+    .MuiInputBase-root {
         height: 30px;
         width: 80%;
-        color: $clr1;
-        border: 1px solid lighten($color: $clr1, $amount: 20%);
+        color:  white;
+        font-size: 2rem;
+        // border: 1px solid lighten($color: $clr1, $amount: 20%);
+        border-bottom: 1px white solid;
         outline: none;
-        border-right: none;
         padding: 10px;
 
-        ::-webkit-input-placeholder {
-            color: $clr1;
+        @include respon(tab-port){
+          
         }
+        &:after {
+            border-bottom: none;
+        }
+
+        input {
+            ::-webkit-input-placeholder {
+                color: white;
+            }
+        }
+
+       
+
     }
 
     button {

@@ -76,19 +76,15 @@ function BoxDetails(props) {
 
             setUserList(updateUserList)
         })
-        let counter = 0
         socketService.on('set song', async song => {
-
             if (!song) {
-                // if (counter) return
-                counter++
                 const boxId = props.match.params.id
                 const box = await boxService.getBoxById(boxId)
-                console.log(box, boxId);
                 const song = { ...box.playList[0], secPlayed: 0 }
                 dispatch(setCurrSong(song))
                 socketService.emit('update song', song)
             } else {
+                console.log({ song });
                 setNewSong(song)
                 dispatch(setCurrSong(song))
             }

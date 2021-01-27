@@ -1,6 +1,6 @@
 @import '../../scss/abstracts/variables';
 @import '../../scss/abstracts/mixins';
-
+@import '../../scss/base/typography';
 
 .boxPreview {
     // margin-right: .5rem;
@@ -9,6 +9,7 @@
     color: $color-tertiary;
     height: 20rem;
     position: relative;
+    font-family: nunito-bold;
 
     &:hover {
         // color: $color-secondary;
