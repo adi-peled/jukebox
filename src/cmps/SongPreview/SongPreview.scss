@@ -1,13 +1,11 @@
 .song-preview {
     height: 7rem;
     font-size: 2rem;
-
+    font-weight: 200;
     &:hover {
         background-color: rgba(255, 255, 255, 0.041);
         cursor: pointer;
     }
-
-
 
     &-svg {
         width: 3rem !important;

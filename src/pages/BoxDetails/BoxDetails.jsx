@@ -19,7 +19,9 @@ import { socketService } from '../../services/socketService'
 import { boxService } from '../../services/boxService'
 
 function BoxDetails(props) {
-    const { id } = props.match.params
+    // const { id } = props.match.params
+    const [id, setId] = useState(props.match.params.id)
+    console.log({ id });
     const box = useSelector(state => state.boxReducer.currBox)
     const { currSong } = useSelector(state => state.boxReducer)
     const user = useSelector(state => state.userReducer.user)
@@ -53,6 +55,10 @@ function BoxDetails(props) {
     }, [])
 
     useEffect(() => {
+        setId(props.match.params)
+    }, [props.match.params])
+
+    useEffect(() => {
         if (user) {
             const idx = user.favs.findIndex(favBox => favBox._id === id)
             idx === -1 ? setIsLiked(false) : setIsLiked(true)
@@ -77,6 +83,7 @@ function BoxDetails(props) {
             setUserList(updateUserList)
         })
         socketService.on('set song', async song => {
+            console.log('set song in details');
             if (!song) {
                 const boxId = props.match.params.id
                 const box = await boxService.getBoxById(boxId)
@@ -166,6 +173,7 @@ function BoxDetails(props) {
         <div className="box-details">
             { !box && <CircleLoading />}
             { box && <>
+                { console.log(box._id)}
                 <div className="box-details__container flex ">
                     {screenWidth > 850 && <Chat
                         isTyping={isTyping}
