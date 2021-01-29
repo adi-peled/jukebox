@@ -8,19 +8,24 @@ import 'react-multi-carousel/lib/styles.css';
 
 export default function AppCarousel({ items, heroImgs }) {
   const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+    largeDesktop: {
+      breakpoint: { max: 3000, min:1300 },
       items: heroImgs ? 1 : 7,
+      slidesToSlide: 1// optional, default to 1.
+    },
+    desktop: {
+      breakpoint: { max: 1300, min: 1024 },
+      items: heroImgs ? 1 : 6,
       slidesToSlide: 1// optional, default to 1.
     },
     tablet: {
       breakpoint: { max: 1024, min: 750 },
-      items: heroImgs ? 1 : 5,
+      items: heroImgs ? 1 :4 ,
       slidesToSlide: 1 // optional, default to 1.
     },
     mobile: {
       breakpoint: { max: 750, min: 0 },
-      items: heroImgs ? 1 : 4,
+      items: heroImgs ? 1 : 3,
       slidesToSlide: 1 // optional, default to 1.
     }
   };
