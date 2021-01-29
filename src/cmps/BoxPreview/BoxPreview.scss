@@ -21,9 +21,7 @@
         padding: 5px;
         align-items: center;
         justify-content: space-between;
-        @include respon(phone) {
-            padding: 0;
-        }
+       
     }
 
     &__title {
