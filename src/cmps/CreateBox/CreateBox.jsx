@@ -35,7 +35,8 @@ function CreateBox({ openModal }) {
     function onCreateBox() {
         const createdBy = user ? user.username : null
         let imgUrl
-        if (!name || !desc) return // todo add note to user that need fill inputs
+        // if (!name || !desc) return 
+        if (!name) return // todo add note to user that need fill inputs
         if (!imgString) imgUrl = defaultImgs[getRandomNumber()]
         const box = {
             name,
