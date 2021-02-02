@@ -58,7 +58,7 @@ function BoxDetails(props) {
     }, [user?.favs?.length])
 
     function myFunction() {
-         setScreenWidth(window.innerWidth)
+        setScreenWidth(window.innerWidth)
     }
 
     useEffect(() => {
@@ -71,8 +71,8 @@ function BoxDetails(props) {
             setShowIsTyping(username)
             debounceLoadData();
         })
-        socketService.on('msgSent', () => {
-            dispatch(loadBox(id))
+        socketService.on('msgSent', box => {
+            dispatch(updateBox(box))
         })
         socketService.on('user joined', ({ username, userList }) => onJoinedUser(username, userList))
         socketService.on('user leave', (updateUserList) => {
@@ -158,8 +158,10 @@ function BoxDetails(props) {
         }, 3000)
     }
     function sendMsg(data) {
-        dispatch(updateBox(data))
-        socketService.emit('sendMsg', data)
+        const { box, message } = data
+        box.chat.push(message)
+        dispatch(updateBox(box))
+        socketService.emit('sendMsg', box)
     }
     function isTyping(box, user) {
         socketService.emit('typing', { box, username: user.username })

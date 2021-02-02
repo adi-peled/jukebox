@@ -68,10 +68,10 @@ function Login({ type, showSuccess }) {
                     setTxt('email isnt valid')
                     return
                 }
-                if (!validatePassword(password)) {
-                    setTxt('password too weak')
-                    return
-                }
+                // if (!validatePassword(password)) {
+                //     setTxt('password too weak')
+                //     return
+                // }
             }
             if(!imgString) setImgString(defaultImg) 
             msg = await dispatch(signup(email, password, username, imgString))
@@ -110,15 +110,15 @@ function Login({ type, showSuccess }) {
                     value={password}
                     onChange={(ev) => setPassword(ev.target.value)}
                 />
-                <InfoOutlinedIcon className="infoIcon" onClick={showInfoTimeOut} />
+                {/* <InfoOutlinedIcon className="infoIcon" onClick={showInfoTimeOut} /> */}
 
                 {passwordType === 'password' ?
                     <VisibilityIcon className="showIcon" onClick={() => toggleShowPassword()} /> :
                     <VisibilityOffIcon className="showIcon" onClick={() => toggleShowPassword()} />}
             </div>
-            {showInfo && <Alert severity="info" className="form__info" onClick={() => setShowInfo(!showInfo)}>
+            {/* {showInfo && <Alert severity="info" className="form__info" onClick={() => setShowInfo(!showInfo)}>
                 at least 1 capital, 1 lower, numbers and 8 digits.
-                 </Alert>}
+                 </Alert>} */}
 
             {type === 'signup' && <div className="form__file-container flex">
                 <FileBase type="file" multiple={false} onDone={({ base64 }) => setImgString(base64)} />

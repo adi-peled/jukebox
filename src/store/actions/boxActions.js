@@ -3,7 +3,7 @@ import { boxService } from '../../services/boxService'
 import { utilService } from '../../services/utilService'
 import { socketService } from '../../services/socketService.js'
 
-export const setCurrSong = (song) =>  dispatch => {
+export const setCurrSong = (song) => dispatch => {
     console.log('set curr song action');
 
     song = { ...song, isPlaying: !song.isPlaying }
@@ -23,16 +23,18 @@ export const loadBox = (id) => async dispatch => {
     try {
         const box = await boxService.getById(id)
         dispatch({ type: 'LOAD_BOX', box })
+        console.log(box.chat.length);
+
     } catch (err) {
         console.log(err);
     }
 }
 
-export const updateBox = ({ currBox, message }) => async dispatch => {
+export const updateBox = box => async dispatch => {
     try {
-        currBox.chat.push(message)
-        await boxService.save(currBox)
-        dispatch({ type: 'UPDATE_BOX', box: currBox })
+        await boxService.save(box)
+        console.log(box.chat.length);
+        dispatch({ type: 'UPDATE_BOX', box })
     } catch (err) {
         console.log(err);
     }
@@ -53,10 +55,9 @@ export const setFilter = (filterBy) => async dispatch => {
 
 
 export const createBox = (box) => async dispatch => {
-    console.log({box});
     try {
         const newBox = await boxService.save(box)
-        console.log({newBox});
+        console.log({ newBox });
         dispatch({ type: 'ADD_BOX', box: newBox })
     } catch (err) {
         console.log(err);

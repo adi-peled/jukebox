@@ -41,7 +41,7 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
         }
         const data = {
             message,
-            currBox
+            box: currBox
         }
         sendMsg(data)
         setMsg('')
@@ -77,29 +77,17 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
                     const { username, imgString } = msg.from
                     const isCurrUser = currUser.username === username ? true : false
 
-                    return <div  key={msg.createdAt} className={isCurrUser? " rtl chat-box__msg flex": "chat-box__msg flex"}>
+                    return <div key={msg.createdAt} className={isCurrUser ? " rtl chat-box__msg flex" : "chat-box__msg flex"}>
                         <img className="chat-box__img" src={imgString} />
                         <div className="chat-box__text-container flex">
                             <span className={isCurrUser ? " currUser chat-box__username" : "chat-box__username"}>{username} </span>
                             <div className={isCurrUser ? 'user-text chat-box__txt flex' : 'chat-box__txt flex'}>
-                                <div className={isCurrUser? "txt ml" :"text mr"}>  {msg.text}</div>
+                                <div className={isCurrUser ? "txt ml" : "text mr"}>  {msg.text}</div>
                                 <span className="chat-box__time"> {getTime(msg.createdAt)}</span>
                             </div>
                         </div>
 
                     </div>
-                    // return <div className={isCurrUser ? 'rtl currUser chat-box__msg  flex' : 'chat-box__msg  flex'} key={msg.createdAt}>
-                    //     <div className="chat-box__sender flex">
-                    //         {!isCurrUser && <img className="chat-box__img" src={imgString} />}
-                    //         {/* {isCurrUser && <span className="chat-box__username">You</span>} */}
-                    //         {!isCurrUser && <span className="chat-box__username">{username} </span>}
-                    //     </div>
-                    //     <div className={isCurrUser ? 'user-text chat-box__txt' : 'chat-box__txt'}>
-                    //         <div className="txt">  {msg.text}</div>
-                    //         <span className="chat-box__time"> {getTime(msg.createdAt)}</span>
-                    //     </div>
-                    // </div>
-
                 })}
                 <div ref={chatRef}></div>
                 {typingUser && <h3>{typingUser} is typing....</h3>}

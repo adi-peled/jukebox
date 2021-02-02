@@ -4,9 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { userService } from './services/userService'
 import { utilService } from './services/utilService'
-import { socketService } from './services/socketService'
 //cmps
-import Slider, { Range } from 'rc-slider';
 
 import Header from './cmps/Header/Header'
 import Main from './pages/Main/Main'
@@ -52,8 +50,6 @@ function App() {
       }
     }
   }, [])
-
-
 
   return (
     <div className="app">
