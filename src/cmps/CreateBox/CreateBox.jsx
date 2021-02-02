@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import FileBase from 'react-file-base64'
 import './CreateBox.scss'
-import { Button, Input, InputLabel, Select, MenuItem } from '@material-ui/core'
+import { Button, Input, InputLabel } from '@material-ui/core'
 import { ReactComponent as Upload } from '../../assets/upload.svg';
 //redux
 import { useDispatch, useSelector } from 'react-redux'
-import { createBox, loadBoxes } from '../../store/actions/boxActions'
+import { createBox } from '../../store/actions/boxActions'
 //img
 import defaultImgRed from '../../assets/img/jukebox-red.png';
 import defaultImgYellow from '../../assets/img/jukebox-yellow.png';
@@ -40,7 +40,7 @@ function CreateBox({ openModal }) {
         if (!imgString) imgUrl = defaultImgs[getRandomNumber()]
         const box = {
             name,
-            desc,
+            desc: desc ? desc : name,
             genre,
             imgUrl: imgString ? imgString : imgUrl,
             createdBy,
