@@ -3,7 +3,7 @@ import { boxService } from '../../services/boxService'
 import { utilService } from '../../services/utilService'
 import { socketService } from '../../services/socketService.js'
 
-export const setCurrSong = (song) => async dispatch => {
+export const setCurrSong = (song) =>  dispatch => {
     console.log('set curr song action');
 
     song = { ...song, isPlaying: !song.isPlaying }
@@ -12,15 +12,16 @@ export const setCurrSong = (song) => async dispatch => {
 
 export const loadBoxes = (filterBy) => async dispatch => {
     try {
-        const boxes = await boxService.getBoxes(filterBy)
+        const boxes = await boxService.query(filterBy)
         dispatch({ type: 'LOAD_BOXES', boxes })
     } catch (err) {
         console.log(err);
     }
 }
+
 export const loadBox = (id) => async dispatch => {
     try {
-        const box = await boxService.getBoxById(id)
+        const box = await boxService.getById(id)
         dispatch({ type: 'LOAD_BOX', box })
     } catch (err) {
         console.log(err);
@@ -28,10 +29,9 @@ export const loadBox = (id) => async dispatch => {
 }
 
 export const updateBox = ({ currBox, message }) => async dispatch => {
-    console.log('update box action');
     try {
         currBox.chat.push(message)
-        await boxService.updateBox(currBox)
+        await boxService.save(currBox)
         dispatch({ type: 'UPDATE_BOX', box: currBox })
     } catch (err) {
         console.log(err);
@@ -40,7 +40,7 @@ export const updateBox = ({ currBox, message }) => async dispatch => {
 
 export const loadBoxChat = (id) => async dispatch => {
     try {
-        const box = await boxService.getBoxById(id)
+        const box = await boxService.getById(id)
         dispatch({ type: 'LOAD_BOX_CHAT', chat: box.chat })
     } catch (err) {
         console.log(err);
@@ -53,8 +53,10 @@ export const setFilter = (filterBy) => async dispatch => {
 
 
 export const createBox = (box) => async dispatch => {
+    console.log({box});
     try {
-        const newBox = await boxService.createBox(box)
+        const newBox = await boxService.save(box)
+        console.log({newBox});
         dispatch({ type: 'ADD_BOX', box: newBox })
     } catch (err) {
         console.log(err);
@@ -63,9 +65,9 @@ export const createBox = (box) => async dispatch => {
 
 export const removeSong = (boxId, songId) => async dispatch => {
     try {
-        let box = await boxService.getBoxById(boxId)
+        let box = await boxService.getById(boxId)
         box.playList = box.playList.filter(song => song.id !== songId)
-        await boxService.updateBox(box)
+        await boxService.save(box)
         dispatch({ type: 'LOAD_BOX', box })
     } catch (err) {
         console.log(err);
@@ -74,7 +76,7 @@ export const removeSong = (boxId, songId) => async dispatch => {
 
 export const addSong = (song, boxId) => async dispatch => {
     try {
-        const box = await boxService.getBoxById(boxId)
+        const box = await boxService.getById(boxId)
         const { videoId } = song.id
         const newSong = {
             id: utilService.makeId(),
@@ -85,7 +87,7 @@ export const addSong = (song, boxId) => async dispatch => {
             isPlaying: false
         }
         box.playList.push(newSong)
-        await boxService.updateBox(box)
+        await boxService.save(box)
         dispatch({ type: 'LOAD_BOX', box })
     } catch (err) {
         console.log(err);

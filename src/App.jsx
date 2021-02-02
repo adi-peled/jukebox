@@ -25,13 +25,12 @@ function App() {
   const [showLogin, setShowLogin] = useState({ show: false, type: '' })
   const [showSuccess, setShowSuccess] = useState(false)
   const { user } = useSelector(state => state.userReducer)
-  const [boolean, setBoolean] = useState(false)
 
   const dispatch = useDispatch()
   useEffect(async () => {
 
     if (!user) {
-      const loggedUser = await userService.getUser()
+      const loggedUser = await userService.get()
       if (loggedUser) {
         dispatch({ type: 'SET_USER', user: loggedUser })
       } else {

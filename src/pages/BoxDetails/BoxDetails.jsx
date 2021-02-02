@@ -19,11 +19,10 @@ import { socketService } from '../../services/socketService'
 import { boxService } from '../../services/boxService'
 
 function BoxDetails(props) {
-    // const { id } = props.match.params
-    const [id, setId] = useState(props.match.params.id)
+    const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
     const { currSong } = useSelector(state => state.boxReducer)
-    const user = useSelector(state => state.userReducer.user)
+    const { user } = useSelector(state => state.userReducer)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showAddSong, setShowAddSong] = useState(false)
@@ -36,14 +35,12 @@ function BoxDetails(props) {
     const [userList, setUserList] = useState(null)
     const [newSong, setNewSong] = useState(null)
 
-
     function reorder(list, startIndex, endIndex) {
-        const result = Array.from(list)
-        const [removed] = result.splice(startIndex, 1)
-        console.log(startIndex, endIndex.index);
-        result.splice(endIndex.index, 0, removed)
-        result.filter(val => val)
-        box.playList = result;
+        const playList = Array.from(list)
+        const [removed] = playList.splice(startIndex, 1)
+        playList.splice(endIndex.index, 0, removed)
+        playList.filter(val => val)
+        box.playList = playList;
         if (currSong.videoId !== box.playList[0].videoId) {
             playSong(box.playList[0])
         }
@@ -54,18 +51,19 @@ function BoxDetails(props) {
     }, [])
 
     useEffect(() => {
-        setId(props.match.params)
-    }, [props.match.params])
-
-    useEffect(() => {
         if (user) {
             const idx = user.favs.findIndex(favBox => favBox._id === id)
             idx === -1 ? setIsLiked(false) : setIsLiked(true)
         }
     }, [user?.favs?.length])
 
+    function myFunction() {
+         setScreenWidth(window.innerWidth)
+    }
+
     useEffect(() => {
-        window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
+        window.addEventListener('resize', myFunction);
+
         if (user) {
             socketService.emit('join box', { boxId: id, user })
         }
@@ -82,11 +80,9 @@ function BoxDetails(props) {
             setUserList(updateUserList)
         })
         socketService.on('set song', async song => {
-            console.log('set song in details');
             if (!song) {
                 const boxId = props.match.params.id
-                console.log(boxId);
-                const box = await boxService.getBoxById(boxId)
+                const box = await boxService.getById(boxId)
                 const song = { ...box.playList[0], secPlayed: 0 }
                 dispatch(setCurrSong(song))
                 socketService.emit('update song', song)
@@ -98,7 +94,7 @@ function BoxDetails(props) {
         })
 
         return () => {
-            window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
+            window.removeEventListener('resize', myFunction)
         }
     }, [user])
 
