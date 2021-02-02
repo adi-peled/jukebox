@@ -30,10 +30,14 @@
 }
 
 .copy-to-clip{
-    transform: scale(3)  rotate(45deg) !important;
+    transform: scale(2)  rotate(45deg) !important;
+    fill: rgba(white,0.8);
+    &:hover{
+        fill:white
+    }
     @include respon(phone){
-        transform: scale(2.3)  rotate(45deg) !important;
-        }
+    transform: scale(1.6);
+    }
 }
 .social-links__nav-container{
     width: 30%;
