@@ -39,7 +39,7 @@ export default function AppCarousel({ items, heroImgs }) {
       // autoPlay={this.props.deviceType !== "mobile" ? true : false}
       autoPlaySpeed={2000}
       keyBoardControl={false}
-      customTransition="all .5"
+      customTransition="transform 500ms ease-in-out"
       transitionDuration={500}
       containerClass="carousel-container"
       // dotListClass="custom-dot-list-style"

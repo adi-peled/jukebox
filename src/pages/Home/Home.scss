@@ -62,3 +62,13 @@
         cursor: pointer;
     }
 }
+
+@media (max-width: 600px) {
+
+    .scroll-to-boxes{
+        font-size: 4rem;
+        text-align: center;
+        width: 80%;
+    }
+
+}

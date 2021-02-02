@@ -32,7 +32,7 @@ function Home() {
             {!boxes && <CircleLoading />}
             { boxes && <>
                 <Carousel items={heroImgs} heroImgs />
-                <h1 className="scroll-to-boxes" onClick={handleClick} >Enjoy the beat</h1>
+                <h1 className="scroll-to-boxes" onClick={handleClick} >Enjoy The Beat</h1>
                 <KeyboardArrowDownIcon onClick={handleClick} className="arrow-down"/>
                 <div className="home-container">
                     {user?.favs.length>0 && <h2 className="title">My Favorite Playlist</h2>}
