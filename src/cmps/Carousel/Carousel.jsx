@@ -8,19 +8,24 @@ import 'react-multi-carousel/lib/styles.css';
 
 export default function AppCarousel({ items, heroImgs }) {
   const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+    largeDesktop: {
+      breakpoint: { max: 3000, min: 1300 },
       items: heroImgs ? 1 : 7,
+      slidesToSlide: 1// optional, default to 1.
+    },
+    desktop: {
+      breakpoint: { max: 1300, min: 1024 },
+      items: heroImgs ? 1 : 6,
       slidesToSlide: 1// optional, default to 1.
     },
     tablet: {
       breakpoint: { max: 1024, min: 750 },
-      items: heroImgs ? 1 : 5,
+      items: heroImgs ? 1 : 4,
       slidesToSlide: 1 // optional, default to 1.
     },
     mobile: {
       breakpoint: { max: 750, min: 0 },
-      items: heroImgs ? 1 : 4,
+      items: heroImgs ? 1 : 3,
       slidesToSlide: 1 // optional, default to 1.
     }
   };
@@ -36,22 +41,22 @@ export default function AppCarousel({ items, heroImgs }) {
       showDots={true}
       responsive={responsive}
       infinite={true}
-      // autoPlay={this.props.deviceType !== "mobile" ? true : false}
       autoPlaySpeed={2000}
       keyBoardControl={false}
-      customTransition="transform 500ms ease-in-out"
+      customTransition="all .5s"
       transitionDuration={500}
       containerClass="carousel-container"
       // dotListClass="custom-dot-list-style"
       itemClass=""
       showDots={false}
       renderDotsOutside={false}
-      autoPlay={heroImgs?true:false}
+      autoPlay={heroImgs ? true : false}
       arrows={heroImgs ? false : true}
     >
 
       {!heroImgs && items && !(isObject) && items.map(item => {
-        return <Link className="link" key={item} to={'/main/' + item}> {item}</Link>
+        const path = item === 'All' ? '' : item
+        return <Link className="link" key={item} to={'/main/' + path}> {item}</Link>
       })}
 
       {!heroImgs && items && isObject && items.map(item => {

@@ -4,12 +4,12 @@
 
 
 body {
-    font-family: Roboto;
-    font-family: VarelaRound, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    // font-family: VarelaRound, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: nunito-regular;
     font-size: 1.5rem;
     font-weight: 700;
-    line-height: 1.7;
-    letter-spacing: normal;
+    line-height: 20px;
+    letter-spacing: .015em;
     color: $color-tertiary;
     // color: white;
     background-color: $color-primary;

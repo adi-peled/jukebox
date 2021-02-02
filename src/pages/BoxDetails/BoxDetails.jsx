@@ -19,10 +19,10 @@ import { socketService } from '../../services/socketService'
 import { boxService } from '../../services/boxService'
 
 function BoxDetails(props) {
-    const [id, setId] = useState(props.match.params.id)
+    const { id } = props.match.params
     const box = useSelector(state => state.boxReducer.currBox)
     const { currSong } = useSelector(state => state.boxReducer)
-    const user = useSelector(state => state.userReducer.user)
+    const { user } = useSelector(state => state.userReducer)
     const dispatch = useDispatch();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [showAddSong, setShowAddSong] = useState(false)
@@ -35,22 +35,16 @@ function BoxDetails(props) {
     const [userList, setUserList] = useState(null)
     const [newSong, setNewSong] = useState(null)
 
-
-    function reorder(list, startIndex, endIndex){
-        const result = Array.from(list)
-        const [removed] = result.splice(startIndex, 1)
-        console.log(startIndex, endIndex.index);
-        result.splice(endIndex.index, 0, removed)
-        result.filter(val => val)
-        box.playList=result;
-        if(currSong.videoId!==box.playList[0].videoId){
+    function reorder(list, startIndex, endIndex) {
+        const playList = Array.from(list)
+        const [removed] = playList.splice(startIndex, 1)
+        playList.splice(endIndex.index, 0, removed)
+        playList.filter(val => val)
+        box.playList = playList;
+        if (currSong.videoId !== box.playList[0].videoId) {
             playSong(box.playList[0])
         }
-      }
-
-    useEffect(() => {
-        setId(props.match.params.id)
-    }, [props.match.params])
+    }
 
     useEffect(() => {
         dispatch(loadBox(id))
@@ -63,7 +57,13 @@ function BoxDetails(props) {
         }
     }, [user?.favs?.length])
 
+    function myFunction() {
+         setScreenWidth(window.innerWidth)
+    }
+
     useEffect(() => {
+        window.addEventListener('resize', myFunction);
+
         if (user) {
             socketService.emit('join box', { boxId: id, user })
         }
@@ -81,19 +81,20 @@ function BoxDetails(props) {
         })
         socketService.on('set song', async song => {
             if (!song) {
-                const box = await boxService.getBoxById(id)
+                const boxId = props.match.params.id
+                const box = await boxService.getById(boxId)
                 const song = { ...box.playList[0], secPlayed: 0 }
                 dispatch(setCurrSong(song))
                 socketService.emit('update song', song)
             } else {
+                console.log({ song });
                 setNewSong(song)
-                console.log(song);
                 dispatch(setCurrSong(song))
             }
         })
-        window.addEventListener('resize', () => setScreenWidth(window.innerWidth));
+
         return () => {
-            window.removeEventListener('resize', () => setScreenWidth(window.innerWidth))
+            window.removeEventListener('resize', myFunction)
         }
     }, [user])
 
@@ -130,13 +131,14 @@ function BoxDetails(props) {
     }
 
     function playSong(song) {
-        console.log(song);
         if (song.videoId !== currSong?.videoId) {
             song = { ...song, secPlayed: 0 }
-        } 
+        }
         else {
             song = { ...song, isPlaying: song.isPlaying }
         }
+        console.log('set curr song play song');
+
         dispatch(setCurrSong(song))
         socketService.emit('update song', song)
         // socketService.emit('update song', { ...song, isPlaying: !song.isPlaying })

@@ -13,7 +13,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 //redux
 import { useSelector, useDispatch } from 'react-redux'
 import { loadBoxes } from '../../store/actions/boxActions'
-import { boxService } from '../../services/boxService'
 function Home() {
     const { user } = useSelector(state => state.userReducer)
     const genres = ['Hip-hop', 'Electronic', 'Latin', 'Rock', 'Israeli', 'Pop']
@@ -22,9 +21,9 @@ function Home() {
     const heroImgs = [heroImg7, heroImg2, heroImg6, heroImg4, heroImg5]
     const boxesRef = useRef()
     useEffect(() => {
-        dispatch(loadBoxes())
+        dispatch(loadBoxes({ genre: '', name: '' }))
     }, [])
-    function handleClick(){
+    function handleClick() {
         boxesRef.current.scrollIntoView({ behavior: "smooth" });
     }
     return (
@@ -35,7 +34,7 @@ function Home() {
                 <h1 className="scroll-to-boxes" onClick={handleClick} >Enjoy The Beat</h1>
                 <KeyboardArrowDownIcon onClick={handleClick} className="arrow-down"/>
                 <div className="home-container">
-                    {user?.favs.length>0 && <h2 className="title">My Favorite Playlist</h2>}
+                    {user?.favs.length > 0 && <h2 className="title">My Favorite Playlist</h2>}
                     {user?.favs && <Carousel items={user.favs} />}
 
                     <h2 ref={boxesRef} className="title">  Top Genres</h2>
@@ -43,12 +42,11 @@ function Home() {
                         const filteredBoxes = boxes.filter(box => box.genre === genre)
                         return <div key={genre} className="genre-container">
                             <h3 className="sub-title">{genre}</h3>
-                            {/* <BoxList boxes={filteredBoxes} carousel /> */}
                             <Carousel items={filteredBoxes} />
                         </div>
                     })}
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </>}
 
         </section>

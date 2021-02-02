@@ -6,7 +6,7 @@ import { authService } from "../../services/authService"
 export const loadLoggedUser = () => async dispatch => {
 
     try {
-        const user = await userService.getUser()
+        const user = await userService.get()
         console.log({ user });
         dispatch({ type: 'SET_USER', user })
     } catch (err) {
@@ -69,7 +69,7 @@ export const toggleLike = (user, box, isLiked) => async dispatch => {
             const idx = user.favs.findIndex(favBox => favBox._id === box._id)
             user.favs.splice(idx, 1)
         }
-        await userService.updateUser(user)
+        await userService.update(user)
         dispatch({ type: 'SET_USER', user })
     }
     catch (err) {

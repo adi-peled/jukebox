@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, createRef } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrSong, updateProgress } from '../../store/actions/boxActions'
@@ -97,8 +97,7 @@ function Player() {
     }
 
     function seekTo(sec) {
-        if(sec!==secPlayed){
-            console.log('seeking');
+        if (sec !== secPlayed) {
             elPlayer.current.seekTo(parseFloat(sec), 'seconds');
         }
     }
@@ -112,8 +111,10 @@ function Player() {
     }
 
     function handleSeekMouseUp(e) {
-        console.log('lo kore');
         elPlayer.current.seekTo(parseFloat(secPlayed))
+        const song = { ...currSong, secPlayed, isPlaying: !currSong.isPlaying }
+        dispatch(setCurrSong(song))
+        socketService.emit('update song', song)
         setSeeking(false)
     }
 

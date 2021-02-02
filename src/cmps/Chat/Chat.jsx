@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
-
+import { Input, TextField } from '@material-ui/core'
 
 import './Chat.scss'
 function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userList }) {
@@ -47,7 +47,6 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
         setMsg('')
     }
 
-
     function getTime(timestamp) {
         let hour = new Date(timestamp).getHours()
         let minutes = new Date(timestamp).getMinutes()
@@ -73,22 +72,33 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
                         return <li key={user._id} className="user"><img src={user.imgUrl} /></li>
                     })}
                 </ul>}
-            <div className={screenWidth > 850 ? "chat-box__container" : "chat-box__mobile"}>
+            <div className="chat-box__container">
                 {box && box.chat?.map(msg => {
                     const { username, imgString } = msg.from
                     const isCurrUser = currUser.username === username ? true : false
-                    return <div className={isCurrUser ? 'currUser chat-box__msg  flex' : 'chat-box__msg  flex'} key={msg.createdAt}>
-                        <div className="chat-box__sender flex">
-                            {!isCurrUser && <img className="chat-box__img" src={imgString} />}
-                            {/* {isCurrUser && <span className="chat-box__username">You</span>} */}
-                            {!isCurrUser && <span className="chat-box__username">{username} </span>}
-                            -&nbsp; <span className="chat-box__time"> {getTime(msg.createdAt)}</span>
-                        </div>
-                        <div className={isCurrUser ? 'user-text chat-box__txt' : 'chat-box__txt'}>
-                            {msg.text}
+
+                    return <div  key={msg.createdAt} className={isCurrUser? " rtl chat-box__msg flex": "chat-box__msg flex"}>
+                        <img className="chat-box__img" src={imgString} />
+                        <div className="chat-box__text-container flex">
+                            <span className={isCurrUser ? " currUser chat-box__username" : "chat-box__username"}>{username} </span>
+                            <div className={isCurrUser ? 'user-text chat-box__txt flex' : 'chat-box__txt flex'}>
+                                <div className={isCurrUser? "txt ml" :"text mr"}>  {msg.text}</div>
+                                <span className="chat-box__time"> {getTime(msg.createdAt)}</span>
+                            </div>
                         </div>
 
                     </div>
+                    // return <div className={isCurrUser ? 'rtl currUser chat-box__msg  flex' : 'chat-box__msg  flex'} key={msg.createdAt}>
+                    //     <div className="chat-box__sender flex">
+                    //         {!isCurrUser && <img className="chat-box__img" src={imgString} />}
+                    //         {/* {isCurrUser && <span className="chat-box__username">You</span>} */}
+                    //         {!isCurrUser && <span className="chat-box__username">{username} </span>}
+                    //     </div>
+                    //     <div className={isCurrUser ? 'user-text chat-box__txt' : 'chat-box__txt'}>
+                    //         <div className="txt">  {msg.text}</div>
+                    //         <span className="chat-box__time"> {getTime(msg.createdAt)}</span>
+                    //     </div>
+                    // </div>
 
                 })}
                 <div ref={chatRef}></div>
@@ -96,9 +106,9 @@ function Chat({ box, sendMsg, isTyping, typingUser, joinedUser, newSong, userLis
                 {joinedUser && joinedUser !== currUser.username && <h3>{joinedUser} joined the room</h3>}
                 {newSong && <h3>{currUser.username} added new song: {newSong}</h3>}
             </div>
-            <form className="text-form" onSubmit={(e) => handleSubmit(e)}>
-                <input type="text" onChange={(e) => handleInputChange(e)} value={msg} placeholder="Write a message" />
-                <button type="submit">Send</button>
+            <form className="text-form flex" onSubmit={(e) => handleSubmit(e)}>
+                <Input type="text" onChange={(e) => handleInputChange(e)} value={msg} placeholder="Write a message" />
+                {/* <button type="submit">Send</button> */}
             </form>
         </div>
     )

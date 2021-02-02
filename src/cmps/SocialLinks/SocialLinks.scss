@@ -9,6 +9,10 @@
 
         svg {
             transform: scale(2);
+            fill: rgba(white,0.8);
+            &:hover{
+                fill:white
+            }
             @include respon(phone){
             transform: scale(1.6);
             }

@@ -1,39 +1,24 @@
 import axios from 'axios';
-// import he from 'he';
 const SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 const DETAILS_URL = 'https://www.googleapis.com/youtube/v3/videos'
 
 const API_KEY = 'AIzaSyDT9sOsVrKS57kBtrHqmY0FOgykI0fhOrY';
-// const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const youtubeService = {
     get,
-    // titleSimplify,
     getDuration,
-    // getSongById,
 }
 
 async function get(query) {
     if (!query) return
     try {
         const res = await axios.get(`${SEARCH_URL}?videoCategoryId=10&part=id,snippet&videoEmbeddable=true&type=video&maxResults=10&q=${query}&key=${API_KEY}`);
-
         return res.data.items;
     } catch (err) {
         console.dir(err);
         throw (err)
     }
 }
-
-// async function getSongById(youtubeId) {
-//     try {
-//         const res = await axios.get(`${DETAILS_URL}?id=${youtubeId}&part=id,contentDetails,snippet&key=${API_KEY}`);
-//         return res.data;
-//     } catch (err) {
-//         console.log(err);
-//         throw err;
-//     }
-// }
 
 async function getDuration(videoId, timeString) {
     let duration
@@ -59,12 +44,3 @@ async function getDuration(videoId, timeString) {
     }
 }
 
-// function titleSimplify(title) {
-//     // Removes HTML char codes
-//     let output = he.decode(title);
-//     // Removes 'Official Video' brackets
-//     const officialVideoRegex = /[([].?(official.?video)?(official music video)?.?[)\]]/ig
-//     output = output.replace(officialVideoRegex, '');
-
-//     return output;
-// }

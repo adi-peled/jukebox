@@ -4,7 +4,7 @@ import './BoxInfo.scss'
 function BoxInfo({ box }) {
     return (
         <div className="box-info flex">
-          
+          <section></section>
                 <img className="box-info__img" src={box.imgUrl} />
        
             <div className="box-info__details">
@@ -22,3 +22,4 @@ function BoxInfo({ box }) {
 }
 
 export default BoxInfo
+
