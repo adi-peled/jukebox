@@ -71,6 +71,7 @@
         height: 8rem;
         object-fit: contain;
         flex: 0.2;
+        padding: .7rem;
         cursor: pointer;
 
         @include respon(phone) {
